@@ -95,8 +95,26 @@ export const evaluation = {
       label: 'Population case · near median input reduction',
       note: '46 cards · input 53.98% / held-out 55.63% error reduction',
       pairs: [
-        { view: 'Input · front', before: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/before_input_front.png'), after: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/after_input_front.png') },
-        { view: 'Held-out · oblique front-left', before: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/before_heldout_oblique_front_left.png'), after: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/after_heldout_oblique_front_left.png') },
+        {
+          view: 'Input · front',
+          before: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/after_input_front.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.572', after: '0.901' },
+            { label: 'Depth MAE', before: '0.0430', after: '0.0302', unit: ' m' },
+            { label: 'Normal cosine', before: '0.837', after: '0.866' },
+          ],
+        },
+        {
+          view: 'Held-out · oblique front-left',
+          before: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/before_heldout_oblique_front_left.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/after_heldout_oblique_front_left.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.478', after: '0.827' },
+            { label: 'Depth MAE', before: '0.0178', after: '0.0046', unit: ' m' },
+            { label: 'Normal cosine', before: '0.875', after: '0.922' },
+          ],
+        },
       ],
     },
     {
@@ -104,8 +122,26 @@ export const evaluation = {
       label: 'Correctness-closure case',
       note: '44 cards · input 72.42% / held-out 64.29% error reduction',
       pairs: [
-        { view: 'Input · front', before: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/before_input_front.png'), after: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/after_input_front.png') },
-        { view: 'Held-out · oblique back-right', before: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/before_heldout_oblique_back_right.png'), after: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/after_heldout_oblique_back_right.png') },
+        {
+          view: 'Input · front',
+          before: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/after_input_front.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.213', after: '0.810' },
+            { label: 'Depth MAE', before: '0.0442', after: '0.0211', unit: ' m' },
+            { label: 'Normal cosine', before: '0.688', after: '0.824' },
+          ],
+        },
+        {
+          view: 'Held-out · oblique back-right',
+          before: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/before_heldout_oblique_back_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/after_heldout_oblique_back_right.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.299', after: '0.776' },
+            { label: 'Depth MAE', before: '0.0571', after: '0.0098', unit: ' m' },
+            { label: 'Normal cosine', before: '0.627', after: '0.854' },
+          ],
+        },
       ],
     },
     {
@@ -113,8 +149,26 @@ export const evaluation = {
       label: 'Strong held-out improvement',
       note: '64 cards · input 77.28% / held-out 74.61% error reduction',
       pairs: [
-        { view: 'Input · right', before: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/before_input_right.png'), after: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/after_input_right.png') },
-        { view: 'Held-out · top', before: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/before_heldout_top.png'), after: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/after_heldout_top.png') },
+        {
+          view: 'Input · right',
+          before: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/before_input_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/after_input_right.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.253', after: '0.666' },
+            { label: 'Depth MAE', before: '0.0232', after: '0.0049', unit: ' m' },
+            { label: 'Normal cosine', before: '0.838', after: '0.962' },
+          ],
+        },
+        {
+          view: 'Held-out · top',
+          before: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/before_heldout_top.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/after_heldout_top.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.432', after: '0.773' },
+            { label: 'Depth MAE', before: '0.0118', after: '0.0033', unit: ' m' },
+            { label: 'Normal cosine', before: '0.867', after: '0.970' },
+          ],
+        },
       ],
     },
   ],

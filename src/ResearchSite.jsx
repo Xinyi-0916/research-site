@@ -10,10 +10,11 @@ function ComparisonPair({ pair, caseId }) {
   return (
     <figure className="comparison-pair">
       <div className="pair-images">
-        <div><span>Input</span><img src={pair.before} alt={`Case ${caseId}, ${pair.view}: weak-card input before refinement`} loading="lazy" /></div>
-        <div><span>Output</span><img src={pair.after} alt={`Case ${caseId}, ${pair.view}: best-valid refined-card output`} loading="lazy" /></div>
+        <div><span>Input</span><img src={pair.before} alt={`Case ${caseId}, ${pair.view}: weak-card input before refinement`} /></div>
+        <div><span>Output</span><img src={pair.after} alt={`Case ${caseId}, ${pair.view}: best-valid refined-card output`} /></div>
       </div>
-      <figcaption>{pair.view} · direct Blender output from the population evaluation</figcaption>
+      <div className="view-metrics">{pair.metrics.map((metric) => <div key={metric.label}><span>{metric.label}</span><strong>{metric.before} → {metric.after}{metric.unit || ''}</strong></div>)}</div>
+      <figcaption>{pair.view} · source Blender output · display-only white-background inversion</figcaption>
     </figure>
   )
 }
@@ -87,7 +88,7 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="demonstrations">
-          <SectionHead number="03" title="Refiner input / output" note="Unedited Blender PNGs copied directly from the complete population evaluation directories." />
+          <SectionHead number="03" title="Refiner input / output" note="Source Blender PNGs from the complete population evaluation; a display-only tonal inversion changes the black background to white." />
           <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span></div>
           <div className="demo-list">
             {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><code>{demo.caseId}</code></div><p>{demo.note}</p></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} caseId={demo.caseId} />)}</div></article>)}

@@ -8,7 +8,7 @@ The layout uses a narrow personal/project sidebar and one continuous research pa
 
 ## Evidence policy
 
-The site does not use generated demonstration art or fabricated charts. Displayed refiner input/output images are unedited PNG files copied from the complete population-validation render directories:
+The site does not use generated demonstration art or fabricated charts. Displayed refiner input/output files are the original PNGs copied from the complete population-validation render directories. CSS applies a display-only tonal inversion so the original black render background appears white; the source files are unchanged:
 
 ```text
 tasks/aaai_3d_generation_20260626/checkpoints/
