@@ -27,7 +27,6 @@ export default function ResearchSite() {
     <div className="research-shell">
       <aside className="sidebar">
         <div className="identity">
-          <span className="initials" aria-hidden="true">{person.initials}</span>
           <div><h1>{person.name}</h1><p>{person.role}</p></div>
         </div>
         <p className="side-bio">{person.background}</p>
