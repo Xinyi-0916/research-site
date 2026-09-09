@@ -89,14 +89,20 @@ export const evaluation = {
       ['Persistent-overlap fraction · q99 exceedance', '1 / 49'],
     ],
   },
+  metricDefinitions: [
+    { name: 'Alpha IoU', description: 'Silhouette overlap between the rendered cards and target hair.', direction: '0–1 · higher is better' },
+    { name: 'Depth MAE', description: 'Mean absolute metric-depth error on their shared solid foreground.', direction: 'metres · lower is better' },
+    { name: 'Normal cosine', description: 'Surface-normal agreement on their shared solid foreground.', direction: '−1–1 · higher is better' },
+  ],
   demonstrations: [
     {
       caseId: '1022113573246895015',
       label: 'Population case · near median input reduction',
-      note: '46 cards · input 53.98% / held-out 55.63% error reduction',
+      cards: '46 cards',
+      reductions: { input: '53.98%', heldout: '55.63%' },
       pairs: [
         {
-          view: 'Input · front',
+          view: 'Front',
           before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_front.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_front.png'),
           metrics: [
@@ -106,13 +112,13 @@ export const evaluation = {
           ],
         },
         {
-          view: 'Held-out · oblique front-left',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_heldout_oblique_front_left.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_heldout_oblique_front_left.png'),
+          view: 'Side',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_right.png'),
           metrics: [
-            { label: 'Alpha IoU', before: '0.478', after: '0.827' },
-            { label: 'Depth MAE', before: '0.0178', after: '0.0046', unit: ' m' },
-            { label: 'Normal cosine', before: '0.875', after: '0.922' },
+            { label: 'Alpha IoU', before: '0.484', after: '0.907' },
+            { label: 'Depth MAE', before: '0.0416', after: '0.0182', unit: ' m' },
+            { label: 'Normal cosine', before: '0.787', after: '0.900' },
           ],
         },
       ],
@@ -120,10 +126,11 @@ export const evaluation = {
     {
       caseId: '6224181708507224014',
       label: 'Correctness-closure case',
-      note: '44 cards · input 72.42% / held-out 64.29% error reduction',
+      cards: '44 cards',
+      reductions: { input: '72.42%', heldout: '64.29%' },
       pairs: [
         {
-          view: 'Input · front',
+          view: 'Front',
           before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_front.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_front.png'),
           metrics: [
@@ -133,13 +140,13 @@ export const evaluation = {
           ],
         },
         {
-          view: 'Held-out · oblique back-right',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_heldout_oblique_back_right.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_heldout_oblique_back_right.png'),
+          view: 'Side',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_right.png'),
           metrics: [
-            { label: 'Alpha IoU', before: '0.299', after: '0.776' },
-            { label: 'Depth MAE', before: '0.0571', after: '0.0098', unit: ' m' },
-            { label: 'Normal cosine', before: '0.627', after: '0.854' },
+            { label: 'Alpha IoU', before: '0.288', after: '0.808' },
+            { label: 'Depth MAE', before: '0.0422', after: '0.0210', unit: ' m' },
+            { label: 'Normal cosine', before: '0.737', after: '0.865' },
           ],
         },
       ],
@@ -147,26 +154,27 @@ export const evaluation = {
     {
       caseId: '8174510361203308830',
       label: 'Strong held-out improvement',
-      note: '64 cards · input 77.28% / held-out 74.61% error reduction',
+      cards: '64 cards',
+      reductions: { input: '77.28%', heldout: '74.61%' },
       pairs: [
         {
-          view: 'Input · right',
+          view: 'Front',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_input_front.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.222', after: '0.730' },
+            { label: 'Depth MAE', before: '0.0401', after: '0.0083', unit: ' m' },
+            { label: 'Normal cosine', before: '0.382', after: '0.876' },
+          ],
+        },
+        {
+          view: 'Side',
           before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_input_right.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_input_right.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.253', after: '0.666' },
             { label: 'Depth MAE', before: '0.0232', after: '0.0049', unit: ' m' },
             { label: 'Normal cosine', before: '0.838', after: '0.962' },
-          ],
-        },
-        {
-          view: 'Held-out · top',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_heldout_top.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_heldout_top.png'),
-          metrics: [
-            { label: 'Alpha IoU', before: '0.432', after: '0.773' },
-            { label: 'Depth MAE', before: '0.0118', after: '0.0033', unit: ' m' },
-            { label: 'Normal cosine', before: '0.867', after: '0.970' },
           ],
         },
       ],

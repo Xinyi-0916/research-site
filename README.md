@@ -44,7 +44,9 @@ public/media/eval/j0b1-h1-population-v2/
 public/media/eval/j0b1-h1-population-v2-white/
 ```
 
-When updating results, keep the artifact identifier, case IDs, split labels, and view names visible. Do not present a per-view render beside a case-level percentage without explaining that the percentage is aggregated over the split. Keep learned-generator and post-refiner claims separate.
+When updating results, keep the artifact identifier and source case IDs traceable in the repository, and keep split labels and view names clear on the public page. Do not present a per-view render beside a case-level percentage without explaining that the percentage is aggregated over the split. Keep learned-generator and post-refiner claims separate.
+
+The public demonstration uses the canonical input `front` and `right` (Side) views for every example. Its case-level input percentage is the relative reduction in the frozen six-view composite render error—not a percentage change in any one displayed channel metric.
 
 ## Edit content
 

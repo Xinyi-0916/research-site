@@ -6,12 +6,12 @@ function SectionHead({ number, title, note }) {
   return <header className="section-head"><span>{number}</span><div><h2>{title}</h2>{note && <p>{note}</p>}</div></header>
 }
 
-function ComparisonPair({ pair, caseId }) {
+function ComparisonPair({ pair }) {
   return (
     <figure className="comparison-pair">
       <div className="pair-images">
-        <div><span>Input</span><img src={pair.before} alt={`Case ${caseId}, ${pair.view}: weak-card input before refinement`} /></div>
-        <div><span>Output</span><img src={pair.after} alt={`Case ${caseId}, ${pair.view}: best-valid refined-card output`} /></div>
+        <div><span>Input</span><img src={pair.before} alt={`${pair.view}: weak-card input before refinement`} /></div>
+        <div><span>Output</span><img src={pair.after} alt={`${pair.view}: best-valid refined-card output`} /></div>
       </div>
       <div className="view-metrics">{pair.metrics.map((metric) => <div key={metric.label}><span>{metric.label}</span><strong>{metric.before} → {metric.after}{metric.unit || ''}</strong></div>)}</div>
       <figcaption>{pair.view} · source Blender output · white background presentation copy · mesh RGB preserved</figcaption>
@@ -88,12 +88,17 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="demonstrations">
-          <SectionHead number="03" title="Refiner input / output" note="Source Blender PNGs from the complete population evaluation; only the uniform render background is changed to white, while every mesh pixel retains its original RGB." />
+          <SectionHead number="03" title="Refiner input / output" note="Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison." />
           <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span></div>
-          <div className="demo-list">
-            {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><code>{demo.caseId}</code></div><p>{demo.note}</p></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} caseId={demo.caseId} />)}</div></article>)}
+          <div className="metric-guide">
+            <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
+            <div>{evaluation.metricDefinitions.map((metric) => <article key={metric.name}><strong>{metric.name}</strong><p>{metric.description}</p><span>{metric.direction}</span></article>)}</div>
           </div>
-          <p className="render-caveat">Percentages are case-level reductions aggregated over all views in each split; each image above is one named view. The examples include a near-median case, the repaired correctness-closure case, and a strong held-out case.</p>
+          <p className="reduction-definition"><strong>What does “input-view error reduction” mean?</strong> It is the case-level relative drop in the frozen composite render error across all six input cameras: <code>1 − refined error / coarse error</code>. The composite combines alpha/silhouette (4×), edge (2×), metric depth (2×), and surface-normal error (0.25×). “Held-out” reports the same calculation on three unseen evaluation cameras. It is not the percentage change of Alpha IoU.</p>
+          <div className="demo-list">
+            {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>)}
+          </div>
+          <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. Source Blender renders are unchanged except for replacing the uniform background with white; mesh RGB is preserved.</p>
         </section>
 
         <section className="content-section" id="generator-boundary">
