@@ -1,104 +1,71 @@
 # Xinyi Tang — Research Website
 
-An independent academic-style website for 3D AI and graphics research. It is intentionally separate from the animation/art portfolio at [tangxinyi0903.weebly.com](https://tangxinyi0903.weebly.com).
+A single-page research website for **Production-Ready Hair-Card Generation and Refinement**.
 
-## Site structure
+Live site: <https://xinyi-0916.github.io/research-site/>
 
-- `/` — research identity, selected work, and updates
-- `/research` — research interests and connecting agenda
-- `/projects` — current and planned projects
-- `/projects/hair-card-generation-refinement` — full research case study
-- `/publications` — manuscript status and future artifact links
-- `/about` — animation/CGT background, education, and coursework
-- `/cv` — view/download controls for the future CV PDF
-- `Portfolio ↗` — external link to the independent Weebly portfolio
+The layout uses a narrow personal/project sidebar and one continuous research page. The Portfolio link is intentionally prominent and points to the separate animation/art portfolio at <https://tangxinyi0903.weebly.com>.
+
+## Evidence policy
+
+The site does not use generated demonstration art or fabricated charts. Displayed experiment images are unedited PNG files copied from:
+
+```text
+tasks/aaai_3d_generation_20260626/checkpoints/
+hair_target500_stage_j0_joint_oracle/
+j0b1_h1_repaired_12case_oracle_v2_renders/
+```
+
+Displayed metrics and all 12 table rows are transcribed from the frozen artifact:
+
+```text
+tasks/aaai_3d_generation_20260626/checkpoints/
+hair_target500_stage_j0_joint_oracle/
+j0b1_h1_repaired_12case_oracle_v2.json
+```
+
+Public copies of the selected render files live under:
+
+```text
+public/media/eval/j0b1-h1-repaired-12case/
+```
+
+When updating results, keep the artifact identifier, case IDs, split labels, and view names visible. Do not present a per-view render beside a case-level percentage without explaining that the percentage is aggregated over the split.
+
+## Edit content
+
+All personal text, project statements, evaluation values, demonstration paths, full case table, findings, and limitations are in:
+
+```text
+src/data/siteData.js
+```
+
+The single-page structure is in `src/ResearchSite.jsx`; visual styling is in `src/styles.css`.
 
 ## Local development
 
 Requires Node.js 20.19+ or 22.12+.
 
 ```bash
-cd research-site
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite. To test the production build:
+Production check:
 
 ```bash
-npm run build
-npm run preview
+npm ci
+npm run build -- --mode github
 ```
-
-## Content editing
-
-All public research copy, project facts, results, publication status, links, education, and coursework live in:
-
-```text
-src/data/siteData.js
-```
-
-This keeps claims and metrics out of UI components. Keep the status distinctions precise:
-
-- **Validated** — supported by the named current evaluation
-- **Current finding** — observed and shaping the method
-- **Ongoing** — actively unresolved
-- **Planned** — future work, not a completed contribution
-
-### Add a project
-
-1. Add a project object in `src/data/siteData.js` (or split projects into their own data file as the list grows).
-2. Add the project route to `src/App.jsx`.
-3. Create the page under `src/pages/` and reuse the existing figure, status, and link components.
-4. Put media in `public/media/projects/<project-slug>/` and use descriptive alt text.
-
-### Update a publication
-
-Edit `publications` and the matching project's `links` in `src/data/siteData.js`. Empty links render as disabled “soon” buttons. Do not change the venue status to submitted or under review without explicit evidence.
-
-### Replace the CV
-
-1. Add `public/cv/xinyi-tang-cv.pdf`.
-2. Set `site.cv.available` to `true` in `src/data/siteData.js`.
-
-### Replace project visuals
-
-The expected filenames and usage notes are listed in `public/media/projects/hair-card-refinement/README.md`. SVGs in `public/media/placeholders/` are clearly marked placeholders and can be removed after replacement.
-
-For MP4, use H.264 video with a poster image and keep the file compact. For GIF, provide an MP4 alternative when possible. The existing `BeforeAfter` component accepts matched image pairs and provides keyboard-accessible range control and captions.
 
 ## Deployment
 
-### Vercel
+Pushing to `main` runs `.github/workflows/deploy-pages.yml` and updates GitHub Pages automatically.
 
-1. Import the repository into Vercel.
-2. Set **Root Directory** to `research-site`.
-3. Vercel detects Vite; use `npm run build` and output directory `dist` if prompted.
-4. `vercel.json` includes the single-page route fallback.
+## Portfolio reciprocal navigation
 
-### GitHub Pages
-
-The repository workflow `.github/workflows/deploy-pages.yml` builds the site with the correct repository base path and adds a route fallback.
-
-1. Commit and push the standalone website repository, including `package-lock.json`.
-2. In GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
-3. Run the workflow or push to `main`.
-
-The default Pages URL will be similar to:
+The Research site links prominently to the independent portfolio. In Weebly, add a navigation item called `Research ↗` pointing to:
 
 ```text
 https://xinyi-0916.github.io/research-site/
 ```
-
-## Portfolio reciprocal link
-
-This repository does not modify the Weebly portfolio. In Weebly, add a prominent navigation item named `Research ↗` and point it to the deployed research-site URL after deployment.
-
-## Before publishing
-
-- Replace or approve the displayed name in `siteData.js`.
-- Add contact and profile links if desired.
-- Replace hero/comparison/result placeholders with approved research media.
-- Add the final CV and enable its buttons.
-- Update the OpenGraph URL/image after choosing the final domain.
-- Confirm no unpublished, licensed, or confidential material is copied into `public/`.
