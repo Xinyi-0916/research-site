@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 640" role="img" aria-labelledby="title desc">
+  <title id="title">Future project placeholder</title>
+  <desc id="desc">An abstract diagram of a structured articulated character representation.</desc>
+  <rect width="800" height="640" fill="#ecefec"/>
+  <g fill="none" stroke="#cbd2ce"><path d="M0 80h800M0 160h800M0 240h800M0 320h800M0 400h800M0 480h800M0 560h800"/><path d="M80 0v640M160 0v640M240 0v640M320 0v640M400 0v640M480 0v640M560 0v640M640 0v640M720 0v640"/></g>
+  <g fill="none" stroke="#64736e" stroke-width="3"><circle cx="400" cy="137" r="56"/><path d="M400 193v178m0-112-112 79m112-79 112 79M400 371l-77 151m77-151 77 151"/></g>
+  <g fill="#0b685c"><circle cx="400" cy="193" r="8"/><circle cx="400" cy="259" r="8"/><circle cx="400" cy="371" r="8"/><circle cx="288" cy="338" r="8"/><circle cx="512" cy="338" r="8"/><circle cx="323" cy="522" r="8"/><circle cx="477" cy="522" r="8"/></g>
+  <text x="35" y="45" fill="#51605b" font-family="Arial,sans-serif" font-size="12" letter-spacing="2">FUTURE RESEARCH DIRECTION</text>
+  <text x="35" y="603" fill="#71807a" font-family="Arial,sans-serif" font-size="11">ANIMATION-AWARE REPRESENTATION · PLACEHOLDER</text>
+</svg>
