@@ -97,8 +97,8 @@ export const evaluation = {
       pairs: [
         {
           view: 'Input · front',
-          before: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/before_input_front.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/after_input_front.png'),
+          before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_front.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.572', after: '0.901' },
             { label: 'Depth MAE', before: '0.0430', after: '0.0302', unit: ' m' },
@@ -107,8 +107,8 @@ export const evaluation = {
         },
         {
           view: 'Held-out · oblique front-left',
-          before: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/before_heldout_oblique_front_left.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2/1022113573246895015/after_heldout_oblique_front_left.png'),
+          before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_heldout_oblique_front_left.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_heldout_oblique_front_left.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.478', after: '0.827' },
             { label: 'Depth MAE', before: '0.0178', after: '0.0046', unit: ' m' },
@@ -124,8 +124,8 @@ export const evaluation = {
       pairs: [
         {
           view: 'Input · front',
-          before: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/before_input_front.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/after_input_front.png'),
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_front.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.213', after: '0.810' },
             { label: 'Depth MAE', before: '0.0442', after: '0.0211', unit: ' m' },
@@ -134,8 +134,8 @@ export const evaluation = {
         },
         {
           view: 'Held-out · oblique back-right',
-          before: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/before_heldout_oblique_back_right.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2/6224181708507224014/after_heldout_oblique_back_right.png'),
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_heldout_oblique_back_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_heldout_oblique_back_right.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.299', after: '0.776' },
             { label: 'Depth MAE', before: '0.0571', after: '0.0098', unit: ' m' },
@@ -151,8 +151,8 @@ export const evaluation = {
       pairs: [
         {
           view: 'Input · right',
-          before: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/before_input_right.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/after_input_right.png'),
+          before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_input_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_input_right.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.253', after: '0.666' },
             { label: 'Depth MAE', before: '0.0232', after: '0.0049', unit: ' m' },
@@ -161,8 +161,8 @@ export const evaluation = {
         },
         {
           view: 'Held-out · top',
-          before: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/before_heldout_top.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2/8174510361203308830/after_heldout_top.png'),
+          before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_heldout_top.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_heldout_top.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.432', after: '0.773' },
             { label: 'Depth MAE', before: '0.0118', after: '0.0033', unit: ' m' },

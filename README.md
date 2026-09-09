@@ -8,7 +8,7 @@ The layout uses a narrow personal/project sidebar and one continuous research pa
 
 ## Evidence policy
 
-The site does not use generated demonstration art or fabricated charts. Displayed refiner input/output files are the original PNGs copied from the complete population-validation render directories. CSS applies a display-only tonal inversion so the original black render background appears white; the source files are unchanged:
+The site does not use generated demonstration art or fabricated charts. Displayed refiner input/output files come from the complete population-validation render directories. The original PNGs remain unchanged; separate presentation copies replace only the exact uniform background RGB `(15, 15, 15)` with white `(255, 255, 255)`. Every non-background mesh pixel retains its original RGB:
 
 ```text
 tasks/aaai_3d_generation_20260626/checkpoints/
@@ -41,6 +41,7 @@ Public copies of the selected render files live under:
 
 ```text
 public/media/eval/j0b1-h1-population-v2/
+public/media/eval/j0b1-h1-population-v2-white/
 ```
 
 When updating results, keep the artifact identifier, case IDs, split labels, and view names visible. Do not present a per-view render beside a case-level percentage without explaining that the percentage is aggregated over the split. Keep learned-generator and post-refiner claims separate.
