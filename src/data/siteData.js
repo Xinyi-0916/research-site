@@ -28,7 +28,7 @@ export const project = {
   status: 'Generator in progress · refiner frozen',
   manuscript: 'Production-equivalent explicit asset reconstruction · 2026',
   centralObservation: 'Generate a compact, editable, production-valid hair-card asset from a single design image by using multiview consistency to infer geometry directly in explicit-card space.',
-  motivation: 'Starting from a single design image, the project uses StdGEN to form multiview observations, then operates directly on explicit ribbon/card geometry through generation and refinement.',
+  motivation: 'Starting from a single design image, the system first obtains multiview observations—alpha, predicted surface normals, and calibrated cameras—then operates directly on explicit ribbon/card geometry through generation and refinement.',
   motivationLead: 'Modern 3D generation can produce visually convincing hair geometry, but render-ready geometry is not automatically a production-ready asset. Games and animation need compact, editable cards with valid surfaces, controlled overlap, and stable organization.',
   targetDefinition: 'Recover any compact hair-card configuration that explains the observed and held-out appearance while satisfying geometric validity, card-budget, overlap, and production-distribution constraints—rather than requiring the one hidden layout originally authored.',
   motivationPoints: [
@@ -52,7 +52,7 @@ export const project = {
     status: 'Target system design · generator in progress · refiner frozen',
     steps: [
       { label: 'Input', title: 'Single character design image' },
-      { label: 'Observation front end', title: 'StdGEN multiview alpha, predicted normals, and cameras' },
+      { label: 'Observation interface', title: 'Multiview alpha, predicted normals, and calibrated cameras' },
       { label: 'Generator · in progress', title: 'Camera-aware variable-card 3D layout' },
       { label: 'Refiner · validated', title: 'Joint multiview K12 and profile correction' },
       { label: 'Output', title: 'Compact, editable, production-valid explicit cards' },
