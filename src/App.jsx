@@ -3,8 +3,8 @@ import ResearchSite from './ResearchSite'
 
 export default function App() {
   useEffect(() => {
-    const title = 'Production-Ready Hair-Card Refinement — Xinyi Tang'
-    const description = 'Direct explicit hair-card reconstruction and production-constrained refinement from coarse geometry and multiview observations.'
+    const title = 'Production-Ready Hair-Card Generation and Refinement — Xinyi Tang'
+    const description = 'Production-equivalent explicit hair-card generation from a single design image, without dense-strand reconstruction or exact hidden-topology recovery.'
     document.title = title
     document.querySelector('meta[name="description"]')?.setAttribute('content', description)
     document.querySelector('meta[property="og:title"]')?.setAttribute('content', title)

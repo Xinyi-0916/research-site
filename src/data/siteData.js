@@ -23,11 +23,11 @@ export const sections = [
 
 export const project = {
   title: 'Production-Ready Hair-Card Generation and Refinement',
-  subtitle: 'Direct explicit hair-card reconstruction from multiview observations, with a validated production-constrained refiner and a camera-aware generator now in progress.',
+  subtitle: 'From a single character design image to a compact, editable set of explicit hair cards—without reconstructing dense strands or recovering the artist’s exact hidden topology.',
   status: 'Generator in progress · refiner frozen',
-  manuscript: 'Methodology revision 020 · September 2026',
-  centralObservation: 'Appearance fidelity alone does not guarantee production validity.',
-  motivation: 'Modern 3D generators can produce visually convincing geometry, but render-ready assets are often far from production-ready assets. Game and animation pipelines need compact, editable cards with stable organization and intrinsically valid ribbon surfaces.',
+  manuscript: 'Production-equivalent explicit asset reconstruction · 2026',
+  centralObservation: 'Do not reconstruct an unobservable hidden decomposition. Optimize directly for an equivalent valid asset in the target representation.',
+  motivation: 'A single hairstyle appearance can admit many card counts, roots, overlap patterns, widths, and local layerings. We therefore treat any compact card set as equivalent when it explains the observed and held-out views while satisfying production constraints. StdGEN serves only as the observation-generation front end; the geometric primitive remains an explicit ribbon/card throughout generation and refinement.',
   refiner: {
     input: [
       'Fixed card roster, slots, and root anchors',
@@ -212,8 +212,8 @@ export const findings = [
   },
   {
     label: 'Production audit',
-    title: 'Refined outputs remain inside Train-GT production statistics',
-    body: 'B2-S3 finds no systematic out-of-distribution tail in duplicate evidence, overlap, high-order overdraw, or intersection. This closes the earlier set-prior question for the frozen refiner.',
+    title: 'The target is production equivalence—not hidden-topology recovery',
+    body: 'Exact artist count, roots, ownership, and layering are not uniquely observable from appearance. B2-S3 instead tests whether the refined outputs remain within real Train-GT production statistics, and finds no systematic out-of-distribution tail.',
   },
   {
     label: 'Generator direction',

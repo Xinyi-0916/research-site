@@ -45,7 +45,7 @@ export default function ResearchSite() {
         <p className="side-status"><i /> {project.status}</p>
       </aside>
 
-      <main className="research-main">
+      <main className="research-main" id="main-content">
         <section className="project-intro" id="overview">
           <p className="kicker">Research project · Generative 3D / Production graphics</p>
           <h2>{project.title}</h2>
@@ -128,7 +128,6 @@ export default function ResearchSite() {
         <section className="content-section final-section" id="limitations">
           <SectionHead number="06" title="Current limitations" note="Refiner and generator claims are deliberately separated." />
           <ul className="limitations">{limitations.map((item) => <li key={item}>{item}</li>)}</ul>
-          <div className="bottom-links"><a href={person.code} target="_blank" rel="noreferrer">Research GitHub <Arrow /></a><a className="bottom-portfolio" href={person.portfolio} target="_blank" rel="noreferrer">Animation / Art Portfolio <Arrow /></a></div>
         </section>
         <footer>© {new Date().getFullYear()} {person.name} · Research website</footer>
       </main>
