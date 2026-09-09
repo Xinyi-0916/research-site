@@ -71,14 +71,14 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .side-status i { width: 7px; height: 7px; border-radius: 50%; background: #39a279; }
 
 .research-main { width: min(1120px, calc(100% - 288px)); margin-left: max(264px, calc(50% - 440px)); padding: 0 0 34px; }
-.project-intro { padding: 54px 0 62px; scroll-margin-top: 20px; }
+.project-intro { padding: 54px 0 62px; scroll-margin-top: 20px; text-align: center; }
 .kicker { margin: 0 0 28px; color: var(--green); font-size: .68rem; font-weight: 750; letter-spacing: .12em; text-transform: uppercase; }
 .project-intro > h2 { margin: 0; font-family: var(--serif); font-size: clamp(2.65rem, 3.25vw, 3.4rem); font-weight: 400; letter-spacing: -.045em; line-height: 1; white-space: nowrap; }
 .research-repo-link {
   display: grid;
   width: fit-content;
   max-width: 100%;
-  margin-top: 25px;
+  margin: 25px auto 0;
   padding: 12px 15px;
   grid-template-columns: auto minmax(0, 1fr) auto;
   align-items: center;
@@ -92,13 +92,13 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .research-repo-link span:first-child { color: #c7d1cc; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
 .research-repo-link strong { overflow-wrap: anywhere; font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .68rem; font-weight: 500; }
 .research-repo-link:hover { border-color: var(--green); background: var(--green); }
-.project-subtitle { max-width: 780px; margin: 30px 0 0; color: #34413c; font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.85rem); line-height: 1.45; }
-.research-identity { max-width: 760px; margin: 26px 0; color: var(--muted); font-size: .92rem; }
-.intro-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.project-subtitle { max-width: 780px; margin: 30px auto 0; color: #34413c; font-family: var(--serif); font-size: clamp(1.3rem, 2.4vw, 1.85rem); line-height: 1.45; }
+.research-identity { max-width: 760px; margin: 26px auto; color: var(--muted); font-size: .92rem; }
+.intro-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; }
 .intro-meta span { padding: 7px 10px; border: 1px solid var(--line); color: var(--muted); background: var(--panel); font-size: .64rem; }
-.project-intro blockquote { max-width: 850px; margin: 42px 0 22px; padding: 20px 24px; border-left: 3px solid var(--green); color: var(--green); background: var(--green-pale); font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 1.9rem); font-style: italic; line-height: 1.35; }
-.project-intro blockquote > span { display: block; margin-bottom: 9px; color: var(--muted); font-family: var(--sans); font-size: .6rem; font-style: normal; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }
-.lead { max-width: 850px; margin: 0; color: #34413c; font-family: var(--serif); font-size: 1.15rem; }
+.project-intro blockquote { max-width: 780px; margin: 42px auto 22px; padding: 20px 24px; border: 1px solid var(--line); color: var(--ink); background: var(--panel); font-family: var(--sans); font-size: 1rem; font-style: normal; line-height: 1.6; }
+.project-intro blockquote > span { display: block; margin-bottom: 7px; color: var(--green); font-family: inherit; font-size: .72rem; font-style: normal; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.lead { max-width: 780px; margin: 0 auto; color: var(--muted); font-family: var(--sans); font-size: .83rem; }
 
 .content-section { padding: 64px 0; border-top: 1px solid var(--line); scroll-margin-top: 20px; }
 .section-head { display: grid; margin-bottom: 32px; grid-template-columns: 62px minmax(0, 1fr); gap: 12px; }
