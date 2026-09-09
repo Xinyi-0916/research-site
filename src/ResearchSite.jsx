@@ -55,12 +55,23 @@ export default function ResearchSite() {
           <p className="project-subtitle">{project.subtitle}</p>
           <p className="research-identity">{person.identity}</p>
           <div className="intro-meta"><span>{project.manuscript}</span><span>{project.status}</span></div>
-          <blockquote>{project.centralObservation}</blockquote>
+          <blockquote><span>Research goal</span>{project.centralObservation}</blockquote>
           <p className="lead">{project.motivation}</p>
         </section>
 
-        <section className="content-section" id="refiner">
-          <SectionHead number="01" title="Frozen refiner: input → output" note="The current validated component is an optimization-based, known-root / known-slot refiner—not yet an amortized network." />
+        <section className="content-section" id="motivation">
+          <SectionHead number="01" title="Motivation" note="Why appearance alone is not an adequate objective for production hair assets." />
+          <p className="motivation-lead">{project.motivationLead}</p>
+          <div className="motivation-grid">{project.motivationPoints.map((point) => <article key={point.label}><span>{point.label}</span><h3>{point.title}</h3><p>{point.body}</p></article>)}</div>
+          <div className="target-definition"><span>Research target</span><strong>Production-equivalent explicit asset reconstruction</strong><p>{project.targetDefinition}</p></div>
+        </section>
+
+        <section className="content-section" id="methodology">
+          <SectionHead number="02" title="Methodology" note={project.methodology.status} />
+          <div className="method-pipeline">{project.methodology.steps.map((step, index) => <div className="method-stage" key={step.label}><article><span>{String(index + 1).padStart(2, '0')} · {step.label}</span><strong>{step.title}</strong></article>{index < project.methodology.steps.length - 1 && <i aria-hidden="true">→</i>}</div>)}</div>
+          <div className="method-roles">{project.methodology.roles.map((role) => <article key={role.label}><span>{role.label}</span><h3>{role.title}</h3><p>{role.body}</p></article>)}</div>
+          <p className="method-evidence"><strong>Evidence boundary.</strong> {project.methodology.evidenceBoundary}</p>
+          <h3 className="subsection-title">Frozen refiner contract</h3>
           <div className="refiner-contract">
             <ContractColumn label="Input" items={project.refiner.input} />
             <div className="io-arrow" aria-hidden="true">→</div>
@@ -72,7 +83,7 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="results">
-          <SectionHead number="02" title="Population-supported refiner" note={evaluation.scope} />
+          <SectionHead number="03" title="Experimental results" note={`${evaluation.scope} · frozen refiner`} />
           <div className="artifact-bar"><span>Source artifact</span><code>{evaluation.artifact}</code><span>Runtime {evaluation.elapsed}</span></div>
           <div className="metrics">{evaluation.aggregate.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
           <div className="result-tables">
@@ -88,7 +99,7 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="demonstrations">
-          <SectionHead number="03" title="Refiner input / output" note="Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison." />
+          <SectionHead number="04" title="Refiner input / output" note="Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison." />
           <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span></div>
           <div className="metric-guide">
             <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
@@ -102,7 +113,7 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="generator-boundary">
-          <SectionHead number="04" title="Generator target boundary" note={generatorBoundary.status} />
+          <SectionHead number="05" title="Generator target boundary" note={generatorBoundary.status} />
           <p className="section-lead">{generatorBoundary.summary}</p>
           <div className="generator-contract">
             <div><small>Deployable F1 input</small><strong>{generatorBoundary.f1.input}</strong></div>
@@ -124,14 +135,14 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="findings">
-          <SectionHead number="05" title="Current findings" />
+          <SectionHead number="06" title="Current findings" />
           <div className="findings-list">{findings.map((finding) => <article key={finding.title}><span>{finding.label}</span><h3>{finding.title}</h3><p>{finding.body}</p></article>)}</div>
           <h3 className="process-title">Why the generator changed</h3>
           <ol className="process-list">{process.map(([phase, insight], index) => <li key={phase}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{phase}</strong><p>{insight}</p></div></li>)}</ol>
         </section>
 
         <section className="content-section final-section" id="limitations">
-          <SectionHead number="06" title="Current limitations" note="Refiner and generator claims are deliberately separated." />
+          <SectionHead number="07" title="Current limitations" note="Refiner and generator claims are deliberately separated." />
           <ul className="limitations">{limitations.map((item) => <li key={item}>{item}</li>)}</ul>
         </section>
         <footer>© {new Date().getFullYear()} {person.name} · Research website</footer>

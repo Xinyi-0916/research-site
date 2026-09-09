@@ -97,6 +97,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .intro-meta { display: flex; flex-wrap: wrap; gap: 8px; }
 .intro-meta span { padding: 7px 10px; border: 1px solid var(--line); color: var(--muted); background: var(--panel); font-size: .64rem; }
 .project-intro blockquote { max-width: 850px; margin: 42px 0 22px; padding: 20px 24px; border-left: 3px solid var(--green); color: var(--green); background: var(--green-pale); font-family: var(--serif); font-size: clamp(1.35rem, 2.4vw, 1.9rem); font-style: italic; line-height: 1.35; }
+.project-intro blockquote > span { display: block; margin-bottom: 9px; color: var(--muted); font-family: var(--sans); font-size: .6rem; font-style: normal; font-weight: 750; letter-spacing: .11em; text-transform: uppercase; }
 .lead { max-width: 850px; margin: 0; color: #34413c; font-family: var(--serif); font-size: 1.15rem; }
 
 .content-section { padding: 64px 0; border-top: 1px solid var(--line); scroll-margin-top: 20px; }
@@ -104,6 +105,31 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .section-head > span { color: var(--green); font-family: var(--serif); font-size: 2rem; line-height: 1; }
 .section-head h2 { margin: 0; font-family: var(--serif); font-size: clamp(2.1rem, 4vw, 3.4rem); font-weight: 400; letter-spacing: -.025em; }
 .section-head p { max-width: 700px; margin: 11px 0 0; color: var(--muted); font-size: .82rem; }
+
+.motivation-lead { max-width: 880px; margin: -8px 0 30px 74px; color: #34413c; font-family: var(--serif); font-size: 1.2rem; }
+.motivation-grid { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: var(--panel); }
+.motivation-grid article { padding: 24px; }
+.motivation-grid article + article { border-left: 1px solid var(--line); }
+.motivation-grid article > span, .method-roles article > span { color: var(--green); font-size: .59rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+.motivation-grid h3, .method-roles h3 { margin: 24px 0 11px; font-family: var(--serif); font-size: 1.2rem; font-weight: 400; line-height: 1.3; }
+.motivation-grid p, .method-roles p { margin: 0; color: var(--muted); font-size: .71rem; }
+.target-definition { display: grid; margin-top: 14px; padding: 20px 22px; grid-template-columns: .55fr 1.1fr 1.7fr; align-items: start; gap: 25px; border: 1px solid var(--line); background: transparent; }
+.target-definition > span { color: var(--green); font-size: .6rem; font-weight: 750; letter-spacing: .09em; text-transform: uppercase; }
+.target-definition > strong { font-family: var(--serif); font-size: 1.15rem; font-weight: 400; line-height: 1.35; }
+.target-definition > p { margin: 0; color: var(--muted); font-size: .7rem; }
+
+.method-pipeline { display: flex; align-items: stretch; }
+.method-stage { display: flex; min-width: 0; flex: 1; align-items: stretch; }
+.method-stage article { min-height: 142px; padding: 18px; flex: 1; border: 1px solid var(--line); background: var(--panel); }
+.method-stage article > span { display: block; color: var(--green); font-size: .55rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.method-stage article > strong { display: block; margin-top: 32px; font-family: var(--serif); font-size: .9rem; font-weight: 400; line-height: 1.35; }
+.method-stage > i { display: grid; width: 22px; flex: 0 0 22px; place-items: center; color: var(--green); font-style: normal; }
+.method-roles { display: grid; margin-top: 22px; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--line); background: var(--panel); }
+.method-roles article { padding: 23px; }
+.method-roles article + article { border-left: 1px solid var(--line); }
+.method-evidence { margin: 13px 0 0; padding: 16px 18px; border: 1px solid var(--line); color: var(--muted); background: transparent; font-size: .7rem; }
+.method-evidence strong { color: var(--ink); }
+.subsection-title { margin: 48px 0 17px; font-family: var(--serif); font-size: 1.5rem; font-weight: 400; }
 
 .refiner-contract { display: grid; grid-template-columns: 1fr 34px 1.25fr 34px 1fr; align-items: stretch; gap: 8px; }
 .refiner-contract > div:not(.io-arrow) { display: flex; min-width: 0; min-height: 250px; padding: 24px; flex-direction: column; gap: 13px; border: 1px solid var(--line); background: var(--panel); }
@@ -278,6 +304,7 @@ th:first-child { text-align: left; }
   .findings-list article + article { padding-left: 0; border-left: 0; }
   .findings-list h3 { margin-top: 15px; }
   .section-lead { margin-left: 0; }
+  .motivation-lead { margin-left: 0; }
 }
 
 @media (max-width: 520px) {
@@ -287,6 +314,14 @@ th:first-child { text-align: left; }
   .research-repo-link { width: 100%; grid-template-columns: 1fr auto; }
   .research-repo-link span:first-child { grid-column: 1 / -1; }
   .objective-list, .validity-block ul, .limitations { grid-template-columns: 1fr; }
+  .motivation-grid, .method-roles { grid-template-columns: 1fr; }
+  .motivation-grid article + article, .method-roles article + article { border-top: 1px solid var(--line); border-left: 0; }
+  .target-definition { grid-template-columns: 1fr; gap: 10px; }
+  .method-pipeline { flex-direction: column; }
+  .method-stage { flex-direction: column; }
+  .method-stage article { min-height: 0; }
+  .method-stage article > strong { margin-top: 18px; }
+  .method-stage > i { width: 100%; height: 24px; transform: rotate(90deg); }
   .metrics { grid-template-columns: 1fr; }
   .metrics > div + div { border-top: 1px solid var(--line); border-left: 0; }
   .demo-case { padding: 12px; }

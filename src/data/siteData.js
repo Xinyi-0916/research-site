@@ -13,8 +13,9 @@ export const person = {
 
 export const sections = [
   { id: 'overview', label: 'Overview' },
-  { id: 'refiner', label: 'Refiner I/O' },
-  { id: 'results', label: 'Refiner results' },
+  { id: 'motivation', label: 'Motivation' },
+  { id: 'methodology', label: 'Methodology' },
+  { id: 'results', label: 'Results' },
   { id: 'demonstrations', label: 'Input / output' },
   { id: 'generator-boundary', label: 'Generator boundary' },
   { id: 'findings', label: 'Research findings' },
@@ -26,8 +27,55 @@ export const project = {
   subtitle: 'From a single character design image to a compact, editable set of explicit hair cards—without reconstructing dense strands or recovering the artist’s exact hidden topology.',
   status: 'Generator in progress · refiner frozen',
   manuscript: 'Production-equivalent explicit asset reconstruction · 2026',
-  centralObservation: 'Do not reconstruct an unobservable hidden decomposition. Optimize directly for an equivalent valid asset in the target representation.',
-  motivation: 'A single hairstyle appearance can admit many card counts, roots, overlap patterns, widths, and local layerings. We therefore treat any compact card set as equivalent when it explains the observed and held-out views while satisfying production constraints. StdGEN serves only as the observation-generation front end; the geometric primitive remains an explicit ribbon/card throughout generation and refinement.',
+  centralObservation: 'Generate a compact, editable, production-valid hair-card asset from a single design image by using multiview consistency to infer geometry directly in explicit-card space.',
+  motivation: 'Starting from a single design image, the project uses StdGEN to form multiview observations, then operates directly on explicit ribbon/card geometry through generation and refinement.',
+  motivationLead: 'Modern 3D generation can produce visually convincing hair geometry, but render-ready geometry is not automatically a production-ready asset. Games and animation need compact, editable cards with valid surfaces, controlled overlap, and stable organization.',
+  targetDefinition: 'Recover any compact hair-card configuration that explains the observed and held-out appearance while satisfying geometric validity, card-budget, overlap, and production-distribution constraints—rather than requiring the one hidden layout originally authored.',
+  motivationPoints: [
+    {
+      label: 'Production gap',
+      title: 'Appearance is necessary, but not sufficient',
+      body: 'A plausible render can still hide excessive card counts, folded or degenerate ribbons, duplicated coverage, unstable layering, or geometry that is difficult to edit and animate.',
+    },
+    {
+      label: 'Ambiguous structure',
+      title: 'The hidden card layout is not uniquely observable',
+      body: 'The same hairstyle can be represented by different counts, roots, widths, overlaps, and local layerings. Reproducing the artist’s exact decomposition is therefore not the right acceptance target.',
+    },
+    {
+      label: 'Direct representation',
+      title: 'The final asset should remain explicit throughout',
+      body: 'Because the production target is already a set of ribbon surfaces, the project aims to avoid a dense-strand intermediate and solve generation, correspondence, and correction directly in card space.',
+    },
+  ],
+  methodology: {
+    status: 'Target system design · generator in progress · refiner frozen',
+    steps: [
+      { label: 'Input', title: 'Single character design image' },
+      { label: 'Observation front end', title: 'StdGEN multiview alpha, predicted normals, and cameras' },
+      { label: 'Generator · in progress', title: 'Camera-aware variable-card 3D layout' },
+      { label: 'Refiner · validated', title: 'Joint multiview K12 and profile correction' },
+      { label: 'Output', title: 'Compact, editable, production-valid explicit cards' },
+    ],
+    roles: [
+      {
+        label: 'Generator · current F1 target',
+        title: 'Discover the coarse card set',
+        body: 'Up to 320 fixed queries predict existence, 3D anchors, orientation, length, width, and low-dimensional curvature. The same explicit quadratic cards are projected into every calibrated view.',
+      },
+      {
+        label: 'Training / deployment boundary',
+        title: 'Use geometry supervision without requiring it at inference',
+        body: 'Training adds GT metric-depth render supervision for 3D placement and layer order. Inference remains limited to generated alpha, predicted normals, and camera parameters; coarse hair geometry is not a primary input.',
+      },
+      {
+        label: 'Frozen B1/H1 refiner',
+        title: 'Correct appearance inside a valid asset space',
+        body: 'Joint rendering adjusts known-root, known-slot K12 cards and bounded profiles, rejects invalid H1 states, and restores the best feasible output while preserving count, roots, topology, and face budget.',
+      },
+    ],
+    evidenceBoundary: 'The pipeline above is the target system design. Population-scale evidence currently supports the frozen refiner; the generator remains under small-prototype development, so generator-only and post-refiner results are reported separately.',
+  },
   refiner: {
     input: [
       'Fixed card roster, slots, and root anchors',
