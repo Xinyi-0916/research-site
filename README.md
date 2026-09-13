@@ -25,16 +25,19 @@ hair_target500_stage_j0_joint_oracle/
 j0b1_h1_population_validation_v2_complete.json
 ```
 
-Production-distribution values and the generator correction-entry boundary are transcribed from:
+Production-distribution values are transcribed from:
 
 ```text
 tasks/aaai_3d_generation_20260626/checkpoints/
 hair_target500_stage_j0_joint_oracle/
 j0b2s3_absolute_production_distribution_v2_complete.json
+```
 
-tasks/aaai_3d_generation_20260626/checkpoints/
-hair_target500_stage_g0_generator/
-g0_train_generator_entry_basin_v1.json
+The Generator progress section follows the current decision ledger in the main project `README.md`. Its milestone table is transcribed from the named JSON artifacts on the page. Generator visuals are unmodified copies from the project evaluation sites, principally:
+
+```text
+tasks/aaai_3d_generation_20260626/evals/
+hair_target500_g1_depth_utility_study/
 ```
 
 Public copies of the selected render files live under:
@@ -42,6 +45,7 @@ Public copies of the selected render files live under:
 ```text
 public/media/eval/j0b1-h1-population-v2/
 public/media/eval/j0b1-h1-population-v2-white/
+public/media/eval/generator/
 ```
 
 When updating results, keep the artifact identifier and source case IDs traceable in the repository, and keep split labels and view names clear on the public page. Do not present a per-view render beside a case-level percentage without explaining that the percentage is aggregated over the split. Keep learned-generator and post-refiner claims separate.
@@ -50,7 +54,7 @@ The public demonstration uses the canonical input `front` and `right` (Side) vie
 
 ## Edit content
 
-All personal text, project statements, evaluation values, demonstration paths, generator-boundary values, findings, and limitations are in:
+All personal text, project statements, evaluation values, demonstration paths, generator-progress values, findings, and limitations are in:
 
 ```text
 src/data/siteData.js

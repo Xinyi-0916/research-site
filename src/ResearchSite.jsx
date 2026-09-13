@@ -113,25 +113,48 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="generator-boundary">
-          <SectionHead number="05" title="Generator target boundary" note={generatorBoundary.status} />
+          <SectionHead number="05" title="Generator: current progress" note={generatorBoundary.status} />
           <p className="section-lead">{generatorBoundary.summary}</p>
           <div className="generator-contract">
             <div><small>Deployable F1 input</small><strong>{generatorBoundary.f1.input}</strong></div>
-            <div><small>Coarse generator output</small><strong>{generatorBoundary.f1.output}</strong><p>{generatorBoundary.f1.variables}</p></div>
-            <div><small>Next handoff gate</small><strong>{generatorBoundary.f1.nextGate}</strong></div>
+            <div><small>Current geometry probe</small><strong>{generatorBoundary.f1.output}</strong><p>{generatorBoundary.f1.variables}</p></div>
+            <div><small>Active gate</small><strong>{generatorBoundary.f1.nextGate}</strong></div>
           </div>
           <p className="depth-rule"><strong>Depth rule.</strong> {generatorBoundary.f1.depth}</p>
-          <div className="basin-callout">
-            <div><span>Measured correction-entry boundary</span><strong>{generatorBoundary.largestSupported}</strong></div>
-            <code>{generatorBoundary.formula}</code>
-            <p>{generatorBoundary.scope}</p>
+
+          <div className="generator-question">
+            <span>Current research question</span>
+            <strong>{generatorBoundary.currentQuestion}</strong>
+            <p><b>Deferred until this passes:</b> {generatorBoundary.deferred}</p>
           </div>
-          <div className="boundary-grid">
-            <div className="table-scroll"><table className="boundary-table"><thead><tr><th>Start error</th><th>Status</th><th>Input Δ</th><th>Held-out Δ</th><th>Terminal input</th><th>Terminal held-out</th></tr></thead><tbody>{generatorBoundary.levels.map((row) => <tr key={row.factor} className={row.status === 'Pass' ? 'boundary-pass' : 'boundary-fail'}><th>{row.factor}</th><td>{row.status}</td><td>{row.input}</td><td>{row.heldout}</td><td>{row.terminalInput}</td><td>{row.terminalHeldout}</td></tr>)}</tbody></table></div>
-            <div className="gate-list"><h3>Pass requires all four</h3><ul>{generatorBoundary.gates.map((gate) => <li key={gate}>{gate}</li>)}</ul></div>
+
+          <h3 className="subsection-title generator-subtitle">Decision-changing milestones</h3>
+          <div className="table-scroll">
+            <table className="generator-milestone-table">
+              <thead><tr><th>Stage</th><th>Status</th><th>Measured evidence</th><th>Method decision</th></tr></thead>
+              <tbody>{generatorBoundary.milestones.map((row) => <tr key={row.stage}><th>{row.stage}</th><td><span className={`status-chip ${row.tone}`}>{row.status}</span></td><td>{row.evidence}</td><td>{row.decision}</td></tr>)}</tbody>
+            </table>
           </div>
-          <p className="boundary-note"><strong>Interpretation.</strong> Starts at 1.5×–4× still reduce their own larger errors, but finish worse than the accepted 1× endpoint and therefore fail. The measured <em>f ≤ 1</em> limit applies to the later K12 refiner handoff; the active F1 generator must first establish stable coarse-card 3D layout.</p>
-          <p className="source-note">Boundary values are transcribed from <code>{generatorBoundary.artifact}</code>.</p>
+
+          <div className="generator-budget">
+            <div>
+              <span>Why 128 now, but 320 later?</span>
+              <h3>Fixed capacity isolates geometry; the data still requires a variable roster.</h3>
+              <p>The current 128-card probe removes count and topology changes from the experiment. The final 320-query ceiling comes from the Train distribution and covers its observed maximum of 293 cards without truncation.</p>
+            </div>
+            <div className="table-scroll"><table><thead><tr><th>Card-bearing split</th><th>Cases</th><th>Median</th><th>P90</th><th>P95</th><th>Max</th></tr></thead><tbody>{generatorBoundary.cardCounts.map((row) => <tr key={row.split}><th>{row.split}</th><td>{row.cases}</td><td>{row.median}</td><td>{row.p90}</td><td>{row.p95}</td><td>{row.max}</td></tr>)}</tbody></table></div>
+          </div>
+
+          <h3 className="subsection-title generator-subtitle">Visual evidence from the evaluation site</h3>
+          <figure className="generator-depth-visual">
+            <header><h3>{generatorBoundary.visuals.depth.title}</h3><span>Same case · same seed · two loss variants</span></header>
+            <div><div><span>Normal + alpha</span><img src={generatorBoundary.visuals.depth.baseline} alt="Generator depth utility eval sheet using normal and alpha supervision" /></div><div><span>Normal + alpha + GT depth</span><img src={generatorBoundary.visuals.depth.treatment} alt="Generator depth utility eval sheet adding training-only GT depth supervision" /></div></div>
+            <figcaption>{generatorBoundary.visuals.depth.caption}</figcaption>
+          </figure>
+          <div className="generator-diagnostic-grid">
+            {generatorBoundary.visuals.diagnostics.map((visual) => <figure key={visual.title}><h3>{visual.title}</h3><img src={visual.image} alt={visual.title} /><figcaption>{visual.caption}</figcaption></figure>)}
+          </div>
+          <p className="source-note">All displayed generator visuals are unmodified copies from <code>evals/hair_target500_g1_depth_utility_study</code>. Table values are transcribed from: {generatorBoundary.sources.map((source, index) => <span key={source}><code>{source}</code>{index < generatorBoundary.sources.length - 1 ? '; ' : '.'}</span>)}</p>
         </section>
 
         <section className="content-section" id="findings">
