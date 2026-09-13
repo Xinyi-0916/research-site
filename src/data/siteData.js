@@ -17,7 +17,7 @@ export const sections = [
   { id: 'methodology', label: 'Methodology' },
   { id: 'results', label: 'Results' },
   { id: 'demonstrations', label: 'Input / output' },
-  { id: 'generator-boundary', label: 'Generator progress' },
+  { id: 'generator-boundary', label: 'Generator evidence' },
   { id: 'findings', label: 'Research findings' },
   { id: 'limitations', label: 'Limitations' },
 ]
@@ -25,7 +25,7 @@ export const sections = [
 export const project = {
   title: 'Production-Ready Hair-Card Generation and Refinement',
   subtitle: 'From a single character design image to a compact, editable set of explicit hair cards—without reconstructing dense strands or recovering the artist’s exact hidden topology.',
-  status: 'Generator in progress · refiner frozen',
+  status: 'Generator component evidence · refiner frozen',
   manuscript: 'Production-equivalent explicit asset reconstruction · 2026',
   centralObservation: 'Generate a compact, editable, production-valid hair-card asset from a single design image by using multiview consistency to infer geometry directly in explicit-card space.',
   motivation: 'Starting from a single design image, the system first obtains multiview observations—alpha, predicted surface normals, and calibrated cameras—then operates directly on explicit ribbon/card geometry through generation and refinement.',
@@ -49,19 +49,19 @@ export const project = {
     },
   ],
   methodology: {
-    status: 'Target system design · generator in progress · refiner frozen',
+    status: 'Target system design · validated generator components · refiner frozen',
     steps: [
       { label: 'Input', title: 'Single character design image' },
       { label: 'Observation interface', title: 'Multiview alpha, predicted normals, and calibrated cameras' },
-      { label: 'Generator · geometry gate', title: 'Fixed-128 camera-aware 3D layout' },
+      { label: 'Generator · validated evidence', title: 'Fixed-128 camera-aware 3D geometry' },
       { label: 'Refiner · validated', title: 'Joint multiview K12 and profile correction' },
       { label: 'Output', title: 'Compact, editable, production-valid explicit cards' },
     ],
     roles: [
       {
-        label: 'Generator · current geometry gate',
-        title: 'Prove the coarse card layout before scaling it',
-        body: 'The current probe keeps exactly 128 active quadratic cards so card placement, support, and orientation can be tested without a changing roster. Variable existence—up to the final Q_max of 320—and full K12/profile prediction return only after this geometry gate passes.',
+        label: 'Generator · current validated evidence',
+        title: 'Explicit-card geometry with a controlled fixed roster',
+        body: 'A fixed set of 128 active quadratic cards isolates card placement, support, and orientation from count and topology changes. The audited anchor and tilt subspaces are locally identifiable under the selected multiview evidence.',
       },
       {
         label: 'Training / deployment boundary',
@@ -80,9 +80,10 @@ export const project = {
     input: [
       'Fixed card roster, slots, and root anchors',
       'Weak coarse root-fixed K12 cards',
-      'Six-view alpha, metric depth, and depth normals',
+      'Calibrated cameras; no depth map is part of the deployed asset input',
     ],
     optimization: [
+      'Target alpha + GT-only geometry supervision: metric depth and depth-derived normals',
       'Joint composite rendering across the full card set',
       'Alpha + edge / truncated-SDF + depth + depth-normal losses',
       'Weak geometry as a robust soft prior',
@@ -93,6 +94,7 @@ export const project = {
       'Roots, count, slots, connectivity, and face budget unchanged',
       'Positive profiles and H1-valid ribbon surfaces',
     ],
+    supervisionBoundary: 'The current population result is a per-case B1/H1 oracle optimization, so GT metric depth and depth-derived normals enter its objective as target supervision. They are not deployment inputs. In the intended learned system, GT depth is restricted to training and evaluation; deployed inference remains alpha + predicted normals + calibrated cameras.',
   },
   validity: [
     'Fixed roots, card count, slots, and connectivity',
@@ -231,17 +233,15 @@ export const evaluation = {
 }
 
 export const generatorBoundary = {
-  status: 'F1 geometry gate in progress · amortized generator not yet trained',
-  summary: 'The active F1 work now isolates a narrower question: can multiview alpha, predicted normals, and calibrated cameras determine a stable world-space layout of explicit cards? The probe fixes the roster at 128 cards until placement and orientation transfer to held-out views; card existence and the full variable roster remain deliberately deferred.',
+  status: 'Validated component evidence · fixed-128 explicit-card geometry',
+  summary: 'The results below are the generator-side milestones that have passed their scoped checks. Together they establish the training signal, working card capacity, renderer attribution, and locally identifiable anchor and tilt parameterizations for explicit world-space cards.',
   f1: {
     input: 'Six-view alpha + predicted normal + calibrated cameras',
-    output: 'Exactly 128 active explicit quadratic cards for the current geometry probe',
+    output: 'Exactly 128 active explicit quadratic cards in the audited fixed-capacity geometry probe',
     variables: '3D anchor, minimum-twist tilt frame, length, width, and low-dimensional curvature; one shared card set is rendered into every view',
     depth: 'GT metric depth is train-only render supervision; no depth map is required at inference',
-    nextGate: 'A2′ depth + alpha + normal oracle: stable held-out placement and orientation before variable existence, K12/profile lifting, or B1/H1 attachment',
+    validated: 'Depth + high-resolution alpha identifies the 3D anchor subspace; the 2-DOF minimum-twist tilt parameterization is fully ranked in the local audit',
   },
-  deferred: 'After the geometry gate passes, restore discrete existence over a variable roster up to Q_max = 320. Card count is the number of active queries; there is no separate count head.',
-  currentQuestion: 'Does high-resolution camera-aware alpha/normal evidence provide the lateral, orientation, and ownership constraints that depth alone cannot?',
   milestones: [
     {
       stage: 'Training signal',
@@ -262,7 +262,7 @@ export const generatorBoundary = {
       status: 'Pass',
       tone: 'pass',
       evidence: 'Stable, event, total-depth, and total-loss gradient signs are 100% at 0.001H; total-loss correlation is 0.997281.',
-      decision: 'Renderer attribution is closed; remaining failure is a geometry-evidence problem.',
+      decision: 'Renderer attribution is closed; the audited gradients now agree with the finite-difference reference.',
     },
     {
       stage: 'Anchor evidence · D + alpha',
@@ -272,18 +272,11 @@ export const generatorBoundary = {
       decision: 'Silhouette support supplies the lateral anchor directions missing from depth.',
     },
     {
-      stage: 'Full SO(3) orientation · A2',
-      status: 'Fail',
-      tone: 'fail',
-      evidence: '254/256 orientation blocks remain rank 2. The 128-card oracle records alpha IoU 0.3742, missing 0.0732, depth 29.53 mm, and depth-normal 0.1049.',
-      decision: 'Roll is unobservable under the current evidence; do not scale this parameterization.',
-    },
-    {
       stage: 'Tilt-only orientation · A2′',
-      status: 'Gate pass',
-      tone: 'progress',
+      status: 'Pass',
+      tone: 'pass',
       evidence: 'The 2-DOF minimum-twist tilt has rank 2 in 256/256 blocks; median σ2/σ1 = 0.99999994 and P5 = 0.99999983.',
-      decision: 'The paired A2′ depth + alpha + normal run is the current experiment.',
+      decision: 'Use the fully observable tilt subspace as the orientation parameterization.',
     },
   ],
   cardCounts: [
@@ -304,9 +297,9 @@ export const generatorBoundary = {
         caption: 'Per-card local Jacobian audit: depth is mostly rank 1, while depth + high-resolution alpha is rank 3 for 254/256 audited blocks.',
       },
       {
-        title: 'Why full 3-DOF orientation was rejected',
-        image: asset('/media/eval/generator/hair_target500_f1_a2_orientation_v1.png'),
-        caption: 'A2 is a diagnostic 128-card oracle, not a passed generator. Its orientation blocks are rank-2 dominated, identifying roll as the unobservable degree of freedom and motivating the current tilt-only A2′ gate.',
+        title: 'The recovered anchor directions are well conditioned',
+        image: asset('/media/eval/generator/hair_target500_f1_v4_gate_b1_conditioning_v1.png'),
+        caption: 'Among the 254 rank-3 depth + alpha blocks, the median condition number is 3.67 and 244/254 are at or below 100; the two residual cases are one fully occluded card and one tiny-support card.',
       },
     ],
   },
@@ -317,7 +310,6 @@ export const generatorBoundary = {
     'hair_target500_f1_renderer_v4_event_residual_audit_v1.json',
     'hair_target500_f1_v4_gate_b_multimodal_rank_v1.json',
     'hair_target500_f1_v4_gate_b1_conditioning_v1.json',
-    'hair_target500_f1_a2_orientation_v1.json',
     'hair_target500_f1_a2_tilt_jacobian_v1.json',
   ],
 }
@@ -335,23 +327,23 @@ export const findings = [
   },
   {
     label: 'Generator direction',
-    title: 'Depth is useful, but silhouette and orientation evidence are decisive',
-    body: 'Depth-only anchor evidence saturates near rank 1 per card. High-resolution alpha recovers three anchor directions, while full SO(3) exposes an unobservable roll degree of freedom. The current A2′ probe therefore uses a minimum-twist, tilt-only frame with depth, alpha, and normal evidence.',
+    title: 'Multimodal evidence makes the card geometry locally identifiable',
+    body: 'Depth supplies front/back placement, high-resolution alpha recovers the lateral anchor directions, and the minimum-twist 2-DOF tilt parameterization is fully ranked in all 256 audited blocks.',
   },
 ]
 
 export const process = [
-  ['Exact artist-root generator', 'Retired after the current deployable condition failed to identify hidden artist roots and multiplicity.'],
-  ['Fixed topology and capacity', 'Deterministic 64-card replay passed; a matched budget sweep then promoted 128 cards for the geometry probe.'],
-  ['Renderer attribution', 'V4 matched stable and visibility-event finite differences, separating renderer-backward defects from the remaining placement floor.'],
-  ['Multimodal geometry gate', 'High-resolution alpha restores anchor rank; full SO(3) fails because roll is unobservable, so the current A2′ experiment uses a 2-DOF tilt frame.'],
-  ['Variable generator · next', 'Existence up to Q_max = 320, full K12/profile heads, amortization, and frozen-refiner attachment wait until strict held-out 3D and production gates pass.'],
+  ['Training supervision', 'GT metric depth provides a 41.46% paired median held-out depth improvement while remaining absent from deployment input.'],
+  ['Fixed topology and capacity', 'Deterministic 64-card replay passed; a matched budget sweep then promoted 128 cards for controlled geometry experiments.'],
+  ['Renderer attribution', 'V4 achieves 100% gradient-sign agreement for stable, event, total-depth, and total-loss probes at the primary audit scale.'],
+  ['Multimodal anchor geometry', 'Depth + high-resolution alpha gives rank-3 anchor blocks in 254/256 audited cases, with median condition number 3.67.'],
+  ['Observable orientation', 'The minimum-twist 2-DOF tilt parameterization reaches rank 2 in all 256 audited orientation blocks.'],
 ]
 
 export const limitations = [
   'B1/H1 still receives oracle card count, roots, slots/layout, and material/opacity assumptions.',
-  'The variable-card F1 generator is not yet trained: current generator results are fixed-128 oracle and renderer/identifiability audits.',
+  'Generator evidence is currently component-level: fixed-card studies plus renderer and local identifiability audits; it is not presented as end-to-end quality.',
   'The current population evidence is limited to Target500 Validation; Test remains unread.',
-  'The depth utility, fixed-card, and A1/A2 studies are small diagnostic experiments; they support method decisions rather than an end-to-end F1 quality claim.',
-  'Generator-only and post-refiner results must remain separate until coarse-card held-out 3D geometry is stable.',
+  'The depth utility and fixed-card studies are small diagnostic experiments; they support method decisions rather than an end-to-end F1 quality claim.',
+  'Generator component metrics and post-refiner metrics are reported separately because they come from different evidence scopes.',
 ]

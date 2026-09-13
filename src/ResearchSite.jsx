@@ -71,14 +71,15 @@ export default function ResearchSite() {
           <div className="method-pipeline">{project.methodology.steps.map((step, index) => <div className="method-stage" key={step.label}><article><span>{String(index + 1).padStart(2, '0')} · {step.label}</span><strong>{step.title}</strong></article>{index < project.methodology.steps.length - 1 && <i aria-hidden="true">→</i>}</div>)}</div>
           <div className="method-roles">{project.methodology.roles.map((role) => <article key={role.label}><span>{role.label}</span><h3>{role.title}</h3><p>{role.body}</p></article>)}</div>
           <p className="method-evidence"><strong>Evidence boundary.</strong> {project.methodology.evidenceBoundary}</p>
-          <h3 className="subsection-title">Frozen refiner contract</h3>
+          <h3 className="subsection-title">Refiner contract and supervision boundary</h3>
           <div className="refiner-contract">
-            <ContractColumn label="Input" items={project.refiner.input} />
+            <ContractColumn label="Card-state input" items={project.refiner.input} />
             <div className="io-arrow" aria-hidden="true">→</div>
-            <ContractColumn label="Joint optimization" items={project.refiner.optimization} />
+            <ContractColumn label="Optimization + GT-only supervision" items={project.refiner.optimization} />
             <div className="io-arrow" aria-hidden="true">→</div>
             <ContractColumn label="Output" items={project.refiner.output} />
           </div>
+          <p className="method-evidence refiner-depth-note"><strong>Depth boundary.</strong> {project.refiner.supervisionBoundary}</p>
           <div className="validity-block"><h3>Hard validity boundary</h3><ul>{project.validity.map((item) => <li key={item}>{item}</li>)}</ul></div>
         </section>
 
@@ -113,22 +114,16 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="generator-boundary">
-          <SectionHead number="05" title="Generator: current progress" note={generatorBoundary.status} />
+          <SectionHead number="05" title="Generator: validated evidence" note={generatorBoundary.status} />
           <p className="section-lead">{generatorBoundary.summary}</p>
           <div className="generator-contract">
             <div><small>Deployable F1 input</small><strong>{generatorBoundary.f1.input}</strong></div>
-            <div><small>Current geometry probe</small><strong>{generatorBoundary.f1.output}</strong><p>{generatorBoundary.f1.variables}</p></div>
-            <div><small>Active gate</small><strong>{generatorBoundary.f1.nextGate}</strong></div>
+            <div><small>Audited geometry probe</small><strong>{generatorBoundary.f1.output}</strong><p>{generatorBoundary.f1.variables}</p></div>
+            <div><small>Validated geometry result</small><strong>{generatorBoundary.f1.validated}</strong></div>
           </div>
           <p className="depth-rule"><strong>Depth rule.</strong> {generatorBoundary.f1.depth}</p>
 
-          <div className="generator-question">
-            <span>Current research question</span>
-            <strong>{generatorBoundary.currentQuestion}</strong>
-            <p><b>Deferred until this passes:</b> {generatorBoundary.deferred}</p>
-          </div>
-
-          <h3 className="subsection-title generator-subtitle">Decision-changing milestones</h3>
+          <h3 className="subsection-title generator-subtitle">Validated milestones</h3>
           <div className="table-scroll">
             <table className="generator-milestone-table">
               <thead><tr><th>Stage</th><th>Status</th><th>Measured evidence</th><th>Method decision</th></tr></thead>
@@ -138,9 +133,9 @@ export default function ResearchSite() {
 
           <div className="generator-budget">
             <div>
-              <span>Why 128 now, but 320 later?</span>
-              <h3>Fixed capacity isolates geometry; the data still requires a variable roster.</h3>
-              <p>The current 128-card probe removes count and topology changes from the experiment. The final 320-query ceiling comes from the Train distribution and covers its observed maximum of 293 cards without truncation.</p>
+              <span>Dataset and probe capacity</span>
+              <h3>128 cards isolate geometry; the 320-query ceiling covers the observed data.</h3>
+              <p>The fixed 128-card probe removes count and topology changes from the controlled geometry experiments. Separately, the audited 320-query ceiling covers the Train maximum of 293 cards without truncation.</p>
             </div>
             <div className="table-scroll"><table><thead><tr><th>Card-bearing split</th><th>Cases</th><th>Median</th><th>P90</th><th>P95</th><th>Max</th></tr></thead><tbody>{generatorBoundary.cardCounts.map((row) => <tr key={row.split}><th>{row.split}</th><td>{row.cases}</td><td>{row.median}</td><td>{row.p90}</td><td>{row.p95}</td><td>{row.max}</td></tr>)}</tbody></table></div>
           </div>
@@ -160,7 +155,7 @@ export default function ResearchSite() {
         <section className="content-section" id="findings">
           <SectionHead number="06" title="Current findings" />
           <div className="findings-list">{findings.map((finding) => <article key={finding.title}><span>{finding.label}</span><h3>{finding.title}</h3><p>{finding.body}</p></article>)}</div>
-          <h3 className="process-title">Why the generator changed</h3>
+          <h3 className="process-title">Generator evidence established so far</h3>
           <ol className="process-list">{process.map(([phase, insight], index) => <li key={phase}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{phase}</strong><p>{insight}</p></div></li>)}</ol>
         </section>
 

@@ -33,7 +33,7 @@ hair_target500_stage_j0_joint_oracle/
 j0b2s3_absolute_production_distribution_v2_complete.json
 ```
 
-The Generator progress section follows the current decision ledger in the main project `README.md`. Its milestone table is transcribed from the named JSON artifacts on the page. Generator visuals are unmodified copies from the project evaluation sites, principally:
+The Generator evidence section follows the current decision ledger in the main project `README.md`. Its milestone table is transcribed from the named JSON artifacts on the page. Generator visuals are unmodified copies from the project evaluation sites, principally:
 
 ```text
 tasks/aaai_3d_generation_20260626/evals/
@@ -54,7 +54,7 @@ The public demonstration uses the canonical input `front` and `right` (Side) vie
 
 ## Edit content
 
-All personal text, project statements, evaluation values, demonstration paths, generator-progress values, findings, and limitations are in:
+All personal text, project statements, evaluation values, demonstration paths, generator-evidence values, findings, and limitations are in:
 
 ```text
 src/data/siteData.js
