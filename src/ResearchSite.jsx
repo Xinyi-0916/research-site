@@ -26,8 +26,8 @@ function ContractColumn({ label, items }) {
 
 function RefinerVisualResults() {
   return (
-    <div className="method-visual-results" id="demonstrations">
-      <h3 className="subsection-title">Refiner visual results</h3>
+    <div className="refiner-visual-results" id="demonstrations">
+      <h3 className="subsection-title">Visual results</h3>
       <p className="subsection-note">Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison.</p>
       <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> GT target = source asset rendered from the same view camera</span></div>
       <div className="metric-guide">
@@ -60,7 +60,7 @@ export default function ResearchSite() {
         </div>
         <nav className="project-index" aria-label="Project sections">
           <p>On this page</p>
-          {sections.map((section, index) => <a key={section.id} href={`#${section.id}`}><span>{String(index + 1).padStart(2, '0')}</span>{section.label}</a>)}
+          {sections.map((section) => <a key={section.id} href={`#${section.id}`}><span>{section.number}</span>{section.label}</a>)}
         </nav>
         <p className="side-status"><i /> {project.status}</p>
       </aside>
@@ -91,6 +91,10 @@ export default function ResearchSite() {
           <div className="method-pipeline">{project.methodology.steps.map((step, index) => <div className="method-stage" key={step.label}><article><span>{String(index + 1).padStart(2, '0')} · {step.label}</span><strong>{step.title}</strong></article>{index < project.methodology.steps.length - 1 && <i aria-hidden="true">→</i>}</div>)}</div>
           <div className="method-roles">{project.methodology.roles.map((role) => <article key={role.label}><span>{role.label}</span><h3>{role.title}</h3><p>{role.body}</p></article>)}</div>
           <p className="method-evidence"><strong>Evidence boundary.</strong> {project.methodology.evidenceBoundary}</p>
+        </section>
+
+        <section className="content-section" id="refiner">
+          <SectionHead number="03" title="Refiner" note={`${evaluation.scope} · frozen B1/H1`} />
           <RefinerVisualResults />
           <h3 className="subsection-title">Refiner contract and supervision boundary</h3>
           <div className="refiner-contract">
@@ -106,10 +110,7 @@ export default function ResearchSite() {
             <div className="loss-terms">{project.refiner.objective.terms.map((term) => <article key={term.label}><span>{term.label}</span><code>{term.symbol}</code><p>{term.effect}</p></article>)}</div>
             <p><strong>Hard boundary.</strong> {project.refiner.objective.hardBoundary}</p>
           </div>
-        </section>
-
-        <section className="content-section" id="results">
-          <SectionHead number="03" title="Refiner results" note={`${evaluation.scope} · frozen refiner`} />
+          <h3 className="subsection-title" id="results">Population results</h3>
           <div className="artifact-bar"><span>Source artifact</span><code>{evaluation.artifact}</code><span>Runtime {evaluation.elapsed}</span></div>
           <div className="metrics">{evaluation.aggregate.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
           <div className="result-tables">
@@ -125,7 +126,8 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="generator-boundary">
-          <SectionHead number="04" title="Generator: validated evidence" note={generatorBoundary.status} />
+          <SectionHead number="04" title="Generator" note={generatorBoundary.status} />
+          <h3 className="subsection-title generator-overview-title">Current validated evidence</h3>
           <p className="section-lead">{generatorBoundary.summary}</p>
           <div className="generator-contract">
             <div><small>Deployable F1 input</small><strong>{generatorBoundary.f1.input}</strong></div>

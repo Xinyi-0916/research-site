@@ -12,14 +12,13 @@ export const person = {
 }
 
 export const sections = [
-  { id: 'overview', label: 'Overview' },
-  { id: 'motivation', label: 'Motivation' },
-  { id: 'methodology', label: 'Methodology' },
-  { id: 'demonstrations', label: 'Refiner input / output' },
-  { id: 'results', label: 'Refiner results' },
-  { id: 'generator-boundary', label: 'Generator evidence' },
-  { id: 'findings', label: 'Research findings' },
-  { id: 'limitations', label: 'Limitations' },
+  { id: 'overview', number: '00', label: 'Overview' },
+  { id: 'motivation', number: '01', label: 'Motivation' },
+  { id: 'methodology', number: '02', label: 'Methodology' },
+  { id: 'refiner', number: '03', label: 'Refiner' },
+  { id: 'generator-boundary', number: '04', label: 'Generator' },
+  { id: 'findings', number: '05', label: 'Research findings' },
+  { id: 'limitations', number: '06', label: 'Limitations' },
 ]
 
 export const project = {
