@@ -9,12 +9,13 @@ function SectionHead({ number, title, note }) {
 function ComparisonPair({ pair }) {
   return (
     <figure className="comparison-pair">
-      <div className="pair-images">
+      <div className={`pair-images${pair.gt ? ' has-gt' : ''}`}>
         <div><span>Input</span><img src={pair.before} alt={`${pair.view}: weak-card input before refinement`} /></div>
         <div><span>Output</span><img src={pair.after} alt={`${pair.view}: best-valid refined-card output`} /></div>
+        {pair.gt && <div><span>GT target</span><img src={pair.gt} alt={`${pair.view}: ground-truth target render from the same camera`} /></div>}
       </div>
       <div className="view-metrics">{pair.metrics.map((metric) => <div key={metric.label}><span>{metric.label}</span><strong>{metric.before} → {metric.after}{metric.unit || ''}</strong></div>)}</div>
-      <figcaption>{pair.view} · source Blender output · white background presentation copy · mesh RGB preserved</figcaption>
+      <figcaption>{pair.view} · {pair.gt ? 'input and output are measured against the GT target shown above · ' : ''}source Blender output · white background presentation copy · mesh RGB preserved</figcaption>
     </figure>
   )
 }
@@ -105,7 +106,7 @@ export default function ResearchSite() {
 
         <section className="content-section" id="demonstrations">
           <SectionHead number="04" title="Refiner input / output" note="Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison." />
-          <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span></div>
+          <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> GT target = source asset rendered from the same Front camera</span></div>
           <div className="metric-guide">
             <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
             <div>{evaluation.metricDefinitions.map((metric) => <article key={metric.name}><strong>{metric.name}</strong><p>{metric.description}</p><span>{metric.direction}</span></article>)}</div>
@@ -114,7 +115,7 @@ export default function ResearchSite() {
           <div className="demo-list">
             {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>)}
           </div>
-          <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. Source Blender renders are unchanged except for replacing the uniform background with white; mesh RGB is preserved.</p>
+          <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. The Front row also includes the authoritative C2 GT RGB render from the same camera. Source Blender renders are unchanged except for cropping the GT render to the shared camera frame and replacing the uniform background with white; mesh RGB is preserved.</p>
         </section>
 
         <section className="content-section" id="generator-boundary">
@@ -123,7 +124,7 @@ export default function ResearchSite() {
           <div className="generator-contract">
             <div><small>Deployable F1 input</small><strong>{generatorBoundary.f1.input}</strong></div>
             <div><small>Audited geometry probe</small><strong>{generatorBoundary.f1.output}</strong><p>{generatorBoundary.f1.variables}</p></div>
-            <div><small>Validated geometry result</small><strong>{generatorBoundary.f1.validated}</strong></div>
+            <div><small>Validated component result</small><strong>{generatorBoundary.f1.validated}</strong></div>
           </div>
           <p className="depth-rule"><strong>Depth rule.</strong> {generatorBoundary.f1.depth}</p>
 
@@ -150,9 +151,6 @@ export default function ResearchSite() {
             <div><div><span>Normal + alpha</span><img src={generatorBoundary.visuals.depth.baseline} alt="Generator depth utility eval sheet using normal and alpha supervision" /></div><div><span>Normal + alpha + GT depth</span><img src={generatorBoundary.visuals.depth.treatment} alt="Generator depth utility eval sheet adding training-only GT depth supervision" /></div></div>
             <figcaption>{generatorBoundary.visuals.depth.caption}</figcaption>
           </figure>
-          <div className="generator-diagnostic-grid">
-            {generatorBoundary.visuals.diagnostics.map((visual) => <figure key={visual.title}><h3>{visual.title}</h3><img src={visual.image} alt={visual.title} /><figcaption>{visual.caption}</figcaption></figure>)}
-          </div>
           <p className="source-note">All displayed generator visuals are unmodified copies from <code>evals/hair_target500_g1_depth_utility_study</code>. Table values are transcribed from: {generatorBoundary.sources.map((source, index) => <span key={source}><code>{source}</code>{index < generatorBoundary.sources.length - 1 ? '; ' : '.'}</span>)}</p>
         </section>
 

@@ -61,7 +61,7 @@ export const project = {
       {
         label: 'Generator · current validated evidence',
         title: 'Explicit-card geometry with a controlled fixed roster',
-        body: 'A fixed set of 128 active quadratic cards isolates card placement, support, and orientation from count and topology changes. The audited anchor and tilt subspaces are locally identifiable under the selected multiview evidence.',
+        body: 'A fixed set of 128 active quadratic cards isolates geometry optimization from count and topology changes. This controlled probe is used to test supervision, capacity, and renderer behavior before training the final variable-count generator.',
       },
       {
         label: 'Training / deployment boundary',
@@ -176,6 +176,7 @@ export const evaluation = {
           view: 'Front',
           before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_front.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_front.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/gt_input_front.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.572', after: '0.901' },
             { label: 'Depth MAE', before: '0.0430', after: '0.0302', unit: ' m' },
@@ -204,6 +205,7 @@ export const evaluation = {
           view: 'Front',
           before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_front.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_front.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/gt_input_front.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.213', after: '0.810' },
             { label: 'Depth MAE', before: '0.0442', after: '0.0211', unit: ' m' },
@@ -232,6 +234,7 @@ export const evaluation = {
           view: 'Front',
           before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_input_front.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_input_front.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/gt_input_front.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.222', after: '0.730' },
             { label: 'Depth MAE', before: '0.0401', after: '0.0083', unit: ' m' },
@@ -255,13 +258,13 @@ export const evaluation = {
 
 export const generatorBoundary = {
   status: 'Validated component evidence · fixed-128 explicit-card geometry',
-  summary: 'The results below are the generator-side milestones that have passed their scoped checks. Together they establish the training signal, working card capacity, renderer attribution, and locally identifiable anchor and tilt parameterizations for explicit world-space cards.',
+  summary: 'The results below are the generator-side component checks that are ready to report: training-only depth utility, a controlled 128-card geometry budget, and renderer-gradient attribution. They support method decisions but are not presented as an end-to-end generator result.',
   f1: {
     input: 'Six-view alpha + predicted normal + calibrated cameras',
     output: 'Exactly 128 active explicit quadratic cards in the audited fixed-capacity geometry probe',
-    variables: '3D anchor, minimum-twist tilt frame, length, width, and low-dimensional curvature; one shared card set is rendered into every view',
+    variables: '3D placement, orientation, length, width, and low-dimensional curvature; one shared card set is rendered into every view',
     depth: 'GT metric depth is train-only render supervision; no depth map is required at inference',
-    validated: 'Depth + high-resolution alpha identifies the 3D anchor subspace; the 2-DOF minimum-twist tilt parameterization is fully ranked in the local audit',
+    validated: 'GT-depth utility, fixed-capacity geometry, and renderer backward behavior have passed their scoped checks',
   },
   milestones: [
     {
@@ -285,20 +288,6 @@ export const generatorBoundary = {
       evidence: 'Stable, event, total-depth, and total-loss gradient signs are 100% at 0.001H; total-loss correlation is 0.997281.',
       decision: 'Renderer attribution is closed; the audited gradients now agree with the finite-difference reference.',
     },
-    {
-      stage: 'Anchor evidence · D + alpha',
-      status: 'Local pass',
-      tone: 'pass',
-      evidence: 'Depth alone gives median per-card rank 1. Adding high-resolution alpha yields rank 3 for 254/256 blocks; median condition number is 3.67.',
-      decision: 'Silhouette support supplies the lateral anchor directions missing from depth.',
-    },
-    {
-      stage: 'Tilt-only orientation · A2′',
-      status: 'Pass',
-      tone: 'pass',
-      evidence: 'The 2-DOF minimum-twist tilt has rank 2 in 256/256 blocks; median σ2/σ1 = 0.99999994 and P5 = 0.99999983.',
-      decision: 'Use the fully observable tilt subspace as the orientation parameterization.',
-    },
   ],
   cardCounts: [
     { split: 'Train · non-zero', cases: '383', median: '46', p90: '117.6', p95: '148.3', max: '293' },
@@ -311,27 +300,12 @@ export const generatorBoundary = {
       treatment: asset('/media/eval/generator/1065487795967695213_r0_normal_alpha_gt_depth.webp'),
       caption: 'Same Validation case and seed. Each unmodified eval sheet shows target alpha, final alpha, depth error, and depth-normal error for one input and one held-out view. This is evidence for the training-loss choice, not a final learned-generator result.',
     },
-    diagnostics: [
-      {
-        title: 'Alpha recovers the missing anchor directions',
-        image: asset('/media/eval/generator/hair_target500_f1_v4_gate_b_multimodal_rank_v1.png'),
-        caption: 'Per-card local Jacobian audit: depth is mostly rank 1, while depth + high-resolution alpha is rank 3 for 254/256 audited blocks.',
-      },
-      {
-        title: 'The recovered anchor directions are well conditioned',
-        image: asset('/media/eval/generator/hair_target500_f1_v4_gate_b1_conditioning_v1.png'),
-        caption: 'Among the 254 rank-3 depth + alpha blocks, the median condition number is 3.67 and 244/254 are at or below 100; the two residual cases are one fully occluded card and one tiny-support card.',
-      },
-    ],
   },
   sources: [
     'hair_target500_g1_depth_utility_study_v1.json',
     'hair_target500_gt_card_count_audit_v1.json',
     'hair_target500_f1_v3_fixed_budget_sweep_v1.json',
     'hair_target500_f1_renderer_v4_event_residual_audit_v1.json',
-    'hair_target500_f1_v4_gate_b_multimodal_rank_v1.json',
-    'hair_target500_f1_v4_gate_b1_conditioning_v1.json',
-    'hair_target500_f1_a2_tilt_jacobian_v1.json',
   ],
 }
 
@@ -348,8 +322,8 @@ export const findings = [
   },
   {
     label: 'Generator direction',
-    title: 'Multimodal evidence makes the card geometry locally identifiable',
-    body: 'Depth supplies front/back placement, high-resolution alpha recovers the lateral anchor directions, and the minimum-twist 2-DOF tilt parameterization is fully ranked in all 256 audited blocks.',
+    title: 'Scoped component checks establish the next generator scaffold',
+    body: 'Training-only metric depth improves held-out placement, 128 cards provide the stronger controlled geometry budget, and the audited renderer gradients agree with finite-difference references.',
   },
 ]
 
@@ -357,13 +331,11 @@ export const process = [
   ['Training supervision', 'GT metric depth provides a 41.46% paired median held-out depth improvement while remaining absent from deployment input.'],
   ['Fixed topology and capacity', 'Deterministic 64-card replay passed; a matched budget sweep then promoted 128 cards for controlled geometry experiments.'],
   ['Renderer attribution', 'V4 achieves 100% gradient-sign agreement for stable, event, total-depth, and total-loss probes at the primary audit scale.'],
-  ['Multimodal anchor geometry', 'Depth + high-resolution alpha gives rank-3 anchor blocks in 254/256 audited cases, with median condition number 3.67.'],
-  ['Observable orientation', 'The minimum-twist 2-DOF tilt parameterization reaches rank 2 in all 256 audited orientation blocks.'],
 ]
 
 export const limitations = [
   'B1/H1 still receives oracle card count, roots, slots/layout, and material/opacity assumptions.',
-  'Generator evidence is currently component-level: fixed-card studies plus renderer and local identifiability audits; it is not presented as end-to-end quality.',
+  'Generator evidence is currently component-level: fixed-card studies plus renderer audits; it is not presented as end-to-end quality.',
   'The current population evidence is limited to Target500 Validation; Test remains unread.',
   'The depth utility and fixed-card studies are small diagnostic experiments; they support method decisions rather than an end-to-end F1 quality claim.',
   'Generator component metrics and post-refiner metrics are reported separately because they come from different evidence scopes.',
