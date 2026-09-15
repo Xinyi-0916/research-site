@@ -187,6 +187,9 @@ th:first-child { text-align: left; }
 
 .demo-list { display: grid; margin-top: 26px; gap: 34px; }
 .input-output-key { display: flex; margin: -18px 0 26px; flex-wrap: wrap; gap: 10px 25px; color: var(--muted); font-size: .66rem; }
+.method-visual-results { margin-top: 34px; }
+.method-visual-results .subsection-note { margin: -10px 0 14px; color: var(--muted); font-size: .7rem; }
+.method-visual-results .input-output-key { margin: 0 0 26px; }
 .input-output-key span { display: flex; align-items: center; gap: 7px; }
 .input-output-key i { width: 8px; height: 8px; border-radius: 50%; background: #747d79; }
 .input-output-key .refined-dot { background: var(--green); }
