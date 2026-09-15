@@ -159,7 +159,17 @@ export default function ResearchSite() {
             <div><div><span>Normal + alpha</span><img src={generatorBoundary.visuals.depth.baseline} alt="Generator depth utility eval sheet using normal and alpha supervision" /></div><div><span>Normal + alpha + GT depth</span><img src={generatorBoundary.visuals.depth.treatment} alt="Generator depth utility eval sheet adding training-only GT depth supervision" /></div></div>
             <figcaption>{generatorBoundary.visuals.depth.caption}</figcaption>
           </figure>
-          <p className="source-note">All displayed generator visuals are unmodified copies from <code>evals/hair_target500_g1_depth_utility_study</code>. Table values are transcribed from: {generatorBoundary.sources.map((source, index) => <span key={source}><code>{source}</code>{index < generatorBoundary.sources.length - 1 ? '; ' : '.'}</span>)}</p>
+          <figure className="generator-depth-visual">
+            <header><h3>{generatorBoundary.visuals.rootLattice.title}</h3><span>No training · fixed 128 slots</span></header>
+            <div><div><img src={generatorBoundary.visuals.rootLattice.image} alt="C1-R0 fixed canonical root lattice visual audit" /></div></div>
+            <figcaption>{generatorBoundary.visuals.rootLattice.caption}</figcaption>
+          </figure>
+          <figure className="generator-depth-visual">
+            <header><h3>{generatorBoundary.visuals.bodyGray.title}</h3><span>Separate gray meshes · roots overlaid</span></header>
+            <div><div><img src={generatorBoundary.visuals.bodyGray.image} alt="Gray GT body mesh with root slots overlaid" /></div><div><img src={generatorBoundary.visuals.bodyGray.imageAlt} alt="Second gray GT body mesh with root slots overlaid" /></div></div>
+            <figcaption>{generatorBoundary.visuals.bodyGray.caption}</figcaption>
+          </figure>
+          <p className="source-note">Generator visuals are copied from the corresponding local evaluation artifacts. Table values are transcribed from: {generatorBoundary.sources.map((source, index) => <span key={source}><code>{source}</code>{index < generatorBoundary.sources.length - 1 ? '; ' : '.'}</span>)}</p>
         </section>
 
         <section className="content-section" id="findings">

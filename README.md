@@ -38,6 +38,13 @@ The Generator evidence section follows the current decision ledger in the main p
 ```text
 tasks/aaai_3d_generation_20260626/evals/
 hair_target500_g1_depth_utility_study/
+
+The C1-R0 fixed-root visual audit is additionally mirrored from:
+
+```text
+tasks/aaai_3d_generation_20260626/evals/
+hair_target500_c1_r0_fixed_root_lattice/
+```
 ```
 
 Public copies of the selected render files live under:

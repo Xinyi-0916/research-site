@@ -259,8 +259,8 @@ export const evaluation = {
 }
 
 export const generatorBoundary = {
-  status: 'Validated component evidence · fixed-128 explicit-card geometry',
-  summary: 'The results below are the generator-side component checks that are ready to report: training-only depth utility, a controlled 128-card geometry budget, and renderer-gradient attribution. They support method decisions but are not presented as an end-to-end generator result.',
+  status: 'Validated component evidence · C1 fixed-root scaffold · refiner frozen',
+  summary: 'The results below are generator-side component checks: training-only depth utility, a controlled 128-card geometry budget, renderer-gradient attribution, and the no-training C1 fixed-root lattice audit. They support method decisions but are not presented as an end-to-end generator result.',
   f1: {
     input: 'Six-view alpha + predicted normal + calibrated cameras',
     output: 'Exactly 128 active explicit quadratic cards in the audited fixed-capacity geometry probe',
@@ -290,6 +290,13 @@ export const generatorBoundary = {
       evidence: 'Stable, event, total-depth, and total-loss gradient signs are 100% at 0.001H; total-loss correlation is 0.997281.',
       decision: 'Renderer attribution is closed; the audited gradients now agree with the finite-difference reference.',
     },
+    {
+      stage: 'C1-R0 fixed root lattice',
+      status: 'Visual review',
+      tone: 'pass',
+      evidence: 'No-training audit constructs one shared 128-slot canonical scaffold with crown 66, temple/side 20, back 33, and nape 9 slots; ear, forward face-plane, and lower face/neck exclusions pass by construction.',
+      decision: 'Use the fixed slots only as the positional scaffold for the K12 centerline oracle; exact-root distance remains diagnostic.',
+    },
   ],
   cardCounts: [
     { split: 'Train · non-zero', cases: '383', median: '46', p90: '117.6', p95: '148.3', max: '293' },
@@ -302,8 +309,20 @@ export const generatorBoundary = {
       treatment: asset('/media/eval/generator/1065487795967695213_r0_normal_alpha_gt_depth.webp'),
       caption: 'Same Validation case and seed. Each unmodified eval sheet shows target alpha, final alpha, depth error, and depth-normal error for one input and one held-out view. This is evidence for the training-loss choice, not a final learned-generator result.',
     },
+    rootLattice: {
+      title: 'C1-R0 fixed-root lattice visual audit',
+      image: asset('/media/eval/generator/c1_r0_lattice_views.png'),
+      caption: 'No-training canonical layout check. The dedicated eval page renders each GT body template separately as a gray triangle mesh and overlays the same 128 colored root slots. Canonical +z is front/face and −z is back; ear, face, and neck exclusion is checked before centerline optimization.',
+    },
+    bodyGray: {
+      title: 'GT body mesh with root overlay',
+      image: asset('/media/eval/generator/c1_r0_gt_body_gray_views.png'),
+      imageAlt: asset('/media/eval/generator/c1_r0_gt_body_gray_views_alt.png'),
+      caption: 'Each body template is rendered separately as gray triangles; roots are drawn on the mesh surface. Camera labels explicitly use canonical +z as front and −z as back.',
+    },
   },
   sources: [
+    'hair_target500_c1_r0_fixed_root_lattice_v1.json',
     'hair_target500_g1_depth_utility_study_v1.json',
     'hair_target500_gt_card_count_audit_v1.json',
     'hair_target500_f1_v3_fixed_budget_sweep_v1.json',
