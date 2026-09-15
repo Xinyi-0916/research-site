@@ -168,6 +168,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .metrics span { display: block; margin-top: 12px; color: var(--muted); font-size: .68rem; line-height: 1.45; }
 .result-tables { display: grid; margin-top: 34px; grid-template-columns: 1.1fr .9fr; gap: 22px; }
 .result-tables h3 { margin: 0 0 12px; font-family: var(--serif); font-size: 1.15rem; font-weight: 400; }
+.table-explainer { margin: 10px 0 0; color: var(--muted); font-size: .66rem; line-height: 1.55; }
 table { width: 100%; border-collapse: collapse; background: var(--panel); font-size: .68rem; }
 th, td { padding: 11px 12px; border: 1px solid var(--line); text-align: right; white-space: nowrap; }
 th { color: var(--muted); font-weight: 650; }

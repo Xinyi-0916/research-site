@@ -120,7 +120,7 @@ export const project = {
           effect: 'Keeps corrections near the weak K12 geometry and widths/thicknesses within the bounded profile model.',
         },
       ],
-      hardBoundary: 'H1 surface validity, positive profiles, fixed roots/count/slots, and the card/face budget are hard selection checks—not extra weighted loss terms.',
+      hardBoundary: 'H1 is this project’s name for the frozen intrinsic ribbon-surface validity gate—not an image metric or a loss. It rejects non-finite or degenerate surfaces, local loss of ribbon-surface rank, non-manifold connectivity or inconsistent winding, and invalid width/thickness profiles. Fixed roots/count/slots and the card/face budget are checked separately; only states passing all hard checks can be selected.',
     },
   },
 }
@@ -149,6 +149,7 @@ export const evaluation = {
     input: { mean: '52.28%', p10: '33.87%', median: '53.98%', p90: '70.66%' },
     heldout: { mean: '41.40%', p10: '18.52%', median: '43.76%', p90: '61.10%' },
   },
+  distributionGuide: 'Each value summarizes the case-level composite error reduction across 49 card-bearing Validation cases. Mean is the arithmetic average; P10 is the 10th percentile (90% of cases are at least this high); Median is the 50th percentile; P90 is the 90th percentile (only 10% of cases are higher). Input aggregates the six optimization views, while Held-out uses three unseen Blender cameras. Higher is better.',
   production: {
     decision: 'PASS — Branch A',
     summary: 'The refined Validation outputs remain inside the absolute Train-GT production distribution; no additional set prior is justified by the current evidence.',
