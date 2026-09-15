@@ -106,7 +106,7 @@ export default function ResearchSite() {
 
         <section className="content-section" id="demonstrations">
           <SectionHead number="04" title="Refiner input / output" note="Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison." />
-          <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> GT target = source asset rendered from the same Front camera</span></div>
+          <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> GT target = source asset rendered from the same view camera</span></div>
           <div className="metric-guide">
             <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
             <div>{evaluation.metricDefinitions.map((metric) => <article key={metric.name}><strong>{metric.name}</strong><p>{metric.description}</p><span>{metric.direction}</span></article>)}</div>
@@ -115,7 +115,7 @@ export default function ResearchSite() {
           <div className="demo-list">
             {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>)}
           </div>
-          <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. The Front row also includes the authoritative C2 GT RGB render from the same camera. Source Blender renders are unchanged except for cropping the GT render to the shared camera frame and replacing the uniform background with white; mesh RGB is preserved.</p>
+          <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. Both rows include the authoritative C2 GT RGB render from the corresponding camera. Source Blender renders are unchanged except for cropping the GT render to the shared camera frame and replacing the uniform background with white; mesh RGB is preserved.</p>
         </section>
 
         <section className="content-section" id="generator-boundary">

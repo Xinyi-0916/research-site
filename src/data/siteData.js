@@ -187,6 +187,7 @@ export const evaluation = {
           view: 'Side',
           before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_right.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_right.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/gt_input_right.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.484', after: '0.907' },
             { label: 'Depth MAE', before: '0.0416', after: '0.0182', unit: ' m' },
@@ -216,6 +217,7 @@ export const evaluation = {
           view: 'Side',
           before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_right.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_right.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/gt_input_right.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.288', after: '0.808' },
             { label: 'Depth MAE', before: '0.0422', after: '0.0210', unit: ' m' },
@@ -245,6 +247,7 @@ export const evaluation = {
           view: 'Side',
           before: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/before_input_right.png'),
           after: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/after_input_right.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/8174510361203308830/gt_input_right.png'),
           metrics: [
             { label: 'Alpha IoU', before: '0.253', after: '0.666' },
             { label: 'Depth MAE', before: '0.0232', after: '0.0049', unit: ' m' },
