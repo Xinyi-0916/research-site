@@ -80,11 +80,15 @@ export default function ResearchSite() {
             <ContractColumn label="Output" items={project.refiner.output} />
           </div>
           <p className="method-evidence refiner-depth-note"><strong>Depth boundary.</strong> {project.refiner.supervisionBoundary}</p>
-          <div className="validity-block"><h3>Hard validity boundary</h3><ul>{project.validity.map((item) => <li key={item}>{item}</li>)}</ul></div>
+          <div className="refiner-loss">
+            <header><span>Frozen refiner objective</span><div><code>{project.refiner.objective.formula}</code><code>{project.refiner.objective.renderFormula}</code></div></header>
+            <div className="loss-terms">{project.refiner.objective.terms.map((term) => <article key={term.label}><span>{term.label}</span><code>{term.symbol}</code><p>{term.effect}</p></article>)}</div>
+            <p><strong>Hard boundary.</strong> {project.refiner.objective.hardBoundary}</p>
+          </div>
         </section>
 
         <section className="content-section" id="results">
-          <SectionHead number="03" title="Experimental results" note={`${evaluation.scope} · frozen refiner`} />
+          <SectionHead number="03" title="Refiner results" note={`${evaluation.scope} · frozen refiner`} />
           <div className="artifact-bar"><span>Source artifact</span><code>{evaluation.artifact}</code><span>Runtime {evaluation.elapsed}</span></div>
           <div className="metrics">{evaluation.aggregate.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
           <div className="result-tables">
