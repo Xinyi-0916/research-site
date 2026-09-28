@@ -1,4 +1,4 @@
-import { evaluation, findings, limitations, person, project, sections } from './data/siteData'
+import { evaluation, findings, limitations, overviewDemonstration, person, project, sections } from './data/siteData'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
 
@@ -12,10 +12,10 @@ function ComparisonPair({ pair }) {
       <div className={`pair-images${pair.gt ? ' has-gt' : ''}`}>
         <div><span>Input</span><img src={pair.before} alt={`${pair.view}: weak-card input before refinement`} /></div>
         <div><span>Output</span><img src={pair.after} alt={`${pair.view}: best-valid refined-card output`} /></div>
-        {pair.gt && <div><span>GT target</span><img src={pair.gt} alt={`${pair.view}: ground-truth target render from the same camera`} /></div>}
+        {pair.gt && <div><span>Reference</span><img src={pair.gt} alt={`${pair.view}: reference target render from the same camera`} /></div>}
       </div>
       <div className="view-metrics">{pair.metrics.map((metric) => <div key={metric.label}><span>{metric.label}</span><strong>{metric.before} → {metric.after}{metric.unit || ''}</strong></div>)}</div>
-      <figcaption>{pair.view} · {pair.gt ? 'input and output are measured against the GT target shown above · ' : ''}source Blender output · white background presentation copy · mesh RGB preserved</figcaption>
+      <figcaption>{pair.view} · {pair.gt ? 'input and output are measured against the reference shown above · ' : ''}source Blender output · white background presentation copy · mesh RGB preserved</figcaption>
     </figure>
   )
 }
@@ -24,12 +24,31 @@ function ContractColumn({ label, items }) {
   return <div><small>{label}</small>{items.map((item) => <strong key={item}>{item}</strong>)}</div>
 }
 
+function OverviewDemonstration() {
+  return (
+    <div className="overview-demonstration" aria-labelledby="overview-demo-title">
+      <header><h3 id="overview-demo-title">{overviewDemonstration.title}</h3><p>{overviewDemonstration.note}</p></header>
+      <div className="overview-demo-flow">
+        {overviewDemonstration.stages.map((stage, index) => (
+          <div className="overview-demo-step" key={stage.label}>
+            <figure className="overview-demo-stage">
+              <img src={stage.image} alt={stage.alt} />
+              <figcaption><strong>{stage.label}</strong><span>{stage.detail}</span></figcaption>
+            </figure>
+            {index < overviewDemonstration.stages.length - 1 && <i aria-hidden="true">→</i>}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function RefinerVisualResults() {
   return (
     <div className="refiner-visual-results" id="demonstrations">
       <h3 className="subsection-title">Visual results</h3>
       <p className="subsection-note">Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison.</p>
-      <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> GT target = source asset rendered from the same view camera</span></div>
+      <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> Reference = source asset rendered from the same view camera</span></div>
       <div className="metric-guide">
         <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
         <div>{evaluation.metricDefinitions.map((metric) => <article key={metric.name}><strong>{metric.name}</strong><p>{metric.description}</p><span>{metric.direction}</span></article>)}</div>
@@ -38,7 +57,7 @@ function RefinerVisualResults() {
       <div className="demo-list">
         {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>)}
       </div>
-      <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. Both rows include the authoritative C2 GT RGB render from the corresponding camera. Source Blender renders are unchanged except for cropping the GT render to the shared camera frame and replacing the uniform background with white; mesh RGB is preserved.</p>
+      <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. Both rows include the authoritative C2 reference render from the corresponding camera. Source Blender renders are unchanged except for cropping the reference to the shared camera frame and replacing the uniform background with white; mesh RGB is preserved.</p>
     </div>
   )
 }
@@ -67,7 +86,7 @@ export default function ResearchSite() {
 
       <main className="research-main" id="main-content">
         <section className="project-intro" id="overview">
-          <p className="kicker">Research project · Generative 3D / Production graphics</p>
+          <p className="kicker">Research project · 3D geometry / Production graphics</p>
           <h2>{project.title}</h2>
           <a className="research-repo-link" href={person.code} target="_blank" rel="noreferrer">
             <span>Research GitHub</span><strong>github.com/Xinyi-0916/3D_Generation_refinement</strong><Arrow />
@@ -77,13 +96,14 @@ export default function ResearchSite() {
           <div className="intro-meta"><span>{project.manuscript}</span><span>{project.status}</span></div>
           <blockquote><span>Research goal</span>{project.centralObservation}</blockquote>
           <p className="lead">{project.motivation}</p>
+          <OverviewDemonstration />
         </section>
 
         <section className="content-section" id="motivation">
           <SectionHead number="01" title="Motivation" note="Why appearance alone is not an adequate objective for production hair assets." />
           <p className="motivation-lead">{project.motivationLead}</p>
           <div className="motivation-grid">{project.motivationPoints.map((point) => <article key={point.label}><span>{point.label}</span><h3>{point.title}</h3><p>{point.body}</p></article>)}</div>
-          <div className="target-definition"><span>Research target</span><strong>Production-equivalent explicit asset reconstruction</strong><p>{project.targetDefinition}</p></div>
+          <div className="target-definition"><span>Research target</span><strong>Production-equivalent explicit asset refinement</strong><p>{project.targetDefinition}</p></div>
         </section>
 
         <section className="content-section" id="methodology">

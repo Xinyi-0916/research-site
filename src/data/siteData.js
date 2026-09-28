@@ -4,7 +4,7 @@ export const person = {
   name: 'Xinyi Tang',
   initials: 'XT',
   role: '3D AI & Graphics Research',
-  identity: 'Animation artist transitioning into 3D AI research, focused on production-ready generative 3D, structured character assets, and animation-aware representations.',
+  identity: 'Animation artist transitioning into 3D AI research, focused on production-ready geometry, structured character assets, and animation-aware representations.',
   background: 'My Animation / CGT production background brings practical experience with modeling, topology, rigging, deformation, and production workflows.',
   portfolio: 'https://tangxinyi0903.weebly.com',
   github: 'https://github.com/Xinyi-0916',
@@ -20,15 +20,40 @@ export const sections = [
   { id: 'limitations', number: '05', label: 'Limitations' },
 ]
 
+export const overviewDemonstration = {
+  title: 'From a front-view design to editable hair cards',
+  note: 'A visual preview of the intended output representation. This establishes the target asset format; the measured refiner results begin in Section 03.',
+  stages: [
+    {
+      label: 'Initial design input',
+      detail: 'Single front-view character render',
+      image: asset('/media/overview/initial-design-front.png'),
+      alt: 'Front-view character design used to illustrate the intended hair-card result',
+    },
+    {
+      label: 'Hair-card geometry',
+      detail: '75 explicit cards · 360° geometry turnaround',
+      image: asset('/media/overview/hair-card-geometry-turnaround.gif'),
+      alt: 'Turnaround of the intended explicit hair-card geometry in neutral gray shading',
+    },
+    {
+      label: 'Cards with texture',
+      detail: 'The same editable card asset with source appearance · 360° turnaround',
+      image: asset('/media/overview/cards-with-texture-turnaround.gif'),
+      alt: 'Turnaround of the intended explicit hair-card asset with texture',
+    },
+  ],
+}
+
 export const project = {
-  title: 'Production-Ready Hair-Card Generation and Refinement',
-  subtitle: 'From a single character design image to a compact, editable set of explicit hair cards—without reconstructing dense strands or recovering the artist’s exact hidden topology.',
+  title: 'Production-Ready Hair-Card Refinement',
+  subtitle: 'Refining weak explicit hair-card geometry into compact, editable, production-valid assets under multiview appearance and geometry supervision.',
   status: 'Refiner evidence · frozen evaluation',
-  manuscript: 'Production-equivalent explicit asset reconstruction · 2026',
-  centralObservation: 'Generate a compact, editable, production-valid hair-card asset from a single design image by using multiview consistency to infer geometry directly in explicit-card space.',
-  motivation: 'Starting from a single design image, the system first obtains multiview observations—alpha, predicted surface normals, and calibrated cameras—then operates directly on explicit ribbon/card geometry through generation and refinement.',
-  motivationLead: 'Current 3D generation can produce visually convincing hair geometry, but render-ready geometry is not automatically a production-ready asset. Games and animation need compact, editable cards with valid surfaces, controlled overlap, and stable organization.',
-  targetDefinition: 'Recover any compact hair-card configuration that explains the observed and held-out appearance while satisfying geometric validity, card-budget, overlap, and production-distribution constraints—rather than requiring the one hidden layout originally authored.',
+  manuscript: 'Production-equivalent explicit asset refinement · 2026',
+  centralObservation: 'Improve an existing explicit hair-card asset while preserving its roots, count, slot identity, connectivity, and face budget—and accept only outputs that remain intrinsically valid.',
+  motivation: 'The refiner starts from weak coarse K12 cards and calibrated multiview observations, then jointly corrects card geometry and bounded profiles inside a fixed production-asset contract.',
+  motivationLead: 'Visually plausible hair geometry is not automatically a production-ready asset. Games and animation need compact, editable cards with valid surfaces, controlled overlap, stable organization, and predictable topology.',
+  targetDefinition: 'Recover a corrected hair-card configuration that better explains the observed and held-out appearance while preserving the input asset contract and satisfying intrinsic validity, overlap, and production-distribution checks.',
   motivationPoints: [
     {
       label: 'Production gap',
@@ -43,28 +68,28 @@ export const project = {
     {
       label: 'Direct representation',
       title: 'The final asset should remain explicit throughout',
-      body: 'Because the production target is already a set of ribbon surfaces, the project aims to avoid a dense-strand intermediate and solve generation, correspondence, and correction directly in card space.',
+      body: 'Because the production target is already a set of ribbon surfaces, the refiner solves correspondence and correction directly in card space without introducing a dense-strand intermediate.',
     },
   ],
   methodology: {
-    status: 'Target system design · refiner frozen',
+    status: 'Frozen refiner design and evaluation boundary',
     steps: [
-      { label: 'Input', title: 'Single character design image' },
-      { label: 'Observation interface', title: 'Multiview alpha, predicted normals, and calibrated cameras' },
-      { label: 'Generator · target component', title: 'Camera-aware explicit-card initialization' },
-      { label: 'Refiner · validated', title: 'Joint multiview K12 and profile correction' },
-      { label: 'Output', title: 'Compact, editable, production-valid explicit cards' },
+      { label: 'Card-state input', title: 'Weak coarse root-fixed K12 card set' },
+      { label: 'Observations', title: 'Multiview alpha, predicted normals, and calibrated cameras' },
+      { label: 'Supervision', title: 'Target alpha plus training-only metric depth and normals' },
+      { label: 'Refinement', title: 'Joint multiview K12 and bounded-profile correction' },
+      { label: 'Output', title: 'Best-valid production-equivalent explicit cards' },
     ],
     roles: [
       {
-        label: 'Generator · target role',
-        title: 'Initialize explicit-card geometry from multiview observations',
-        body: 'The target generator produces a compact camera-aware card set directly in explicit geometry space. Generator implementation details and experimental results are intentionally omitted from the current site.',
+        label: 'Fixed asset contract',
+        title: 'Preserve the parts of the asset that define editability',
+        body: 'Roots, card count, slot identity, connectivity, winding, and face budget remain fixed while geometry and bounded profiles are corrected.',
       },
       {
         label: 'Training / deployment boundary',
         title: 'Use geometry supervision without requiring it at inference',
-        body: 'Training adds GT metric-depth render supervision for 3D placement and layer order. Inference remains limited to generated alpha, predicted normals, and camera parameters; coarse hair geometry is not a primary input.',
+        body: 'Metric depth and depth-derived normals provide optimization supervision only; they are not bundled with the deployed card-state input. Runtime observations remain alpha, predicted normals, and calibrated cameras.',
       },
       {
         label: 'Frozen B1/H1 refiner',
@@ -72,7 +97,7 @@ export const project = {
         body: 'Joint rendering adjusts known-root, known-slot K12 cards and bounded profiles, rejects invalid H1 states, and restores the best feasible output while preserving count, roots, topology, and face budget.',
       },
     ],
-    evidenceBoundary: 'The pipeline above describes the target system design. The evidence presented on this page is limited to the frozen refiner; generator implementation details and results are intentionally omitted.',
+    evidenceBoundary: 'Every quantitative result and input/output comparison on this page belongs to the frozen B1/H1 refiner evaluated on the complete Validation split.',
   },
   refiner: {
     input: [
