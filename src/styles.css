@@ -210,6 +210,7 @@ th:first-child { text-align: left; }
 .input-output-key .refined-dot { background: var(--green); }
 .input-output-key .gt-dot { border: 1px solid var(--ink); background: white; }
 .metric-guide { border: 1px solid var(--line); background: var(--panel); }
+.demo-list + .metric-guide { margin-top: 34px; }
 .metric-guide > header { display: flex; padding: 13px 17px; align-items: center; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); }
 .metric-guide > header strong { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; }
 .metric-guide > header span { color: var(--muted); font-size: .62rem; }
