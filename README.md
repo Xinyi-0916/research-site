@@ -39,6 +39,12 @@ The opening three-panel demonstration is a target-format preview, not an experim
 public/media/overview/
 ```
 
+The renderer/loss-map chart uses the real front-view C2 maps for Validation case `8174510361203308830`. Card ownership, native RGB, alpha, metric depth, edge/SDF weight, and depth-derived normal are read or deterministically derived from the frozen map artifact. The images are cropped and color-mapped only for display; loss computation uses the uncropped stored arrays. Exact provenance and display parameters are recorded in:
+
+```text
+public/media/methodology/8174510361203308830/provenance.json
+```
+
 Public copies of the selected render files live under:
 
 ```text

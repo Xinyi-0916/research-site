@@ -1,4 +1,4 @@
-import { evaluation, findings, limitations, overviewDemonstration, person, project, sections } from './data/siteData'
+import { evaluation, findings, limitations, overviewDemonstration, person, project, rendererDemonstration, sections } from './data/siteData'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
 
@@ -64,6 +64,40 @@ function RefinerVisualResults() {
   )
 }
 
+function RendererLossChart() {
+  return (
+    <figure className="renderer-chart" id="renderer-chart">
+      <header className="renderer-chart-head">
+        <div><span>Frozen supervision route</span><h3>{rendererDemonstration.title}</h3></div>
+        <p>{rendererDemonstration.subtitle}</p>
+      </header>
+      <div className="renderer-flow">
+        {rendererDemonstration.stages.map((stage, index) => (
+          <div className="renderer-flow-step" key={stage.title}>
+            <article><h4>{stage.title}</h4><img src={stage.image} alt={stage.alt} /><p>{stage.detail}</p></article>
+            {index < rendererDemonstration.stages.length - 1 && <i aria-hidden="true">→</i>}
+          </div>
+        ))}
+      </div>
+      <div className="renderer-chart-detail">
+        <section className="loss-map-panel">
+          <header><h4>Four geometry losses</h4><span>Frozen composite weights</span></header>
+          <div>{rendererDemonstration.losses.map((loss) => <article key={loss.title}><div><h5>{loss.title}</h5><strong>{loss.weight}</strong></div><img src={loss.image} alt={loss.alt} /><p>{loss.detail}</p></article>)}</div>
+        </section>
+        <section className="route-panel">
+          <header><h4>Why this route?</h4></header>
+          <ol>{rendererDemonstration.routeReasons.map((reason) => <li key={reason}>{reason}</li>)}</ol>
+        </section>
+      </div>
+      <section className="renderer-safeguards">
+        <header><h4>Safeguards</h4></header>
+        <div>{rendererDemonstration.safeguards.map((item) => <article key={item.title}><span aria-hidden="true">✓</span><p><strong>{item.title}.</strong> {item.body}</p></article>)}</div>
+      </section>
+      <figcaption>{rendererDemonstration.provenance}</figcaption>
+    </figure>
+  )
+}
+
 export default function ResearchSite() {
   return (
     <div className="research-shell">
@@ -118,6 +152,7 @@ export default function ResearchSite() {
         <section className="content-section" id="refiner">
           <SectionHead number="03" title="Refiner" note={`${evaluation.scope} · frozen B1/H1`} />
           <RefinerVisualResults />
+          <RendererLossChart />
           <h3 className="subsection-title">Refiner contract and supervision boundary</h3>
           <div className="refiner-contract">
             <ContractColumn label="Card-state input" items={project.refiner.input} />

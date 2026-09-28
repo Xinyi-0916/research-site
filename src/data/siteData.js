@@ -45,6 +45,89 @@ export const overviewDemonstration = {
   ],
 }
 
+export const rendererDemonstration = {
+  title: 'Authoritative renderer and loss maps',
+  subtitle: 'One real front-view example from the frozen refiner evaluation · 64 explicit cards',
+  stages: [
+    {
+      title: 'Explicit card ownership',
+      detail: 'Frontmost card-ID map · 64 cards',
+      image: asset('/media/methodology/8174510361203308830/card-ownership.png'),
+      alt: 'Categorical frontmost-card ownership map for the selected 64-card hairstyle',
+    },
+    {
+      title: '1024 native raster',
+      detail: 'Frozen C2 front-view card render',
+      image: asset('/media/methodology/8174510361203308830/native-rgb.png'),
+      alt: 'Native 1024-pixel C2 raster of the selected hair-card asset',
+    },
+    {
+      title: 'Exact alpha reduction',
+      detail: '1024 → 512 area reduction',
+      image: asset('/media/methodology/8174510361203308830/alpha-512.png'),
+      alt: 'Exact 512-pixel reduced alpha map for the selected case',
+    },
+    {
+      title: '512 metric depth',
+      detail: 'Validity-weighted surface depth',
+      image: asset('/media/methodology/8174510361203308830/metric-depth-512.png'),
+      alt: 'Normalized visualization of the real 512-pixel metric-depth map',
+    },
+    {
+      title: 'Depth-derived normal',
+      detail: 'Computed after depth reduction',
+      image: asset('/media/methodology/8174510361203308830/depth-normal-512.png'),
+      alt: 'RGB visualization of normals derived from the reduced metric-depth map',
+    },
+  ],
+  losses: [
+    {
+      title: 'Alpha',
+      weight: '4×',
+      detail: 'Full-image occupancy and silhouette coverage',
+      image: asset('/media/methodology/8174510361203308830/alpha-512.png'),
+      alt: 'Alpha supervision map',
+    },
+    {
+      title: 'Edge / truncated SDF',
+      weight: '2×',
+      detail: 'Boundary-weighted silhouette alignment',
+      image: asset('/media/methodology/8174510361203308830/edge-sdf-512.png'),
+      alt: 'Edge weight map derived from the truncated signed distance field',
+    },
+    {
+      title: 'Metric depth',
+      weight: '2×',
+      detail: 'Front/back placement and layer order',
+      image: asset('/media/methodology/8174510361203308830/metric-depth-512.png'),
+      alt: 'Metric-depth supervision map',
+    },
+    {
+      title: 'Depth-derived normal',
+      weight: '0.25×',
+      detail: 'Local surface orientation',
+      image: asset('/media/methodology/8174510361203308830/depth-normal-512.png'),
+      alt: 'Depth-derived normal supervision map',
+    },
+  ],
+  routeReasons: [
+    'Rasterize thin card boundaries at 1024 before any loss-space reduction.',
+    'Reduce alpha and validity-weighted metric depth with the exact C2 area operator.',
+    'Derive orientation from the final 512 depth instead of downsampling a normal map directly.',
+  ],
+  safeguards: [
+    {
+      title: 'Alpha safeguard',
+      body: 'The objective keeps the soft full-image alpha error and adds the frozen edge/SDF weight around the target boundary.',
+    },
+    {
+      title: 'Normal safeguard',
+      body: 'Target-valid support and its denominator stay fixed; four-neighbor validity and the 0.005 depth-continuity rule exclude silhouettes and depth jumps.',
+    },
+  ],
+  provenance: 'All six panels come from the real front-view C2 maps for the displayed rank-1 Validation case. The page only crops and color-maps them for legibility; loss computation uses the uncropped stored values.',
+}
+
 export const project = {
   title: 'Production-Ready Hair-Card Refinement',
   subtitle: 'Refining weak explicit hair-card geometry into compact, editable, production-valid assets under multiview appearance and geometry supervision.',
