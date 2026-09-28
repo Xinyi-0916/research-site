@@ -16,15 +16,14 @@ export const sections = [
   { id: 'motivation', number: '01', label: 'Motivation' },
   { id: 'methodology', number: '02', label: 'Methodology' },
   { id: 'refiner', number: '03', label: 'Refiner' },
-  { id: 'generator-boundary', number: '04', label: 'Generator' },
-  { id: 'findings', number: '05', label: 'Research findings' },
-  { id: 'limitations', number: '06', label: 'Limitations' },
+  { id: 'findings', number: '04', label: 'Research findings' },
+  { id: 'limitations', number: '05', label: 'Limitations' },
 ]
 
 export const project = {
   title: 'Production-Ready Hair-Card Generation and Refinement',
   subtitle: 'From a single character design image to a compact, editable set of explicit hair cards—without reconstructing dense strands or recovering the artist’s exact hidden topology.',
-  status: 'Generator component evidence · refiner frozen',
+  status: 'Refiner evidence · frozen evaluation',
   manuscript: 'Production-equivalent explicit asset reconstruction · 2026',
   centralObservation: 'Generate a compact, editable, production-valid hair-card asset from a single design image by using multiview consistency to infer geometry directly in explicit-card space.',
   motivation: 'Starting from a single design image, the system first obtains multiview observations—alpha, predicted surface normals, and calibrated cameras—then operates directly on explicit ribbon/card geometry through generation and refinement.',
@@ -48,19 +47,19 @@ export const project = {
     },
   ],
   methodology: {
-    status: 'Target system design · validated generator components · refiner frozen',
+    status: 'Target system design · refiner frozen',
     steps: [
       { label: 'Input', title: 'Single character design image' },
       { label: 'Observation interface', title: 'Multiview alpha, predicted normals, and calibrated cameras' },
-      { label: 'Generator · validated evidence', title: 'Fixed-128 camera-aware 3D geometry' },
+      { label: 'Generator · target component', title: 'Camera-aware explicit-card initialization' },
       { label: 'Refiner · validated', title: 'Joint multiview K12 and profile correction' },
       { label: 'Output', title: 'Compact, editable, production-valid explicit cards' },
     ],
     roles: [
       {
-        label: 'Generator · current validated evidence',
-        title: 'Explicit-card geometry with a controlled fixed roster',
-        body: 'A fixed set of 128 active quadratic cards isolates geometry optimization from count and topology changes. This controlled probe is used to test supervision, capacity, and renderer behavior before training the final variable-count generator.',
+        label: 'Generator · target role',
+        title: 'Initialize explicit-card geometry from multiview observations',
+        body: 'The target generator produces a compact camera-aware card set directly in explicit geometry space. Generator implementation details and experimental results are intentionally omitted from the current site.',
       },
       {
         label: 'Training / deployment boundary',
@@ -73,7 +72,7 @@ export const project = {
         body: 'Joint rendering adjusts known-root, known-slot K12 cards and bounded profiles, rejects invalid H1 states, and restores the best feasible output while preserving count, roots, topology, and face budget.',
       },
     ],
-    evidenceBoundary: 'The pipeline above is the target system design. Population-scale evidence supports the frozen refiner. Current generator evidence comes from fixed-card oracle and renderer audits—not a trained amortized F1—so generator-only and post-refiner results remain separate.',
+    evidenceBoundary: 'The pipeline above describes the target system design. The evidence presented on this page is limited to the frozen refiner; generator implementation details and results are intentionally omitted.',
   },
   refiner: {
     input: [
@@ -258,78 +257,6 @@ export const evaluation = {
   ],
 }
 
-export const generatorBoundary = {
-  status: 'Validated component evidence · C1 fixed-root scaffold · refiner frozen',
-  summary: 'The results below are generator-side component checks: training-only depth utility, a controlled 128-card geometry budget, renderer-gradient attribution, and the no-training C1 fixed-root lattice audit. They support method decisions but are not presented as an end-to-end generator result.',
-  f1: {
-    input: 'Six-view alpha + predicted normal + calibrated cameras',
-    output: 'Exactly 128 active explicit quadratic cards in the audited fixed-capacity geometry probe',
-    variables: '3D placement, orientation, length, width, and low-dimensional curvature; one shared card set is rendered into every view',
-    depth: 'GT metric depth is train-only render supervision; no depth map is required at inference',
-    validated: 'GT-depth utility, fixed-capacity geometry, and renderer backward behavior have passed their scoped checks',
-  },
-  milestones: [
-    {
-      stage: 'Training signal',
-      status: 'Pass',
-      tone: 'pass',
-      evidence: 'Adding GT metric depth lowers held-out depth MAE from 24.33 mm to 14.52 mm; paired median −10.04 mm (41.46%), better in 6/6 runs.',
-      decision: 'Keep depth as training-only supervision; inference still uses alpha, predicted normals, and cameras.',
-    },
-    {
-      stage: 'Fixed-card budget',
-      status: '128 promoted',
-      tone: 'pass',
-      evidence: 'Against 64 cards, 128 cards improve missing area and depth in 6/6 pairs: paired medians −0.07542 and −4.74 mm. Depth-normal changes −0.03064.',
-      decision: 'Use 128 only for the geometry probe; it is not the final predicted count.',
-    },
-    {
-      stage: 'Renderer backward · V4',
-      status: 'Pass',
-      tone: 'pass',
-      evidence: 'Stable, event, total-depth, and total-loss gradient signs are 100% at 0.001H; total-loss correlation is 0.997281.',
-      decision: 'Renderer attribution is closed; the audited gradients now agree with the finite-difference reference.',
-    },
-    {
-      stage: 'C1-R0 fixed root lattice',
-      status: 'Visual review',
-      tone: 'pass',
-      evidence: 'No-training audit constructs one shared 128-slot canonical scaffold with crown 66, temple/side 20, back 33, and nape 9 slots; ear, forward face-plane, and lower face/neck exclusions pass by construction.',
-      decision: 'Use the fixed slots only as the positional scaffold for the K12 centerline oracle; exact-root distance remains diagnostic.',
-    },
-  ],
-  cardCounts: [
-    { split: 'Train · non-zero', cases: '383', median: '46', p90: '117.6', p95: '148.3', max: '293' },
-    { split: 'Validation · non-zero', cases: '49', median: '57', p90: '76.2', p95: '88.2', max: '95' },
-  ],
-  visuals: {
-    depth: {
-      title: 'Depth-supervision visual check',
-      baseline: asset('/media/eval/generator/1065487795967695213_r0_normal_alpha.webp'),
-      treatment: asset('/media/eval/generator/1065487795967695213_r0_normal_alpha_gt_depth.webp'),
-      caption: 'Same Validation case and seed. Each unmodified eval sheet shows target alpha, final alpha, depth error, and depth-normal error for one input and one held-out view. This is evidence for the training-loss choice, not a final learned-generator result.',
-    },
-    rootLattice: {
-      title: 'C1-R0 fixed-root lattice visual audit',
-      image: asset('/media/eval/generator/c1_r0_lattice_views.png'),
-      caption: 'No-training canonical layout check. The dedicated eval page renders each GT body template separately as a gray triangle mesh and overlays the same 128 colored root slots. Canonical +z is front/face and −z is back; ear, face, and neck exclusion is checked before centerline optimization.',
-    },
-    bodyGray: {
-      title: 'GT body mesh with root overlay',
-      image: asset('/media/eval/generator/c1_r0_gt_body_gray_views.png'),
-      imageAlt: asset('/media/eval/generator/c1_r0_gt_body_gray_views_alt.png'),
-      caption: 'Each body template is rendered separately as gray triangles; roots are drawn on the mesh surface. Camera labels explicitly use canonical +z as front and −z as back.',
-    },
-  },
-  sources: [
-    'hair_target500_c1_r0_fixed_root_lattice_v1.json',
-    'hair_target500_g1_depth_utility_study_v1.json',
-    'hair_target500_gt_card_count_audit_v1.json',
-    'hair_target500_f1_v3_fixed_budget_sweep_v1.json',
-    'hair_target500_f1_renderer_v4_event_residual_audit_v1.json',
-  ],
-}
-
 export const findings = [
   {
     label: 'Validated refiner',
@@ -341,23 +268,9 @@ export const findings = [
     title: 'The target is production equivalence—not hidden-topology recovery',
     body: 'Exact artist count, roots, ownership, and layering are not uniquely observable from appearance. B2-S3 instead tests whether the refined outputs remain within real Train-GT production statistics, and finds no systematic out-of-distribution tail.',
   },
-  {
-    label: 'Generator direction',
-    title: 'Scoped component checks establish the next generator scaffold',
-    body: 'Training-only metric depth improves held-out placement, 128 cards provide the stronger controlled geometry budget, and the audited renderer gradients agree with finite-difference references.',
-  },
-]
-
-export const process = [
-  ['Training supervision', 'GT metric depth provides a 41.46% paired median held-out depth improvement while remaining absent from deployment input.'],
-  ['Fixed topology and capacity', 'Deterministic 64-card replay passed; a matched budget sweep then promoted 128 cards for controlled geometry experiments.'],
-  ['Renderer attribution', 'V4 achieves 100% gradient-sign agreement for stable, event, total-depth, and total-loss probes at the primary audit scale.'],
 ]
 
 export const limitations = [
   'B1/H1 still receives oracle card count, roots, slots/layout, and material/opacity assumptions.',
-  'Generator evidence is currently component-level: fixed-card studies plus renderer audits; it is not presented as end-to-end quality.',
   'The current population evidence is limited to Target500 Validation; Test remains unread.',
-  'The depth utility and fixed-card studies are small diagnostic experiments; they support method decisions rather than an end-to-end F1 quality claim.',
-  'Generator component metrics and post-refiner metrics are reported separately because they come from different evidence scopes.',
 ]

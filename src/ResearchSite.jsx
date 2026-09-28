@@ -1,4 +1,4 @@
-import { evaluation, findings, generatorBoundary, limitations, person, process, project, sections } from './data/siteData'
+import { evaluation, findings, limitations, person, project, sections } from './data/siteData'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
 
@@ -125,62 +125,13 @@ export default function ResearchSite() {
           <p className="source-note">All values are transcribed from <code>{evaluation.source}</code> and <code>{evaluation.productionSource}</code>.</p>
         </section>
 
-        <section className="content-section" id="generator-boundary">
-          <SectionHead number="04" title="Generator" note={generatorBoundary.status} />
-          <h3 className="subsection-title generator-overview-title">Current validated evidence</h3>
-          <p className="section-lead">{generatorBoundary.summary}</p>
-          <div className="generator-contract">
-            <div><small>Deployable F1 input</small><strong>{generatorBoundary.f1.input}</strong></div>
-            <div><small>Audited geometry probe</small><strong>{generatorBoundary.f1.output}</strong><p>{generatorBoundary.f1.variables}</p></div>
-            <div><small>Validated component result</small><strong>{generatorBoundary.f1.validated}</strong></div>
-          </div>
-          <p className="depth-rule"><strong>Depth rule.</strong> {generatorBoundary.f1.depth}</p>
-
-          <h3 className="subsection-title generator-subtitle">Validated milestones</h3>
-          <div className="table-scroll">
-            <table className="generator-milestone-table">
-              <thead><tr><th>Stage</th><th>Status</th><th>Measured evidence</th><th>Method decision</th></tr></thead>
-              <tbody>{generatorBoundary.milestones.map((row) => <tr key={row.stage}><th>{row.stage}</th><td><span className={`status-chip ${row.tone}`}>{row.status}</span></td><td>{row.evidence}</td><td>{row.decision}</td></tr>)}</tbody>
-            </table>
-          </div>
-
-          <div className="generator-budget">
-            <div>
-              <span>Dataset and probe capacity</span>
-              <h3>128 cards isolate geometry; the 320-query ceiling covers the observed data.</h3>
-              <p>The fixed 128-card probe removes count and topology changes from the controlled geometry experiments. Separately, the audited 320-query ceiling covers the Train maximum of 293 cards without truncation.</p>
-            </div>
-            <div className="table-scroll"><table><thead><tr><th>Card-bearing split</th><th>Cases</th><th>Median</th><th>P90</th><th>P95</th><th>Max</th></tr></thead><tbody>{generatorBoundary.cardCounts.map((row) => <tr key={row.split}><th>{row.split}</th><td>{row.cases}</td><td>{row.median}</td><td>{row.p90}</td><td>{row.p95}</td><td>{row.max}</td></tr>)}</tbody></table></div>
-          </div>
-
-          <h3 className="subsection-title generator-subtitle">Visual evidence from the evaluation site</h3>
-          <figure className="generator-depth-visual">
-            <header><h3>{generatorBoundary.visuals.depth.title}</h3><span>Same case · same seed · two loss variants</span></header>
-            <div><div><span>Normal + alpha</span><img src={generatorBoundary.visuals.depth.baseline} alt="Generator depth utility eval sheet using normal and alpha supervision" /></div><div><span>Normal + alpha + GT depth</span><img src={generatorBoundary.visuals.depth.treatment} alt="Generator depth utility eval sheet adding training-only GT depth supervision" /></div></div>
-            <figcaption>{generatorBoundary.visuals.depth.caption}</figcaption>
-          </figure>
-          <figure className="generator-depth-visual">
-            <header><h3>{generatorBoundary.visuals.rootLattice.title}</h3><span>No training · fixed 128 slots</span></header>
-            <div><div><img src={generatorBoundary.visuals.rootLattice.image} alt="C1-R0 fixed canonical root lattice visual audit" /></div></div>
-            <figcaption>{generatorBoundary.visuals.rootLattice.caption}</figcaption>
-          </figure>
-          <figure className="generator-depth-visual">
-            <header><h3>{generatorBoundary.visuals.bodyGray.title}</h3><span>Separate gray meshes · roots overlaid</span></header>
-            <div><div><img src={generatorBoundary.visuals.bodyGray.image} alt="Gray GT body mesh with root slots overlaid" /></div><div><img src={generatorBoundary.visuals.bodyGray.imageAlt} alt="Second gray GT body mesh with root slots overlaid" /></div></div>
-            <figcaption>{generatorBoundary.visuals.bodyGray.caption}</figcaption>
-          </figure>
-          <p className="source-note">Generator visuals are copied from the corresponding local evaluation artifacts. Table values are transcribed from: {generatorBoundary.sources.map((source, index) => <span key={source}><code>{source}</code>{index < generatorBoundary.sources.length - 1 ? '; ' : '.'}</span>)}</p>
-        </section>
-
         <section className="content-section" id="findings">
-          <SectionHead number="05" title="Current findings" />
+          <SectionHead number="04" title="Current findings" />
           <div className="findings-list">{findings.map((finding) => <article key={finding.title}><span>{finding.label}</span><h3>{finding.title}</h3><p>{finding.body}</p></article>)}</div>
-          <h3 className="process-title">Generator evidence established so far</h3>
-          <ol className="process-list">{process.map(([phase, insight], index) => <li key={phase}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{phase}</strong><p>{insight}</p></div></li>)}</ol>
         </section>
 
         <section className="content-section final-section" id="limitations">
-          <SectionHead number="06" title="Current limitations" note="Refiner and generator claims are deliberately separated." />
+          <SectionHead number="05" title="Current limitations" note="Scope of the frozen refiner evidence." />
           <ul className="limitations">{limitations.map((item) => <li key={item}>{item}</li>)}</ul>
         </section>
         <footer>© {new Date().getFullYear()} {person.name} · Research website</footer>
