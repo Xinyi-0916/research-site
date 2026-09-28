@@ -45,6 +45,12 @@ The renderer/loss-map chart uses the real front-view C2 maps for Validation case
 public/media/methodology/8174510361203308830/provenance.json
 ```
 
+The methodology chart deliberately separates the rendered world-space normal
+AOV (diagnostic only) from the depth-derived normal used by the refiner loss.
+In the loss-support visualization, colored pixels are the frozen valid support;
+gray pixels are real rendered card surfaces excluded at silhouettes or depth
+discontinuities.
+
 Public copies of the selected render files live under:
 
 ```text

@@ -74,10 +74,10 @@ export const rendererDemonstration = {
       alt: 'Normalized visualization of the real 512-pixel metric-depth map',
     },
     {
-      title: 'Depth-derived normal',
-      detail: 'Computed after depth reduction',
-      image: asset('/media/methodology/8174510361203308830/depth-normal-512.png'),
-      alt: 'RGB visualization of normals derived from the reduced metric-depth map',
+      title: 'Surface-normal AOV',
+      detail: 'Rendered world-space orientation · diagnostic',
+      image: asset('/media/methodology/8174510361203308830/surface-normal-aov.png'),
+      alt: 'World-space surface-normal AOV from the authoritative card render',
     },
   ],
   losses: [
@@ -105,15 +105,15 @@ export const rendererDemonstration = {
     {
       title: 'Depth-derived normal',
       weight: '0.25×',
-      detail: 'Local surface orientation',
-      image: asset('/media/methodology/8174510361203308830/depth-normal-512.png'),
-      alt: 'Depth-derived normal supervision map',
+      detail: 'Colour = valid loss support · gray = excluded',
+      image: asset('/media/methodology/8174510361203308830/depth-normal-support.png'),
+      alt: 'Depth-derived normal supervision with valid pixels in colour and excluded card pixels in gray',
     },
   ],
   routeReasons: [
     'Rasterize thin card boundaries at 1024 before any loss-space reduction.',
     'Reduce alpha and validity-weighted metric depth with the exact C2 area operator.',
-    'Derive orientation from the final 512 depth instead of downsampling a normal map directly.',
+    'Use the rendered normal AOV only as a diagnostic; derive the normal loss from the final 512 depth.',
   ],
   safeguards: [
     {
@@ -125,7 +125,7 @@ export const rendererDemonstration = {
       body: 'Target-valid support and its denominator stay fixed; four-neighbor validity and the 0.005 depth-continuity rule exclude silhouettes and depth jumps.',
     },
   ],
-  provenance: 'All six panels come from the real front-view C2 maps for the displayed rank-1 Validation case. The page only crops and color-maps them for legibility; loss computation uses the uncropped stored values.',
+  provenance: 'Every panel comes from the real front-view C2 maps for the displayed rank-1 Validation case. The surface-normal AOV is diagnostic only. In the depth-normal loss panel, colour marks the exact frozen loss support and gray marks rendered card pixels excluded at silhouettes or depth discontinuities. The page only crops and color-maps values for legibility; loss computation uses the uncropped stored arrays.',
 }
 
 export const project = {

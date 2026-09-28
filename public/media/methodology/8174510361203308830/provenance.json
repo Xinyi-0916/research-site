@@ -7,6 +7,8 @@
   "depth_min_m": 2.8984899520874023,
   "depth_max_m": 3.0727479457855225,
   "depth_normal_valid_pixels": 4889,
+  "surface_normal_aov": "explicit_card_normal_world_i16; diagnostic only",
+  "depth_normal_visualization": "color = exact frozen loss support; gray = rendered card pixels excluded by validity or the 0.005 m continuity rule",
   "roi_512": [
     189,
     22,
@@ -14,5 +16,5 @@
     156
   ],
   "source": "../tasks/aaai_3d_generation_20260626/datasets/hair_target500_stage_c2_gt6/8174510361203308830/view_0_front/maps.npz",
-  "derivation": "Frozen J0 target_maps and depth_normal_torch semantics reproduced with NumPy/OpenCV for visualization only."
+  "derivation": "Frozen J0 target_maps and depth_normal_torch semantics reproduced with NumPy/OpenCV for visualization only; optimization values remain unchanged."
 }
