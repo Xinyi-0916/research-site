@@ -147,12 +147,12 @@ export default function ResearchSite() {
           <div className="method-pipeline">{project.methodology.steps.map((step, index) => <div className="method-stage" key={step.label}><article><span>{String(index + 1).padStart(2, '0')} · {step.label}</span><strong>{step.title}</strong></article>{index < project.methodology.steps.length - 1 && <i aria-hidden="true">→</i>}</div>)}</div>
           <div className="method-roles">{project.methodology.roles.map((role) => <article key={role.label}><span>{role.label}</span><h3>{role.title}</h3><p>{role.body}</p></article>)}</div>
           <p className="method-evidence"><strong>Evidence boundary.</strong> {project.methodology.evidenceBoundary}</p>
+          <RendererLossChart />
         </section>
 
         <section className="content-section" id="refiner">
           <SectionHead number="03" title="Refiner" note={`${evaluation.scope} · frozen B1/H1`} />
           <RefinerVisualResults />
-          <RendererLossChart />
           <h3 className="subsection-title">Refiner contract and supervision boundary</h3>
           <div className="refiner-contract">
             <ContractColumn label="Card-state input" items={project.refiner.input} />
