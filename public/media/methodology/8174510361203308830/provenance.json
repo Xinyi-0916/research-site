@@ -8,7 +8,7 @@
   "depth_max_m": 3.0727479457855225,
   "depth_normal_valid_pixels": 4889,
   "surface_normal_aov": "explicit_card_normal_world_i16; diagnostic only",
-  "depth_normal_visualization": "color = exact frozen loss support; gray = rendered card pixels excluded by validity or the 0.005 m continuity rule",
+  "depth_normal_visualization": "the chart uses the clean surface-normal AOV as a legible orientation thumbnail; the exact loss is derived from 512 metric depth on frozen valid support",
   "roi_512": [
     189,
     22,

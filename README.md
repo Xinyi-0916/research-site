@@ -47,9 +47,9 @@ public/media/methodology/8174510361203308830/provenance.json
 
 The methodology chart deliberately separates the rendered world-space normal
 AOV (diagnostic only) from the depth-derived normal used by the refiner loss.
-In the loss-support visualization, colored pixels are the frozen valid support;
-gray pixels are real rendered card surfaces excluded at silhouettes or depth
-discontinuities.
+The clean AOV is also used as the legible orientation thumbnail in the loss row;
+the caption states that the actual 0.25x loss is derived from 512 metric depth
+and evaluated only on frozen valid, locally continuous support.
 
 Public copies of the selected render files live under:
 

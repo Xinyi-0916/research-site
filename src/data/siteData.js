@@ -105,9 +105,9 @@ export const rendererDemonstration = {
     {
       title: 'Depth-derived normal',
       weight: '0.25×',
-      detail: 'Colour = valid loss support · gray = excluded',
-      image: asset('/media/methodology/8174510361203308830/depth-normal-support.png'),
-      alt: 'Depth-derived normal supervision with valid pixels in colour and excluded card pixels in gray',
+      detail: 'Orientation AOV shown · loss derived from depth',
+      image: asset('/media/methodology/8174510361203308830/surface-normal-aov.png'),
+      alt: 'World-space surface-normal AOV illustrating the orientation supervised by the depth-derived normal loss',
     },
   ],
   routeReasons: [
@@ -125,7 +125,7 @@ export const rendererDemonstration = {
       body: 'Target-valid support and its denominator stay fixed; four-neighbor validity and the 0.005 depth-continuity rule exclude silhouettes and depth jumps.',
     },
   ],
-  provenance: 'Every panel comes from the real front-view C2 maps for the displayed rank-1 Validation case. The surface-normal AOV is diagnostic only. In the depth-normal loss panel, colour marks the exact frozen loss support and gray marks rendered card pixels excluded at silhouettes or depth discontinuities. The page only crops and color-maps values for legibility; loss computation uses the uncropped stored arrays.',
+  provenance: 'Every panel comes from the real front-view C2 maps for the displayed rank-1 Validation case. The clean surface-normal AOV illustrates orientation only: the 0.25× loss is computed from the final 512 metric depth and evaluated on frozen four-neighbor-valid, locally continuous support. The page only crops and color-maps values for legibility; loss computation uses the uncropped stored arrays.',
 }
 
 export const project = {
