@@ -188,72 +188,13 @@ export const evaluation = {
     { name: 'Depth MAE', description: 'Mean absolute metric-depth error on their shared solid foreground.', direction: 'metres · lower is better' },
     { name: 'Normal cosine', description: 'Surface-normal agreement on their shared solid foreground.', direction: '−1–1 · higher is better' },
   ],
+  demonstrationSelection: 'These are the three highest-ranked card-bearing Validation cases by the arithmetic mean of input-view and held-out-view composite error reduction. The ranking uses all 49 card-bearing cases in the frozen artifact; every displayed output passes H1.',
   demonstrations: [
     {
-      caseId: '1022113573246895015',
-      label: 'Population case · near median input reduction',
-      cards: '46 cards',
-      reductions: { input: '53.98%', heldout: '55.63%' },
-      pairs: [
-        {
-          view: 'Front',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_front.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_front.png'),
-          gt: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/gt_input_front.png'),
-          metrics: [
-            { label: 'Alpha IoU', before: '0.572', after: '0.901' },
-            { label: 'Depth MAE', before: '0.0430', after: '0.0302', unit: ' m' },
-            { label: 'Normal cosine', before: '0.837', after: '0.866' },
-          ],
-        },
-        {
-          view: 'Side',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/before_input_right.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/after_input_right.png'),
-          gt: asset('/media/eval/j0b1-h1-population-v2-white/1022113573246895015/gt_input_right.png'),
-          metrics: [
-            { label: 'Alpha IoU', before: '0.484', after: '0.907' },
-            { label: 'Depth MAE', before: '0.0416', after: '0.0182', unit: ' m' },
-            { label: 'Normal cosine', before: '0.787', after: '0.900' },
-          ],
-        },
-      ],
-    },
-    {
-      caseId: '6224181708507224014',
-      label: 'Correctness-closure case',
-      cards: '44 cards',
-      reductions: { input: '72.42%', heldout: '64.29%' },
-      pairs: [
-        {
-          view: 'Front',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_front.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_front.png'),
-          gt: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/gt_input_front.png'),
-          metrics: [
-            { label: 'Alpha IoU', before: '0.213', after: '0.810' },
-            { label: 'Depth MAE', before: '0.0442', after: '0.0211', unit: ' m' },
-            { label: 'Normal cosine', before: '0.688', after: '0.824' },
-          ],
-        },
-        {
-          view: 'Side',
-          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_right.png'),
-          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_right.png'),
-          gt: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/gt_input_right.png'),
-          metrics: [
-            { label: 'Alpha IoU', before: '0.288', after: '0.808' },
-            { label: 'Depth MAE', before: '0.0422', after: '0.0210', unit: ' m' },
-            { label: 'Normal cosine', before: '0.737', after: '0.865' },
-          ],
-        },
-      ],
-    },
-    {
       caseId: '8174510361203308830',
-      label: 'Strong held-out improvement',
+      label: 'Top combined result · rank 1',
       cards: '64 cards',
-      reductions: { input: '77.28%', heldout: '74.61%' },
+      reductions: { input: '77.28%', heldout: '74.61%', combined: '75.95%' },
       pairs: [
         {
           view: 'Front',
@@ -275,6 +216,66 @@ export const evaluation = {
             { label: 'Alpha IoU', before: '0.253', after: '0.666' },
             { label: 'Depth MAE', before: '0.0232', after: '0.0049', unit: ' m' },
             { label: 'Normal cosine', before: '0.838', after: '0.962' },
+          ],
+        },
+      ],
+    },
+    {
+      caseId: '6171884197754545830',
+      label: 'Top combined result · rank 2',
+      cards: '52 cards',
+      reductions: { input: '72.33%', heldout: '67.35%', combined: '69.84%' },
+      pairs: [
+        {
+          view: 'Front',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6171884197754545830/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6171884197754545830/after_input_front.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/6171884197754545830/gt_input_front.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.419', after: '0.924' },
+            { label: 'Depth MAE', before: '0.0384', after: '0.0164', unit: ' m' },
+            { label: 'Normal cosine', before: '0.848', after: '0.917' },
+          ],
+        },
+        {
+          view: 'Side',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6171884197754545830/before_input_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6171884197754545830/after_input_right.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/6171884197754545830/gt_input_right.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.323', after: '0.912' },
+            { label: 'Depth MAE', before: '0.0304', after: '0.0139', unit: ' m' },
+            { label: 'Normal cosine', before: '0.802', after: '0.949' },
+          ],
+        },
+      ],
+    },
+    {
+      caseId: '6224181708507224014',
+      label: 'Top combined result · rank 3',
+      cards: '44 cards',
+      reductions: { input: '72.42%', heldout: '64.29%', combined: '68.35%' },
+      pairs: [
+        {
+          view: 'Front',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_front.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_front.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/gt_input_front.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.213', after: '0.810' },
+            { label: 'Depth MAE', before: '0.0442', after: '0.0211', unit: ' m' },
+            { label: 'Normal cosine', before: '0.688', after: '0.824' },
+          ],
+        },
+        {
+          view: 'Side',
+          before: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/before_input_right.png'),
+          after: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/after_input_right.png'),
+          gt: asset('/media/eval/j0b1-h1-population-v2-white/6224181708507224014/gt_input_right.png'),
+          metrics: [
+            { label: 'Alpha IoU', before: '0.288', after: '0.808' },
+            { label: 'Depth MAE', before: '0.0422', after: '0.0210', unit: ' m' },
+            { label: 'Normal cosine', before: '0.737', after: '0.865' },
           ],
         },
       ],
