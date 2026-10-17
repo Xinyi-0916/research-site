@@ -145,6 +145,16 @@ export default function ResearchSite() {
         <section className="content-section" id="methodology">
           <SectionHead number="02" title="Methodology" note={project.methodology.status} />
           <div className="method-pipeline">{project.methodology.steps.map((step, index) => <div className="method-stage" key={step.label}><article><span>{String(index + 1).padStart(2, '0')} · {step.label}</span><strong>{step.title}</strong></article>{index < project.methodology.steps.length - 1 && <i aria-hidden="true">→</i>}</div>)}</div>
+          <aside className="k12-explainer" aria-labelledby="k12-title">
+            <div className="k12-copy"><span>{project.methodology.k12.label}</span><h3 id="k12-title">{project.methodology.k12.title}</h3><p>{project.methodology.k12.body}</p></div>
+            <div className="k12-visual">
+              <div className="k12-knot-track" role="img" aria-label="Twelve ordered knots from fixed root q0 to tip q11">
+                {Array.from({ length: 12 }, (_, index) => <span className={index === 0 ? 'root-knot' : index === 11 ? 'tip-knot' : ''} key={index}><i />{index === 0 || index === 11 ? <b>q{index}</b> : <small>q{index}</small>}</span>)}
+              </div>
+              <div className="k12-axis"><span>Fixed root</span><span>Ordered root-to-tip flow</span><span>Tip</span></div>
+              <strong>{project.methodology.k12.summary}</strong>
+            </div>
+          </aside>
           <div className="method-roles">{project.methodology.roles.map((role) => <article key={role.label}><span>{role.label}</span><h3>{role.title}</h3><p>{role.body}</p></article>)}</div>
           <p className="method-evidence"><strong>Evidence boundary.</strong> {project.methodology.evidenceBoundary}</p>
           <RendererLossChart />

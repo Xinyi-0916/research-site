@@ -163,6 +163,12 @@ export const project = {
       { label: 'Refinement', title: 'Joint multiview K12 and bounded-profile correction' },
       { label: 'Output', title: 'Best-valid production-equivalent explicit cards' },
     ],
+    k12: {
+      label: 'Representation note',
+      title: 'K12 = 12 ordered centerline knots per card',
+      body: 'q0 is the fixed root anchor. q1–q11 complete 11 sequential 3D segments from root to tip; the refiner corrects these 11 non-root knots while bounded width and thickness profiles turn the centerline into an editable ribbon surface.',
+      summary: '12 knots · 11 segments · one persistent card identity',
+    },
     roles: [
       {
         label: 'Fixed asset contract',
