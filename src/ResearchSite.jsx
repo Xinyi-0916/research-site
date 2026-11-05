@@ -137,7 +137,7 @@ function ResultsCharts() {
 function GeneratorProgress() {
   return <>
     <section className="content-section generator-section" id="generator">
-      <SectionHead number="07" title="Generator goal" note="Work in progress · from calibrated multiview observations to production-valid explicit hair cards" />
+      <SectionHead number="07" title="Generator · work in progress" note="From calibrated multiview observations to production-valid explicit hair cards" />
       <div className="generator-goal-card">
         <span>Research goal</span>
         <h3>Generate a compact, editable card set—not only a matching silhouette</h3>
@@ -181,12 +181,12 @@ function GeneratorProgress() {
     <section className="content-section generator-progress-section" id="generator-progress">
     <SectionHead number="09" title="Generator progress" note="Current representation, reconstruction, and geometry-prior evidence" />
     <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}>
-      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Vertical triangle-count comparison: Production GT 16,835, CHARM Native 16,434, and our Flat K12 representation 4,109.">
-        <figcaption><strong>Representation geometry budget</strong><span>Triangle count ↓ · silhouette IoU is noted below each bar</span></figcaption>
+      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Vertical held-out silhouette IoU comparison: Production GT reference 100 percent, CHARM Native 95.35 percent, and our Flat K12 representation 90.5 percent.">
+        <figcaption><strong>Representation fidelity</strong><span>Held-out silhouette IoU ↑ · triangle count is noted below each bar</span></figcaption>
         <div className="representation-bars">
-          <div><strong>{study.sourceTriangles.toLocaleString()}</strong><i style={{ height: '100%' }} /><span>Production GT</span><small>Reference · 100%</small></div>
-          <div><strong>{study.charmTriangles.toLocaleString()}</strong><i style={{ height: `${study.charmTriangles / study.sourceTriangles * 100}%` }} /><span>CHARM</span><small>IoU · {study.charmIou}%</small></div>
-          <div className="ours"><strong>{study.compactTriangles.toLocaleString()}</strong><i style={{ height: `${study.compactTriangles / study.sourceTriangles * 100}%` }} /><span>Ours</span><small>IoU · {study.heldoutIou}%</small></div>
+          <div><strong>100%</strong><i style={{ height: '100%' }} /><span>Production GT</span><small>{study.sourceTriangles.toLocaleString()} triangles</small></div>
+          <div><strong>{study.charmIou}%</strong><i style={{ height: `${study.charmIou}%` }} /><span>CHARM</span><small>{study.charmTriangles.toLocaleString()} triangles</small></div>
+          <div className="ours"><strong>{study.heldoutIou}%</strong><i style={{ height: `${study.heldoutIou}%` }} /><span>Ours</span><small>{study.compactTriangles.toLocaleString()} triangles</small></div>
         </div>
       </figure> : <figure><img src={study.image} alt={study.alt} /></figure>}
       <div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div>
