@@ -33,6 +33,16 @@ export const generatorProgress = {
   ],
   studies: [
     {
+      kind: 'representation',
+      label: 'Representation efficiency',
+      value: '75.6% fewer triangles',
+      title: 'K12 ribbons preserve the silhouette with a fraction of the mesh budget',
+      body: 'Against the Production GT upper bound, the flat K12 representation uses about 4,109 triangles instead of 16,835 while retaining 90.5% held-out silhouette IoU. This compact, ordered representation is the geometry predicted by the generator.',
+      sourceTriangles: 16835,
+      compactTriangles: 4109,
+      heldoutIou: 90.5,
+    },
+    {
       label: 'Centerline reconstruction',
       value: '44 fixed roots',
       title: 'Strict-overfit reconstruction recovers the full centerline set',

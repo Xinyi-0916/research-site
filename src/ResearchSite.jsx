@@ -167,7 +167,16 @@ function GeneratorProgress() {
       </svg>
     </figure>
     <p className="pipeline-boundary"><strong>Proposed methodology.</strong> The complete learned generator is the research target. The cards below report the components currently supported by direct reconstruction experiments.</p>
-    <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}><figure><img src={study.image} alt={study.alt} /></figure><div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div></article>)}</div>
+    <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}>
+      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Production GT uses 16,835 triangles; compact K12 ribbons use 4,109 triangles and retain 90.5 percent held-out silhouette IoU">
+        <div className="triangle-comparison">
+          <div><span>Production GT</span><strong>{study.sourceTriangles.toLocaleString()}</strong><i style={{ '--bar-size': '100%' }} /></div>
+          <div><span>Flat K12</span><strong>{study.compactTriangles.toLocaleString()}</strong><i style={{ '--bar-size': `${(study.compactTriangles / study.sourceTriangles) * 100}%` }} /></div>
+        </div>
+        <div className="representation-retention"><span>Held-out silhouette IoU</span><strong>{study.heldoutIou}%</strong><div><i style={{ '--retention': `${study.heldoutIou}%` }} /></div></div>
+      </figure> : <figure><img src={study.image} alt={study.alt} /></figure>}
+      <div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div>
+    </article>)}</div>
   </section>
 }
 

@@ -464,6 +464,17 @@ th:first-child { text-align: left; }
 .generator-studies > article { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(270px, .75fr); min-height: 320px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
 .generator-studies figure { margin: 0; min-height: 320px; background: #fff; }
 .generator-studies img { width: 100%; height: 100%; max-height: 470px; object-fit: contain; display: block; }
+.representation-figure { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(170px, .65fr); align-items: center; gap: 44px; padding: 42px; }
+.triangle-comparison { display: grid; gap: 30px; }
+.triangle-comparison > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 7px 18px; }
+.triangle-comparison span, .representation-retention span { color: var(--muted); font-size: .64rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+.triangle-comparison strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+.triangle-comparison i { grid-column: 1 / -1; width: var(--bar-size); height: 18px; border-radius: 3px; background: #4f174f; }
+.triangle-comparison > div:last-child i { background: #2f8168; }
+.representation-retention { display: grid; justify-items: center; gap: 10px; padding-left: 32px; border-left: 1px solid var(--line); text-align: center; }
+.representation-retention strong { color: #2f8168; font-family: var(--serif); font-size: 2.4rem; font-weight: 600; }
+.representation-retention > div { width: 94px; height: 94px; padding: 9px; border-radius: 50%; background: conic-gradient(#2f8168 var(--retention), #ebe7eb 0); }
+.representation-retention > div::after { display: block; width: 100%; height: 100%; border-radius: 50%; background: white; content: ''; }
 .generator-studies > article > div { padding: 30px; align-self: center; }
 .generator-studies > article > div > span { color: var(--green); font-size: .62rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
 .generator-value { display: block; margin: 14px 0 22px; color: var(--ink); font-family: var(--serif); font-size: 2rem; }
@@ -475,6 +486,8 @@ th:first-child { text-align: left; }
   .generator-flowchart figcaption strong { font-size: 1rem; }
   .generator-studies > article { grid-template-columns: 1fr; }
   .generator-studies figure { min-height: 220px; }
+  .representation-figure { grid-template-columns: 1fr; gap: 30px; padding: 30px 24px; }
+  .representation-retention { padding: 28px 0 0; border-top: 1px solid var(--line); border-left: 0; }
 }
 
 .results-charts { margin-top: 34px; }
