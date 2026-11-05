@@ -17,7 +17,8 @@ export const sections = [
   { id: 'methodology', number: '02', label: 'Methodology' },
   { id: 'refiner', number: '03', label: 'Refiner' },
   { id: 'findings', number: '04', label: 'Research findings' },
-  { id: 'limitations', number: '05', label: 'Limitations' },
+  { id: 'resources', number: '05', label: 'Code & data' },
+  { id: 'limitations', number: '06', label: 'Limitations' },
 ]
 
 export const overviewDemonstration = {
@@ -273,9 +274,9 @@ export const evaluation = {
     ],
   },
   metricDefinitions: [
-    { name: 'Alpha IoU', description: 'Silhouette overlap between the rendered cards and target hair.', direction: '0–1 · higher is better' },
-    { name: 'Depth MAE', description: 'Mean absolute metric-depth error on their shared solid foreground.', direction: 'metres · lower is better' },
-    { name: 'Normal cosine', description: 'Surface-normal agreement on their shared solid foreground.', direction: '−1–1 · higher is better' },
+    { name: 'Alpha IoU', description: 'Silhouette overlap.', direction: '0–1 · ↑ better' },
+    { name: 'Depth MAE', description: 'Metric-depth error.', direction: 'metres · ↓ better' },
+    { name: 'Normal cosine', description: 'Surface-orientation agreement.', direction: '−1–1 · ↑ better' },
   ],
   demonstrationSelection: 'These are the three highest-ranked card-bearing Validation cases by the arithmetic mean of input-view and held-out-view composite error reduction. The ranking uses all 49 card-bearing cases in the frozen artifact; every displayed output passes H1.',
   demonstrations: [

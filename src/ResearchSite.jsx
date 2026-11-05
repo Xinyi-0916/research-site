@@ -9,8 +9,10 @@ function MathFormula({ tex, block = false }) {
     let attempts = 0
     const typeset = () => {
       if (window.MathJax?.typesetPromise && formulaRef.current) {
-        window.MathJax.typesetClear?.([formulaRef.current])
-        window.MathJax.typesetPromise([formulaRef.current])
+        const node = formulaRef.current
+        window.MathJax.typesetClear?.([node])
+        node.textContent = block ? `\\[${tex}\\]` : `\\(${tex}\\)`
+        window.MathJax.typesetPromise([node])
         return
       }
       if (attempts++ < 30) window.setTimeout(typeset, 100)
@@ -81,12 +83,11 @@ function RefinerVisualResults() {
         </div>
         <article className="demo-case" key={demo.caseId} aria-live="polite"><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards} · case {demo.caseId}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div><div><strong>{demo.reductions.combined}</strong><span>Two-split arithmetic mean · ranking score</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>
       </div>
-      <div className="metric-guide">
-        <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
+      <div className="metric-guide metric-guide--compact">
+        <header><strong>Metrics</strong><span>Input → refined · ↑ higher / ↓ lower is better</span></header>
         <div>{evaluation.metricDefinitions.map((metric) => <article key={metric.name}><strong>{metric.name}</strong><p>{metric.description}</p><span>{metric.direction}</span></article>)}</div>
       </div>
-      <p className="reduction-definition"><strong>What does “input-view error reduction” mean?</strong> It is the case-level relative drop in the frozen composite render error across all six input cameras: <code>1 − refined error / coarse error</code>. The composite combines alpha/silhouette (4×), edge (2×), metric depth (2×), and surface-normal error (0.25×). “Held-out” reports the same calculation on three unseen evaluation cameras. It is not the percentage change of Alpha IoU.</p>
-      <p className="render-caveat">The displayed Front and Side images are two of the six input views; the percentages summarize all six input views or all three held-out views. Both rows include the authoritative C2 reference render from the corresponding camera. Source Blender renders are unchanged except for cropping the reference to the shared camera frame and replacing the uniform background with white; mesh RGB is preserved.</p>
+      <p className="render-caveat"><strong>Note.</strong> Front and Side are representative input views. Reduction percentages aggregate all six input cameras or three unseen held-out cameras; they are not changes in one displayed metric.</p>
     </div>
   )
 }
@@ -126,29 +127,19 @@ function RendererLossChart() {
 }
 
 function ResultsCharts() {
-  const percent = (value) => Number.parseFloat(value)
-  const distributionKeys = [['p10', 'P10'], ['mean', 'Mean'], ['median', 'Median'], ['p90', 'P90']]
+  const heldoutError = (demo) => 1 - Number.parseFloat(demo.reductions.heldout) / 100
   return (
     <section className="results-charts" aria-labelledby="results-charts-title">
       <header><div><span>Visual summary</span><h3 id="results-charts-title">Population performance at a glance</h3></div><p>Complete 49-case card-bearing Validation population · higher is better</p></header>
       <div className="chart-grid">
-        <figure className="distribution-chart">
-          <figcaption><strong>Error-reduction distribution</strong><span>Percent reduction in frozen composite render error</span></figcaption>
-          <div className="chart-legend"><span><i className="input-swatch" />Input views</span><span><i className="heldout-swatch" />Held-out views</span></div>
-          <div className="grouped-bars">
-            {distributionKeys.map(([key, label]) => {
-              const input = percent(evaluation.distribution.input[key])
-              const heldout = percent(evaluation.distribution.heldout[key])
-              return <div className="bar-group" key={key}><div className="bar-pair"><div className="vertical-bar input-bar" style={{ '--bar': `${input / .8}%` }}><b>{input.toFixed(1)}%</b></div><div className="vertical-bar heldout-bar" style={{ '--bar': `${heldout / .8}%` }}><b>{heldout.toFixed(1)}%</b></div></div><span>{label}</span></div>
-            })}
-          </div>
-          <div className="axis-labels"><span>0</span><span>20</span><span>40</span><span>60</span><span>80%</span></div>
-        </figure>
-
-        <figure className="case-chart">
-          <figcaption><strong>Top demonstration cases</strong><span>Case-level composite error reduction</span></figcaption>
-          <div className="chart-legend"><span><i className="input-swatch" />Input</span><span><i className="heldout-swatch" />Held-out</span></div>
-          <div className="case-bars">{evaluation.demonstrations.map((demo, index) => <div className="case-bar-row" key={demo.caseId}><div className="case-label"><strong>Rank {index + 1}</strong><span>{demo.cards}</span></div><div className="horizontal-bars"><div><i className="input-bar" style={{ width: demo.reductions.input }} /><b>{demo.reductions.input}</b></div><div><i className="heldout-bar" style={{ width: demo.reductions.heldout }} /><b>{demo.reductions.heldout}</b></div></div></div>)}</div>
+        <figure className="heldout-chart">
+          <figcaption><strong>Held-out error: initial vs. refined</strong><span>Per-case composite error normalized to initial = 1.00 · lower is better</span></figcaption>
+          <div className="chart-legend"><span><i className="initial-swatch" />Initial</span><span><i className="refined-swatch" />Refined</span></div>
+          <div className="heldout-bars">{evaluation.demonstrations.map((demo, index) => {
+            const refined = heldoutError(demo)
+            return <div className="heldout-row" key={demo.caseId}><div className="case-label"><strong>Rank {index + 1}</strong><span>{demo.cards}</span></div><div className="horizontal-bars"><div><i className="initial-bar" style={{ width: '100%' }} /><b>1.00</b></div><div><i className="refined-bar" style={{ width: `${refined * 100}%` }} /><b>{refined.toFixed(2)}</b></div></div></div>
+          })}</div>
+          <div className="heldout-axis"><span>0</span><span>.25</span><span>.50</span><span>.75</span><span>1.00</span></div>
         </figure>
 
         <figure className="coverage-chart">
@@ -256,8 +247,17 @@ export default function ResearchSite() {
           <div className="findings-list">{findings.map((finding) => <article key={finding.title}><span>{finding.label}</span><h3>{finding.title}</h3><p>{finding.body}</p></article>)}</div>
         </section>
 
+        <section className="content-section resources-section" id="resources">
+          <SectionHead number="05" title="Code & data" note="Frozen refiner implementation, contracts, evaluation material, and the VRoid preprocessing route." />
+          <div className="resource-grid">
+            <article><span>Code release</span><h3>Known-layout B1/H1 refiner</h3><p>The recovered frozen implementation includes the K12 representation, joint renderer, constrained optimizer, H1 validity checks, contracts, and evaluation protocol.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/refiner" target="_blank" rel="noreferrer">Browse refiner code <Arrow /></a></article>
+            <article><span>Data preparation</span><h3>VRoid to research assets</h3><p>Raw VRM files are not redistributed. Follow the PAniC-3D downloader, then use the released Blender/VRM add-on scripts and hair-card extraction utilities.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/data_pipeline" target="_blank" rel="noreferrer">View preprocessing code <Arrow /></a></article>
+          </div>
+          <p className="dataset-note"><strong>Dataset policy.</strong> Like StdGEN, this project uses VRoid assets but does not redistribute raw VRM files. The repository provides processing code, metadata contracts, and split information; users must obtain source assets under the original platform terms.</p>
+        </section>
+
         <section className="content-section final-section" id="limitations">
-          <SectionHead number="05" title="Current limitations" note="Scope of the frozen refiner evidence." />
+          <SectionHead number="06" title="Current limitations" note="Scope of the frozen refiner evidence." />
           <ul className="limitations">{limitations.map((item) => <li key={item}>{item}</li>)}</ul>
         </section>
         <footer>© {new Date().getFullYear()} {person.name} · Research website</footer>
