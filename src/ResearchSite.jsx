@@ -101,31 +101,25 @@ function RendererLossChart() {
 export default function ResearchSite() {
   return (
     <div className="research-shell">
-      <aside className="sidebar">
-        <div className="identity">
-          <div><h1>{person.name}</h1><p>{person.role}</p></div>
-        </div>
-        <p className="side-bio">{person.background}</p>
-        <a className="portfolio-cta" href={person.portfolio} target="_blank" rel="noreferrer">
-          <span>Animation / Art</span><strong>View Portfolio</strong><Arrow />
-        </a>
-        <div className="side-links">
-          <a href={person.code} target="_blank" rel="noreferrer">Research GitHub <Arrow /></a>
-          <a href={person.github} target="_blank" rel="noreferrer">GitHub profile <Arrow /></a>
-        </div>
+      <header className="site-header">
+        <a className="site-brand" href="#overview"><strong>{person.name}</strong><span>{person.role}</span></a>
         <nav className="project-index" aria-label="Project sections">
-          <p>On this page</p>
-          {sections.map((section) => <a key={section.id} href={`#${section.id}`}><span>{section.number}</span>{section.label}</a>)}
+          {sections.map((section) => <a key={section.id} href={`#${section.id}`}>{section.label}</a>)}
         </nav>
-        <p className="side-status"><i /> {project.status}</p>
-      </aside>
+        <div className="header-links">
+          <a href={person.portfolio} target="_blank" rel="noreferrer">Portfolio <Arrow /></a>
+          <a href={person.code} target="_blank" rel="noreferrer">Code <Arrow /></a>
+        </div>
+      </header>
 
       <main className="research-main" id="main-content">
         <section className="project-intro" id="overview">
           <p className="kicker">Research project · 3D geometry / Production graphics</p>
           <h2>{project.title}</h2>
+          <p className="hero-author"><a href={person.github} target="_blank" rel="noreferrer">{person.name}</a></p>
+          <p className="hero-affiliation">3D AI &amp; Graphics Research · Animation / CGT Production</p>
           <a className="research-repo-link" href={person.code} target="_blank" rel="noreferrer">
-            <span>Research GitHub</span><strong>github.com/Xinyi-0916/3D_Generation_refinement</strong><Arrow />
+            <span>Code</span><strong>Research GitHub</strong><Arrow />
           </a>
           <OverviewDemonstration />
           <p className="project-subtitle">{project.subtitle}</p>

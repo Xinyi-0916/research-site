@@ -415,3 +415,97 @@ th:first-child { text-align: left; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }
+
+/* CHARM-inspired academic project-page layout */
+:root {
+  --ink: #242029;
+  --muted: #6f6873;
+  --paper: #ffffff;
+  --panel: #ffffff;
+  --line: #e5dfe7;
+  --green: #522265;
+  --green-pale: #f3edf5;
+  --line-dark: #c8bdcc;
+  --serif: Georgia, 'Times New Roman', serif;
+}
+
+body { background: var(--paper); }
+.research-shell { padding-top: 72px; }
+.site-header {
+  position: fixed;
+  z-index: 30;
+  top: 0;
+  right: 0;
+  left: 0;
+  display: grid;
+  min-height: 72px;
+  padding: 0 max(24px, calc((100vw - 1240px) / 2));
+  grid-template-columns: minmax(190px, .8fr) minmax(460px, 1.8fr) minmax(180px, .8fr);
+  align-items: center;
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, .96);
+  backdrop-filter: blur(14px);
+}
+.site-brand { display: grid; text-decoration: none; }
+.site-brand strong { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+.site-brand span { margin-top: 2px; color: var(--muted); font-size: .57rem; letter-spacing: .03em; }
+.project-index { display: flex; flex-direction: row; justify-content: center; gap: 22px; }
+.project-index a { display: block; padding: 27px 0 24px; border: 0; color: #4f4753; font-size: .64rem; font-weight: 650; text-decoration: none; white-space: nowrap; }
+.project-index a:hover { color: var(--green); }
+.header-links { display: flex; justify-content: flex-end; gap: 8px; }
+.header-links a { padding: 8px 12px; border: 1px solid var(--line); border-radius: 999px; font-size: .61rem; font-weight: 650; text-decoration: none; }
+.header-links a:last-child { border-color: #2c2730; color: white; background: #2c2730; }
+.header-links a:hover { border-color: var(--green); color: white; background: var(--green); }
+
+.research-main { width: min(1180px, calc(100% - 48px)); margin: 0 auto; padding-bottom: 34px; }
+.project-intro { padding: 74px 0 72px; }
+.kicker { margin-bottom: 20px; color: var(--green); }
+.project-intro > h2 { max-width: 1020px; margin: auto; font-size: clamp(3rem, 6vw, 5.6rem); font-weight: 600; line-height: 1.02; white-space: normal; }
+.hero-author { margin: 27px 0 0; font-family: var(--serif); font-size: 1.12rem; }
+.hero-author a { color: var(--green); text-underline-offset: 4px; }
+.hero-affiliation { margin: 7px 0 0; color: var(--muted); font-size: .72rem; }
+.research-repo-link { margin-top: 24px; padding: 10px 17px; border-radius: 999px; grid-template-columns: auto auto auto; }
+.research-repo-link span:first-child { color: #d8cddd; }
+.overview-demonstration { margin-top: 62px; }
+.overview-demonstration > header { width: min(880px, 100%); margin: 0 auto 20px; text-align: center; grid-template-columns: 1fr; gap: 8px; }
+.overview-demonstration > header h3 { color: var(--green); font-size: 1.8rem; font-weight: 600; }
+.overview-demonstration > header p { max-width: 720px; margin: auto; }
+.overview-demo-stage { border-radius: 10px; overflow: hidden; }
+.overview-demo-stage figcaption { min-height: 82px; }
+.project-subtitle { max-width: 850px; margin-top: 46px; color: #403747; font-size: clamp(1.35rem, 2.6vw, 2rem); }
+.research-identity { max-width: 820px; }
+.project-intro blockquote { border-width: 0 0 0 3px; border-color: var(--green); background: var(--green-pale); text-align: left; }
+
+.content-section { padding: 88px 0; scroll-margin-top: 72px; }
+.section-head { display: block; margin-bottom: 38px; text-align: center; }
+.section-head > span { display: block; margin-bottom: 9px; font-family: var(--sans); font-size: .62rem; font-weight: 750; letter-spacing: .13em; }
+.section-head h2 { color: var(--green); font-size: clamp(2rem, 4vw, 3.15rem); font-weight: 600; }
+.section-head p { max-width: 720px; margin: 12px auto 0; }
+.motivation-lead { max-width: 860px; margin: 0 auto 34px; text-align: center; }
+.motivation-grid, .method-roles, .metrics, .limitations { border-radius: 10px; overflow: hidden; }
+.target-definition, .k12-explainer, .refiner-contract > div:not(.io-arrow), .refiner-loss, .metric-guide, .demo-case, .production-audit, .renderer-chart { border-radius: 10px; }
+.subsection-title { color: var(--green); font-weight: 600; text-align: center; }
+.refiner-visual-results > .subsection-note { text-align: center; }
+.input-output-key { justify-content: center; }
+.demo-case { padding: 26px; }
+.metrics strong, .case-reductions strong, .production-audit header strong { color: var(--green); }
+.research-main > footer { text-align: center; }
+
+@media (max-width: 980px) {
+  .site-header { grid-template-columns: 1fr auto; }
+  .site-header .project-index { display: none; }
+  .research-main { width: min(100% - 36px, 900px); margin: 0 auto; }
+}
+
+@media (max-width: 760px) {
+  .research-shell { padding-top: 64px; }
+  .site-header { position: fixed; min-height: 64px; padding: 0 18px; }
+  .site-brand span { display: none; }
+  .header-links a:first-child { display: none; }
+  .research-main { width: calc(100% - 28px); margin: 0 auto; }
+  .project-intro { padding: 56px 0 62px; }
+  .project-intro > h2 { font-size: clamp(2.7rem, 13vw, 4.4rem); }
+  .overview-demonstration { margin-top: 46px; }
+  .content-section { padding: 68px 0; scroll-margin-top: 64px; }
+}
