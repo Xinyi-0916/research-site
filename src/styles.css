@@ -216,6 +216,19 @@ th:first-child { text-align: left; }
 .production-audit td { color: var(--green); font-weight: 700; }
 
 .demo-list { display: grid; margin-top: 26px; gap: 34px; }
+.demo-carousel { margin-top: 26px; }
+.carousel-toolbar { display: flex; margin-bottom: 10px; align-items: stretch; justify-content: space-between; gap: 16px; }
+.carousel-tabs { display: flex; gap: 6px; }
+.carousel-tabs button { display: grid; min-width: 76px; padding: 9px 13px; grid-template-columns: auto auto; align-items: center; gap: 7px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); background: var(--panel); cursor: pointer; }
+.carousel-tabs button b { font-family: var(--serif); font-size: .8rem; font-weight: 400; }
+.carousel-tabs button span { font-size: .58rem; }
+.carousel-tabs button:hover, .carousel-tabs button.active { border-color: var(--green); color: white; background: var(--green); }
+.carousel-controls { display: flex; align-items: center; gap: 6px; }
+.carousel-controls > span { margin-right: 5px; color: var(--muted); font-size: .6rem; font-variant-numeric: tabular-nums; }
+.carousel-controls button { display: grid; width: 36px; height: 36px; place-items: center; border: 1px solid var(--line); border-radius: 50%; color: var(--green); background: var(--panel); cursor: pointer; }
+.carousel-controls button:hover { border-color: var(--green); color: white; background: var(--green); }
+.demo-carousel .demo-case { animation: case-in .22s ease-out; }
+@keyframes case-in { from { opacity: .3; transform: translateY(5px); } to { opacity: 1; transform: none; } }
 .input-output-key { display: flex; margin: -18px 0 26px; flex-wrap: wrap; gap: 10px 25px; color: var(--muted); font-size: .66rem; }
 .refiner-visual-results .subsection-title { margin-top: 0; }
 .refiner-visual-results .subsection-note { margin: -10px 0 14px; color: var(--muted); font-size: .7rem; }
@@ -227,7 +240,7 @@ th:first-child { text-align: left; }
 .input-output-key .refined-dot { background: var(--green); }
 .input-output-key .gt-dot { border: 1px solid var(--ink); background: white; }
 .metric-guide { border: 1px solid var(--line); background: var(--panel); }
-.demo-list + .metric-guide { margin-top: 34px; }
+.demo-list + .metric-guide, .demo-carousel + .metric-guide { margin-top: 34px; }
 .metric-guide > header { display: flex; padding: 13px 17px; align-items: center; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); }
 .metric-guide > header strong { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; }
 .metric-guide > header span { color: var(--muted); font-size: .62rem; }
@@ -399,6 +412,11 @@ th:first-child { text-align: left; }
   .metrics { grid-template-columns: 1fr; }
   .metrics > div + div { border-top: 1px solid var(--line); border-left: 0; }
   .demo-case { padding: 12px; }
+  .carousel-toolbar { align-items: flex-end; }
+  .carousel-tabs { gap: 4px; }
+  .carousel-tabs button { min-width: 38px; padding: 8px 10px; grid-template-columns: 1fr; }
+  .carousel-tabs button span { display: none; }
+  .carousel-controls > span { display: none; }
   .demo-case > header { align-items: start; flex-direction: column; gap: 8px; }
   .case-reductions { width: 100%; margin-top: 5px; }
   .metric-guide > header { align-items: flex-start; flex-direction: column; gap: 4px; }
@@ -414,6 +432,7 @@ th:first-child { text-align: left; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
+  .demo-carousel .demo-case { animation: none; }
 }
 
 /* Mathematical notation and quantitative charts */

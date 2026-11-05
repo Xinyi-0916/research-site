@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { evaluation, findings, limitations, overviewDemonstration, person, project, rendererDemonstration, sections } from './data/siteData'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
@@ -63,14 +63,23 @@ function OverviewDemonstration() {
 }
 
 function RefinerVisualResults() {
+  const [activeDemo, setActiveDemo] = useState(0)
+  const demo = evaluation.demonstrations[activeDemo]
+  const moveDemo = (direction) => setActiveDemo((current) => (current + direction + evaluation.demonstrations.length) % evaluation.demonstrations.length)
   return (
     <div className="refiner-visual-results" id="demonstrations">
       <h3 className="subsection-title">Visual results</h3>
       <p className="subsection-note">Each example uses the same two input cameras—Front and Side (right)—for a direct, consistent comparison.</p>
       <div className="input-output-key"><span><i className="weak-dot" /> Input = weak coarse K12 card set</span><span><i className="refined-dot" /> Output = selected best-valid refined K12 card set</span><span><i className="gt-dot" /> Reference = source asset rendered from the same view camera</span></div>
       <p className="demonstration-selection"><strong>Case selection.</strong> {evaluation.demonstrationSelection}</p>
-      <div className="demo-list">
-        {evaluation.demonstrations.map((demo) => <article className="demo-case" key={demo.caseId}><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div><div><strong>{demo.reductions.combined}</strong><span>Two-split arithmetic mean · ranking score</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>)}
+      <div className="demo-carousel">
+        <div className="carousel-toolbar">
+          <div className="carousel-tabs" role="tablist" aria-label="Select a visual result case">
+            {evaluation.demonstrations.map((item, index) => <button type="button" role="tab" aria-selected={index === activeDemo} className={index === activeDemo ? 'active' : ''} onClick={() => setActiveDemo(index)} key={item.caseId}><b>{String(index + 1).padStart(2, '0')}</b><span>Rank {index + 1}</span></button>)}
+          </div>
+          <div className="carousel-controls"><span>{activeDemo + 1} / {evaluation.demonstrations.length}</span><button type="button" onClick={() => moveDemo(-1)} aria-label="Previous visual result">←</button><button type="button" onClick={() => moveDemo(1)} aria-label="Next visual result">→</button></div>
+        </div>
+        <article className="demo-case" key={demo.caseId} aria-live="polite"><header><div><h3>{demo.label}</h3><span className="card-count">{demo.cards} · case {demo.caseId}</span></div><div className="case-reductions"><div><strong>↓ {demo.reductions.input}</strong><span>Input-view composite error reduction</span></div><div><strong>↓ {demo.reductions.heldout}</strong><span>Held-out composite error reduction</span></div><div><strong>{demo.reductions.combined}</strong><span>Two-split arithmetic mean · ranking score</span></div></div></header><div className="pair-grid">{demo.pairs.map((pair) => <ComparisonPair key={pair.view} pair={pair} />)}</div></article>
       </div>
       <div className="metric-guide">
         <header><strong>How to read the view metrics</strong><span>Input → refined output</span></header>
