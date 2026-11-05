@@ -208,27 +208,27 @@ export const project = {
     ],
     supervisionBoundary: 'The current population result is a per-case B1/H1 oracle optimization, so GT metric depth and depth-derived normals enter its objective as target supervision. They are not deployment inputs. In the intended learned system, GT depth is restricted to training and evaluation; deployed inference remains alpha + predicted normals + calibrated cameras.',
     objective: {
-      formula: 'L = L_render + Σ_i λ_i ρ(ΔQ_i; Q_i⁰) + L_profile',
-      renderFormula: 'L_render = λ_α L_α + λ_e L_edge + λ_d L_depth + λ_n L_normal',
+      formula: String.raw`\mathcal{L}=\mathcal{L}_{\mathrm{render}}+\sum_i \lambda_i\,\rho\!\left(\Delta Q_i;Q_i^0\right)+\mathcal{L}_{\mathrm{profile}}`,
+      renderFormula: String.raw`\mathcal{L}_{\mathrm{render}}=4\mathcal{L}_{\alpha}+2\mathcal{L}_{\mathrm{edge/SDF}}+2\mathcal{L}_{\mathrm{depth}}+0.25\mathcal{L}_{\mathrm{depth\text{-}normal}}`,
       terms: [
         {
           label: 'Silhouette',
-          symbol: 'λ_α L_α + λ_e L_edge',
+          symbol: String.raw`4\mathcal{L}_{\alpha}+2\mathcal{L}_{\mathrm{edge/SDF}}`,
           effect: 'Fills missing coverage and aligns the rendered boundary with the target.',
         },
         {
           label: 'Metric depth',
-          symbol: 'λ_d L_depth',
+          symbol: String.raw`2\mathcal{L}_{\mathrm{depth}}`,
           effect: 'Corrects front/back placement and layer order using GT-only supervision.',
         },
         {
           label: 'Depth normal',
-          symbol: 'λ_n L_normal',
+          symbol: String.raw`0.25\mathcal{L}_{\mathrm{depth\text{-}normal}}`,
           effect: 'Aligns local surface direction instead of matching depth alone.',
         },
         {
           label: 'Structure + profile',
-          symbol: 'Σ_i λ_i ρ(ΔQ_i; Q_i⁰) + L_profile',
+          symbol: String.raw`\sum_i\lambda_i\rho(\Delta Q_i;Q_i^0)+\mathcal{L}_{\mathrm{profile}}`,
           effect: 'Keeps corrections near the weak K12 geometry and widths/thicknesses within the bounded profile model.',
         },
       ],

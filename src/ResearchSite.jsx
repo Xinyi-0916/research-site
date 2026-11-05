@@ -1,6 +1,24 @@
+import { useEffect, useRef } from 'react'
 import { evaluation, findings, limitations, overviewDemonstration, person, project, rendererDemonstration, sections } from './data/siteData'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
+
+function MathFormula({ tex, block = false }) {
+  const formulaRef = useRef(null)
+  useEffect(() => {
+    let attempts = 0
+    const typeset = () => {
+      if (window.MathJax?.typesetPromise && formulaRef.current) {
+        window.MathJax.typesetClear?.([formulaRef.current])
+        window.MathJax.typesetPromise([formulaRef.current])
+        return
+      }
+      if (attempts++ < 30) window.setTimeout(typeset, 100)
+    }
+    typeset()
+  }, [tex])
+  return <span ref={formulaRef} className={block ? 'math-display' : 'math-inline'}>{block ? `\\[${tex}\\]` : `\\(${tex}\\)`}</span>
+}
 
 function SectionHead({ number, title, note }) {
   return <header className="section-head"><span>{number}</span><div><h2>{title}</h2>{note && <p>{note}</p>}</div></header>
@@ -98,6 +116,43 @@ function RendererLossChart() {
   )
 }
 
+function ResultsCharts() {
+  const percent = (value) => Number.parseFloat(value)
+  const distributionKeys = [['p10', 'P10'], ['mean', 'Mean'], ['median', 'Median'], ['p90', 'P90']]
+  return (
+    <section className="results-charts" aria-labelledby="results-charts-title">
+      <header><div><span>Visual summary</span><h3 id="results-charts-title">Population performance at a glance</h3></div><p>Complete 49-case card-bearing Validation population · higher is better</p></header>
+      <div className="chart-grid">
+        <figure className="distribution-chart">
+          <figcaption><strong>Error-reduction distribution</strong><span>Percent reduction in frozen composite render error</span></figcaption>
+          <div className="chart-legend"><span><i className="input-swatch" />Input views</span><span><i className="heldout-swatch" />Held-out views</span></div>
+          <div className="grouped-bars">
+            {distributionKeys.map(([key, label]) => {
+              const input = percent(evaluation.distribution.input[key])
+              const heldout = percent(evaluation.distribution.heldout[key])
+              return <div className="bar-group" key={key}><div className="bar-pair"><div className="vertical-bar input-bar" style={{ '--bar': `${input / .8}%` }}><b>{input.toFixed(1)}%</b></div><div className="vertical-bar heldout-bar" style={{ '--bar': `${heldout / .8}%` }}><b>{heldout.toFixed(1)}%</b></div></div><span>{label}</span></div>
+            })}
+          </div>
+          <div className="axis-labels"><span>0</span><span>20</span><span>40</span><span>60</span><span>80%</span></div>
+        </figure>
+
+        <figure className="case-chart">
+          <figcaption><strong>Top demonstration cases</strong><span>Case-level composite error reduction</span></figcaption>
+          <div className="chart-legend"><span><i className="input-swatch" />Input</span><span><i className="heldout-swatch" />Held-out</span></div>
+          <div className="case-bars">{evaluation.demonstrations.map((demo, index) => <div className="case-bar-row" key={demo.caseId}><div className="case-label"><strong>Rank {index + 1}</strong><span>{demo.cards}</span></div><div className="horizontal-bars"><div><i className="input-bar" style={{ width: demo.reductions.input }} /><b>{demo.reductions.input}</b></div><div><i className="heldout-bar" style={{ width: demo.reductions.heldout }} /><b>{demo.reductions.heldout}</b></div></div></div>)}</div>
+        </figure>
+
+        <figure className="coverage-chart">
+          <figcaption><strong>Population coverage</strong><span>Valid and improved outputs across all card-bearing cases</span></figcaption>
+          <div className="coverage-stat"><div><strong>98.0%</strong><span>Improved on both splits</span></div><div className="coverage-track"><i style={{ width: `${48 / 49 * 100}%` }} /></div><small>48 of 49 cases</small></div>
+          <div className="coverage-stat"><div><strong>100%</strong><span>H1-valid selected outputs</span></div><div className="coverage-track validity"><i /></div><small>49 of 49 cases</small></div>
+          <p>One case does not improve on both splits; every selected card-bearing output remains inside the frozen H1 validity contract.</p>
+        </figure>
+      </div>
+    </section>
+  )
+}
+
 export default function ResearchSite() {
   return (
     <div className="research-shell">
@@ -167,13 +222,14 @@ export default function ResearchSite() {
           </div>
           <p className="method-evidence refiner-depth-note"><strong>Depth boundary.</strong> {project.refiner.supervisionBoundary}</p>
           <div className="refiner-loss">
-            <header><span>Frozen refiner objective</span><div><code>{project.refiner.objective.formula}</code><code>{project.refiner.objective.renderFormula}</code></div></header>
-            <div className="loss-terms">{project.refiner.objective.terms.map((term) => <article key={term.label}><span>{term.label}</span><code>{term.symbol}</code><p>{term.effect}</p></article>)}</div>
+            <header><span>Frozen refiner objective</span><div><MathFormula tex={project.refiner.objective.formula} block /><MathFormula tex={project.refiner.objective.renderFormula} block /></div></header>
+            <div className="loss-terms">{project.refiner.objective.terms.map((term) => <article key={term.label}><span>{term.label}</span><MathFormula tex={term.symbol} block /><p>{term.effect}</p></article>)}</div>
             <p><strong>Hard boundary.</strong> {project.refiner.objective.hardBoundary}</p>
           </div>
           <h3 className="subsection-title" id="results">Population results</h3>
           <div className="artifact-bar"><span>Source artifact</span><code>{evaluation.artifact}</code><span>Runtime {evaluation.elapsed}</span></div>
           <div className="metrics">{evaluation.aggregate.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
+          <ResultsCharts />
           <div className="result-tables">
             <div><h3>Error-reduction distribution</h3><table><thead><tr><th>Views</th><th>Mean</th><th>P10</th><th>Median</th><th>P90</th></tr></thead><tbody><tr><th>Input</th><td>{evaluation.distribution.input.mean}</td><td>{evaluation.distribution.input.p10}</td><td>{evaluation.distribution.input.median}</td><td>{evaluation.distribution.input.p90}</td></tr><tr><th>Held-out</th><td>{evaluation.distribution.heldout.mean}</td><td>{evaluation.distribution.heldout.p10}</td><td>{evaluation.distribution.heldout.median}</td><td>{evaluation.distribution.heldout.p90}</td></tr></tbody></table><p className="table-explainer">{evaluation.distributionGuide}</p></div>
             <div><h3>Frozen checks</h3><table className="check-table"><tbody>{evaluation.checks.map(([check, value]) => <tr key={check}><th>{check}</th><td className={value === 'Pass' ? 'pass' : ''}>{value}</td></tr>)}</tbody></table></div>
