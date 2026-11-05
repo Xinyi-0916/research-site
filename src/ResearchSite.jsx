@@ -136,10 +136,36 @@ function ResultsCharts() {
 
 function GeneratorProgress() {
   return <section className="content-section generator-section" id="generator">
-    <SectionHead number="03" title="Generator progress" note="Current reconstruction evidence and proposed end-to-end methodology" />
-    <div className="generator-pipeline" aria-label="Proposed hair-card generation pipeline">
-      {generatorProgress.pipeline.map(([title, detail], index) => <div className="generator-pipeline-step" key={title}><article><span>{String(index + 1).padStart(2, '0')}</span><strong>{title}</strong><p>{detail}</p></article>{index < generatorProgress.pipeline.length - 1 && <i aria-hidden="true">→</i>}</div>)}
-    </div>
+    <SectionHead number="07" title="Generator progress" note="Work in progress · current reconstruction evidence and proposed end-to-end methodology" />
+    <figure className="generator-flowchart">
+      <figcaption><span>Proposed methodology</span><strong>Coarse blueprint + progressive card generation</strong></figcaption>
+      <svg viewBox="0 0 920 720" role="img" aria-labelledby="generator-flow-title generator-flow-desc">
+        <title id="generator-flow-title">Proposed two-stage hair-card generation pipeline</title>
+        <desc id="generator-flow-desc">Multiview images, cameras and scalp enter an image encoder and coarse blueprint. A progressive generator creates and updates root-anchored K12 cards, repeats card birth when needed, and stops with production-valid hair cards.</desc>
+        <defs><marker id="flow-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" /></marker></defs>
+        <g className="flow-lines" markerEnd="url(#flow-arrow)">
+          <path d="M260 92 V142" /><path d="M260 222 V278" /><path d="M260 354 V388 Q260 408 280 408 H355 V438" />
+          <path d="M660 220 V278" /><path d="M660 354 V388 Q660 408 640 408 H565 V438" />
+          <path d="M340 182 H400 Q420 182 420 202 V438" /><path d="M460 526 V570" /><path d="M460 638 V676" />
+          <path d="M535 604 H790 Q812 604 812 582 V322 Q812 302 792 302 H760" />
+          <path d="M760 316 H790 Q800 316 800 296 V202 Q800 182 780 182 H760" />
+        </g>
+        <g className="flow-boxes">
+          <rect x="120" y="28" width="280" height="64" rx="18" /><rect x="180" y="142" width="160" height="80" rx="16" />
+          <rect x="120" y="278" width="280" height="76" rx="16" /><rect x="520" y="142" width="280" height="78" rx="16" />
+          <rect x="520" y="278" width="280" height="76" rx="16" /><rect x="340" y="438" width="240" height="88" rx="18" />
+          <rect className="decision" x="365" y="570" width="190" height="68" rx="18" /><rect x="320" y="676" width="280" height="40" rx="16" />
+          <rect className="loop-pill" x="790" y="286" width="76" height="32" rx="16" />
+        </g>
+        <g className="flow-labels">
+          <text x="260" y="53"><tspan x="260">Multiview Images + Cameras</tspan><tspan x="260" dy="19">+ Scalp</tspan></text>
+          <text x="260" y="190">Image Encoder</text><text x="260" y="322">Stage 1: Coarse Blueprint</text>
+          <text x="660" y="169"><tspan x="660">Generate Root + K12 + Width</tspan><tspan x="660" dy="19">+ Orientation</tspan></text>
+          <text x="660" y="322">Update Generated Card Set</text><text x="460" y="482"><tspan x="460">Stage 2: Progressive</tspan><tspan x="460" dy="19">Generator</tspan></text>
+          <text x="460" y="611">Birth or STOP?</text><text x="460" y="702">Production-valid Hair Cards</text><text x="828" y="307">Birth</text>
+        </g>
+      </svg>
+    </figure>
     <p className="pipeline-boundary"><strong>Proposed methodology.</strong> The complete learned generator is the research target. The cards below report the components currently supported by direct reconstruction experiments.</p>
     <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}><figure><img src={study.image} alt={study.alt} /></figure><div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div></article>)}</div>
   </section>
@@ -201,10 +227,8 @@ export default function ResearchSite() {
           <RendererLossChart />
         </section>
 
-        <GeneratorProgress />
-
         <section className="content-section" id="refiner">
-          <SectionHead number="04" title="Refiner" note={`${evaluation.scope} · frozen B1/H1`} />
+          <SectionHead number="03" title="Refiner" note={`${evaluation.scope} · frozen B1/H1`} />
           <RefinerVisualResults />
           <h3 className="subsection-title">Refiner contract and supervision boundary</h3>
           <div className="refiner-contract">
@@ -237,12 +261,12 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section" id="findings">
-          <SectionHead number="05" title="Current findings" />
+          <SectionHead number="04" title="Current findings" />
           <div className="findings-list">{findings.map((finding) => <article key={finding.title}><span>{finding.label}</span><h3>{finding.title}</h3><p>{finding.body}</p></article>)}</div>
         </section>
 
         <section className="content-section resources-section" id="resources">
-          <SectionHead number="06" title="Code & data" note="Frozen refiner implementation, contracts, evaluation material, and the VRoid preprocessing route." />
+          <SectionHead number="05" title="Code & data" note="Frozen refiner implementation, contracts, evaluation material, and the VRoid preprocessing route." />
           <div className="resource-grid">
             <article><span>Code release</span><h3>Known-layout B1/H1 refiner</h3><p>The recovered frozen implementation includes the K12 representation, joint renderer, constrained optimizer, H1 validity checks, contracts, and evaluation protocol.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/refiner" target="_blank" rel="noreferrer">Browse refiner code <Arrow /></a></article>
             <article><span>Data preparation</span><h3>VRoid to research assets</h3><p>Raw VRM files are not redistributed. Follow the PAniC-3D downloader, then use the released Blender/VRM add-on scripts and hair-card extraction utilities.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/data_pipeline" target="_blank" rel="noreferrer">View preprocessing code <Arrow /></a></article>
@@ -251,9 +275,10 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section final-section" id="limitations">
-          <SectionHead number="07" title="Current limitations" note="Scope of the frozen refiner evidence." />
+          <SectionHead number="06" title="Current limitations" note="Scope of the frozen refiner evidence." />
           <ul className="limitations">{limitations.map((item) => <li key={item}>{item}</li>)}</ul>
         </section>
+        <GeneratorProgress />
         <footer>© {new Date().getFullYear()} {person.name} · Research website</footer>
       </main>
     </div>

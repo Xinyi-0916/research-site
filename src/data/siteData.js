@@ -15,11 +15,11 @@ export const sections = [
   { id: 'overview', number: '00', label: 'Overview' },
   { id: 'motivation', number: '01', label: 'Motivation' },
   { id: 'methodology', number: '02', label: 'Methodology' },
-  { id: 'generator', number: '03', label: 'Generator' },
-  { id: 'refiner', number: '04', label: 'Refiner' },
-  { id: 'findings', number: '05', label: 'Research findings' },
-  { id: 'resources', number: '06', label: 'Code & data' },
-  { id: 'limitations', number: '07', label: 'Limitations' },
+  { id: 'refiner', number: '03', label: 'Refiner' },
+  { id: 'findings', number: '04', label: 'Research findings' },
+  { id: 'resources', number: '05', label: 'Code & data' },
+  { id: 'limitations', number: '06', label: 'Limitations' },
+  { id: 'generator', number: '07', label: 'Generator · in progress' },
 ]
 
 export const generatorProgress = {
