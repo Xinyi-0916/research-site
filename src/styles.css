@@ -546,22 +546,19 @@ th:first-child { text-align: left; }
 .coverage-track.validity i { width: 100%; background: #7a9f91; }
 .coverage-stat small { color: var(--muted); font-size: .54rem; }
 .coverage-chart > p { margin: 0; color: var(--muted); font-size: .61rem; line-height: 1.5; }
-.resource-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-.resource-grid article { padding: 28px; border: 1px solid var(--line); border-radius: 10px; background: var(--panel); }
-.resource-grid article > span { color: var(--green); font-size: .59rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
-.resource-grid h3 { margin: 24px 0 10px; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
-.resource-grid p { color: var(--muted); font-size: .72rem; }
-.resource-grid a { display: inline-flex; margin-top: 10px; align-items: center; gap: 7px; color: var(--green); font-size: .68rem; font-weight: 700; text-decoration: none; }
-.resource-grid a:hover { text-decoration: underline; }
-.dataset-note { margin: 14px 0 0; padding: 17px 19px; border-left: 3px solid var(--green); background: var(--green-pale); color: var(--muted); font-size: .7rem; }
-.dataset-note strong { color: var(--ink); }
+.resource-repository { display: flex; padding: 30px 32px; align-items: center; justify-content: space-between; gap: 36px; border: 1px solid var(--line); border-radius: 12px; background: var(--panel); }
+.resource-repository > div > span { color: var(--green); font-size: .59rem; font-weight: 750; letter-spacing: .1em; text-transform: uppercase; }
+.resource-repository h3 { margin: 13px 0 8px; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+.resource-repository p { max-width: 620px; margin: 0; color: var(--muted); font-size: .72rem; }
+.resource-repository a { display: inline-flex; flex: 0 0 auto; padding: 12px 16px; align-items: center; gap: 8px; border: 1px solid var(--green); border-radius: 999px; color: var(--green); font-size: .68rem; font-weight: 750; text-decoration: none; }
+.resource-repository a:hover { background: var(--green); color: white; }
 
 @media (max-width: 820px) {
   .chart-grid { grid-template-columns: 1fr; }
   .distribution-chart { grid-row: auto; }
   .results-charts > header { align-items: start; flex-direction: column; gap: 7px; }
   .results-charts > header p { text-align: left; }
-  .resource-grid { grid-template-columns: 1fr; }
+  .resource-repository { align-items: flex-start; flex-direction: column; gap: 22px; }
 }
 
 @media (max-width: 520px) {

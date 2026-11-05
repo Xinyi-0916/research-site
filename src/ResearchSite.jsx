@@ -275,12 +275,11 @@ export default function ResearchSite() {
         </section>
 
         <section className="content-section resources-section" id="resources">
-          <SectionHead number="05" title="Code & data" note="Frozen refiner implementation, contracts, evaluation material, and the VRoid preprocessing route." />
-          <div className="resource-grid">
-            <article><span>Code release</span><h3>Known-layout B1/H1 refiner</h3><p>The recovered frozen implementation includes the K12 representation, joint renderer, constrained optimizer, H1 validity checks, contracts, and evaluation protocol.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/refiner" target="_blank" rel="noreferrer">Browse refiner code <Arrow /></a></article>
-            <article><span>Data preparation</span><h3>VRoid to research assets</h3><p>Raw VRM files are not redistributed. Follow the PAniC-3D downloader, then use the released Blender/VRM add-on scripts and hair-card extraction utilities.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/data_pipeline" target="_blank" rel="noreferrer">View preprocessing code <Arrow /></a></article>
-          </div>
-          <p className="dataset-note"><strong>Dataset policy.</strong> This project uses character models from VRoid Hub. Raw VRM files remain subject to their original asset licenses and platform terms, so the repository provides processing code, metadata contracts, and split information rather than redistributing source models.</p>
+          <SectionHead number="05" title="Code & dataset" note="Implementation, data preparation, and dataset documentation are maintained together on GitHub." />
+          <article className="resource-repository">
+            <div><span>Project repository</span><h3>Code, preprocessing, and dataset setup</h3><p>The GitHub repository contains the refiner implementation, VRoid preprocessing pipeline, dataset structure, and setup instructions.</p></div>
+            <a href={person.code} target="_blank" rel="noreferrer"><span>View on GitHub</span><Arrow /></a>
+          </article>
         </section>
 
         <section className="content-section final-section" id="limitations">
