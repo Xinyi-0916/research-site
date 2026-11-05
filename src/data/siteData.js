@@ -34,9 +34,9 @@ export const generatorProgress = {
   studies: [
     {
       label: 'Centerline reconstruction',
-      value: 'Fixed roots',
-      title: 'Root-anchored K12 reconstruction is visually coherent',
-      body: 'Keeping scalp attachment points fixed stabilizes card identity while the decoder reconstructs the remaining root-to-tip centerline.',
+      value: '44 fixed roots',
+      title: 'Strict-overfit reconstruction recovers the full centerline set',
+      body: 'In the fixed-root diagnostic, the predicted 44-card centerlines closely reproduce the GT layout across XY, XZ, and YZ projections while preserving every scalp anchor.',
       image: asset('/media/generator/fixed-root-centerlines.png'),
       alt: 'Fixed scalp roots and reconstructed colored K12 card centerlines',
     },
@@ -50,9 +50,9 @@ export const generatorProgress = {
     },
     {
       label: 'Geometry-prior study',
-      value: 'G48 selected',
-      title: 'Higher-resolution shared support preserves more hairstyle structure',
-      body: 'The controlled resolution audit favors G48 over G24 and G32 for branch, hole, and tail preservation. This is a staged prior study—not yet an end-to-end generator claim.',
+      value: '80.3% projection IoU',
+      title: 'The trained G48 prior preserves the dominant multiaxis shape',
+      body: 'Across Dev50, the image-to-G48 model reaches 80.3% three-view projection IoU. The GT/Pred grid shows representative XY, XZ, and YZ silhouettes; the physical volumetric IoU remains lower, so this is still a Stage-1 result.',
       image: asset('/media/generator/geometry-prior-reconstruction.png'),
       alt: 'Ground-truth and teacher-conditioned geometry-prior reconstructions across physical coordinate views',
     },
