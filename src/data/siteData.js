@@ -15,11 +15,49 @@ export const sections = [
   { id: 'overview', number: '00', label: 'Overview' },
   { id: 'motivation', number: '01', label: 'Motivation' },
   { id: 'methodology', number: '02', label: 'Methodology' },
-  { id: 'refiner', number: '03', label: 'Refiner' },
-  { id: 'findings', number: '04', label: 'Research findings' },
-  { id: 'resources', number: '05', label: 'Code & data' },
-  { id: 'limitations', number: '06', label: 'Limitations' },
+  { id: 'generator', number: '03', label: 'Generator' },
+  { id: 'refiner', number: '04', label: 'Refiner' },
+  { id: 'findings', number: '05', label: 'Research findings' },
+  { id: 'resources', number: '06', label: 'Code & data' },
+  { id: 'limitations', number: '07', label: 'Limitations' },
 ]
+
+export const generatorProgress = {
+  pipeline: [
+    ['Multiview observations', 'RGB, masks, predicted normals, and calibrated cameras'],
+    ['Camera-aware fusion', 'Frozen dense image features fused into shared structure'],
+    ['G48 geometry prior', 'Global support plus region-wise roots and coarse flow'],
+    ['Fixed-root K12 decoder', 'Complete ordered centerlines and bounded width profiles'],
+    ['Explicit hair cards', 'Compact editable ribbons with production topology'],
+    ['Validated refinement', 'Multiview correction followed by H1 validity checks'],
+  ],
+  studies: [
+    {
+      label: 'Centerline reconstruction',
+      value: 'Fixed roots',
+      title: 'Root-anchored K12 reconstruction is visually coherent',
+      body: 'Keeping scalp attachment points fixed stabilizes card identity while the decoder reconstructs the remaining root-to-tip centerline.',
+      image: asset('/media/generator/fixed-root-centerlines.png'),
+      alt: 'Fixed scalp roots and reconstructed colored K12 card centerlines',
+    },
+    {
+      label: 'Direct multiview reconstruction',
+      value: '93.9% mean IoU',
+      title: 'A single-case nine-view reconstruction now clears 93% in every view',
+      body: 'The current case reaches 93.9% mean silhouette IoU; its lowest evaluated view is 93.4%. White is reference-only, cyan prediction-only, and green overlap.',
+      image: asset('/media/generator/multiview-iou-montage.png'),
+      alt: 'Nine-view silhouette overlap montage for direct multiview hair-card reconstruction',
+    },
+    {
+      label: 'Geometry-prior study',
+      value: 'G48 selected',
+      title: 'Higher-resolution shared support preserves more hairstyle structure',
+      body: 'The controlled resolution audit favors G48 over G24 and G32 for branch, hole, and tail preservation. This is a staged prior study—not yet an end-to-end generator claim.',
+      image: asset('/media/generator/geometry-prior-reconstruction.png'),
+      alt: 'Ground-truth and teacher-conditioned geometry-prior reconstructions across physical coordinate views',
+    },
+  ],
+}
 
 export const overviewDemonstration = {
   title: 'From a front-view design to editable hair cards',

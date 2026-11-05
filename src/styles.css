@@ -175,7 +175,7 @@ code { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
 .loss-terms { display: grid; grid-template-columns: repeat(4, 1fr); }
 .loss-terms article { min-width: 0; padding: 18px; }
 .loss-terms article + article { border-left: 1px solid var(--line); }
-.loss-terms article > span { display: block; color: var(--green); font-size: .59rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
+.loss-terms article > span:first-child { display: block; color: var(--green); font-size: .59rem; font-weight: 750; letter-spacing: .07em; text-transform: uppercase; }
 .loss-terms article code { display: block; min-height: 36px; margin-top: 11px; color: var(--ink); font-size: .65rem; line-height: 1.4; white-space: normal; }
 .loss-terms article p { margin: 9px 0 0; color: var(--muted); font-size: .67rem; line-height: 1.5; }
 .refiner-loss > p { margin: 0; padding: 13px 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: .68rem; }
@@ -444,6 +444,41 @@ th:first-child { text-align: left; }
 .refiner-loss > header > div { gap: 3px; }
 .loss-terms .math-display { min-height: 58px; margin-top: 10px; font-size: .76rem; }
 .loss-terms .math-display mjx-container[display="true"] { text-align: center !important; }
+.loss-terms .math-display, .loss-terms .math-display * { letter-spacing: normal !important; text-transform: none !important; }
+
+.generator-section { background: linear-gradient(180deg, rgba(246,243,251,.78), transparent 38%); }
+.generator-pipeline { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin-top: 28px; border: 1px solid var(--line); border-radius: 14px; overflow: hidden; background: white; }
+.generator-pipeline-step { position: relative; min-width: 0; }
+.generator-pipeline-step article { min-height: 160px; padding: 20px 17px; }
+.generator-pipeline-step + .generator-pipeline-step article { border-left: 1px solid var(--line); }
+.generator-pipeline-step article > span { color: var(--green); font-size: .6rem; font-weight: 800; letter-spacing: .1em; }
+.generator-pipeline-step strong { display: block; margin-top: 13px; font-size: .82rem; line-height: 1.25; }
+.generator-pipeline-step p { margin: 9px 0 0; color: var(--muted); font-size: .66rem; line-height: 1.5; }
+.generator-pipeline-step > i { position: absolute; z-index: 2; top: 69px; right: -12px; width: 24px; height: 24px; border: 1px solid var(--line); border-radius: 50%; background: white; color: var(--green); text-align: center; font-style: normal; line-height: 21px; }
+.pipeline-boundary { margin: 14px 0 28px; color: var(--muted); font-size: .72rem; }
+.generator-studies { display: grid; gap: 18px; }
+.generator-studies > article { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(270px, .75fr); min-height: 320px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.generator-studies figure { margin: 0; min-height: 320px; background: #0a1119; }
+.generator-studies img { width: 100%; height: 100%; max-height: 470px; object-fit: contain; display: block; }
+.generator-studies > article > div { padding: 30px; align-self: center; }
+.generator-studies > article > div > span { color: var(--green); font-size: .62rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
+.generator-value { display: block; margin: 14px 0 22px; color: var(--ink); font-family: var(--serif); font-size: 2rem; }
+.generator-studies h3 { margin: 0; font-size: 1rem; line-height: 1.35; }
+.generator-studies p { margin: 12px 0 0; color: var(--muted); font-size: .73rem; line-height: 1.65; }
+
+@media (max-width: 980px) {
+  .generator-pipeline { grid-template-columns: repeat(3, 1fr); }
+  .generator-pipeline-step:nth-child(4) article { border-left: 0; }
+  .generator-pipeline-step:nth-child(n + 4) article { border-top: 1px solid var(--line); }
+  .generator-pipeline-step > i { display: none; }
+}
+
+@media (max-width: 700px) {
+  .generator-pipeline { grid-template-columns: 1fr; }
+  .generator-pipeline-step + .generator-pipeline-step article { border-left: 0; border-top: 1px solid var(--line); }
+  .generator-studies > article { grid-template-columns: 1fr; }
+  .generator-studies figure { min-height: 220px; }
+}
 
 .results-charts { margin-top: 34px; }
 .results-charts > header { display: flex; margin-bottom: 16px; align-items: end; justify-content: space-between; gap: 28px; }
