@@ -44,9 +44,9 @@ export const generatorProgress = {
       label: 'Direct multiview reconstruction',
       value: '93.9% mean IoU',
       title: 'A single-case nine-view reconstruction now clears 93% in every view',
-      body: 'The current case reaches 93.9% mean silhouette IoU; its lowest evaluated view is 93.4%. White is reference-only, cyan prediction-only, and green overlap.',
+      body: 'The current case reaches 93.9% mean silhouette IoU and 93.4% in its lowest evaluated view. Four highest-IoU cameras are shown as separate GT and reconstruction silhouettes for a direct, unobstructed comparison.',
       image: asset('/media/generator/multiview-iou-montage.png'),
-      alt: 'Nine-view silhouette overlap montage for direct multiview hair-card reconstruction',
+      alt: 'Four selected camera views with ground-truth silhouettes above and reconstructed hair-card silhouettes below',
     },
     {
       label: 'Geometry-prior study',
