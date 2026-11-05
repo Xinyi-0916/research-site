@@ -447,6 +447,13 @@ th:first-child { text-align: left; }
 .loss-terms .math-display, .loss-terms .math-display * { letter-spacing: normal !important; text-transform: none !important; }
 
 .generator-section { background: linear-gradient(180deg, rgba(246,243,251,.78), transparent 38%); }
+.generator-goal-card { margin-top: 28px; padding: 38px 42px; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.generator-goal-card > span { color: var(--green); font-size: .6rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.generator-goal-card h3 { max-width: 760px; margin: 14px 0 12px; font-family: var(--serif); font-size: 1.65rem; font-weight: 600; line-height: 1.25; }
+.generator-goal-card > p { max-width: 800px; margin: 0; color: var(--muted); font-size: .76rem; line-height: 1.7; }
+.generator-goal-card > div { display: grid; grid-template-columns: auto 1fr auto 1fr auto 1fr; margin-top: 28px; padding-top: 22px; align-items: baseline; gap: 8px 14px; border-top: 1px solid var(--line); }
+.generator-goal-card > div strong { color: var(--green); font-size: .62rem; text-transform: uppercase; }
+.generator-goal-card > div span { color: var(--muted); font-size: .66rem; }
 .generator-flowchart { max-width: 940px; margin: 28px auto 0; padding: 26px 34px 20px; border: 1px solid var(--line); border-radius: 16px; background: white; }
 .generator-flowchart figcaption { display: grid; justify-items: center; gap: 6px; }
 .generator-flowchart figcaption span { color: var(--green); font-size: .59rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
@@ -464,24 +471,18 @@ th:first-child { text-align: left; }
 .generator-studies > article { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(270px, .75fr); min-height: 320px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
 .generator-studies figure { margin: 0; min-height: 320px; background: #fff; }
 .generator-studies img { width: 100%; height: 100%; max-height: 470px; object-fit: contain; display: block; }
-.representation-figure { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(230px, .8fr); align-items: stretch; gap: 44px; padding: 38px 42px; }
-.triangle-comparison, .representation-retention { display: grid; align-content: center; gap: 20px; }
-.triangle-comparison header, .representation-retention header { display: flex; padding-bottom: 5px; align-items: baseline; justify-content: space-between; border-bottom: 1px solid var(--line); }
-.triangle-comparison header span, .representation-retention header span { color: var(--ink); font-size: .66rem; font-weight: 800; letter-spacing: .07em; text-transform: uppercase; }
-.triangle-comparison header small, .representation-retention header small { color: var(--muted); font-size: .56rem; }
-.triangle-comparison > div { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 7px 18px; }
-.triangle-comparison span, .representation-retention span { color: var(--muted); font-size: .64rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
-.triangle-comparison span b, .representation-retention span b { margin-left: 5px; color: #2f8168; font-size: .5rem; }
-.triangle-comparison strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
-.triangle-comparison i { grid-column: 1 / -1; width: var(--bar-size); height: 18px; border-radius: 3px; background: #4f174f; }
-.triangle-comparison .charm i { background: #9b909d; }
-.triangle-comparison .ours i { background: #2f8168; }
-.representation-retention { padding-left: 38px; border-left: 1px solid var(--line); }
-.representation-retention > div { display: grid; grid-template-columns: 1fr auto; gap: 8px 14px; align-items: end; }
-.representation-retention strong { font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
-.representation-retention > div > i { grid-column: 1 / -1; height: 10px; overflow: hidden; border-radius: 8px; background: #eee9ef; }
-.representation-retention > div > i > b { display: block; width: var(--retention); height: 100%; border-radius: inherit; background: #9b909d; }
-.representation-retention .ours > i > b { background: #2f8168; }
+.representation-figure { display: grid; padding: 30px 42px 34px; grid-template-rows: auto 1fr; }
+.representation-figure figcaption { display: grid; }
+.representation-figure figcaption strong { font-family: var(--serif); font-size: 1.08rem; font-weight: 600; }
+.representation-figure figcaption span { margin-top: 4px; color: var(--muted); font-size: .6rem; }
+.representation-bars { display: grid; height: 245px; margin-top: 24px; padding: 20px 12px 0; grid-template-columns: repeat(3, 1fr); align-items: end; gap: 28px; border-bottom: 1px solid var(--line); }
+.representation-bars > div { display: grid; height: 100%; grid-template-rows: 18px 1fr 22px 19px; justify-items: center; align-items: end; }
+.representation-bars strong { font-size: .59rem; }
+.representation-bars i { display: block; width: min(72px, 72%); min-height: 4px; border-radius: 5px 5px 0 0; background: #4f174f; }
+.representation-bars > div:nth-child(2) i { background: #9b909d; }
+.representation-bars .ours i { background: #2f8168; }
+.representation-bars span { padding-top: 8px; color: var(--ink); font-size: .62rem; font-weight: 750; text-transform: uppercase; }
+.representation-bars small { color: var(--muted); font-size: .52rem; }
 .generator-studies > article > div { padding: 30px; align-self: center; }
 .generator-studies > article > div > span { color: var(--green); font-size: .62rem; font-weight: 800; letter-spacing: .09em; text-transform: uppercase; }
 .generator-value { display: block; margin: 14px 0 22px; color: var(--ink); font-family: var(--serif); font-size: 2rem; }
@@ -491,10 +492,12 @@ th:first-child { text-align: left; }
 @media (max-width: 700px) {
   .generator-flowchart { padding: 18px 8px 8px; }
   .generator-flowchart figcaption strong { font-size: 1rem; }
+  .generator-goal-card { padding: 30px 24px; }
+  .generator-goal-card > div { grid-template-columns: auto 1fr; }
   .generator-studies > article { grid-template-columns: 1fr; }
   .generator-studies figure { min-height: 220px; }
-  .representation-figure { grid-template-columns: 1fr; gap: 30px; padding: 30px 24px; }
-  .representation-retention { padding: 28px 0 0; border-top: 1px solid var(--line); border-left: 0; }
+  .representation-figure { padding: 26px 20px 30px; }
+  .representation-bars { gap: 12px; }
 }
 
 .results-charts { margin-top: 34px; }

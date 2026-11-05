@@ -135,8 +135,18 @@ function ResultsCharts() {
 }
 
 function GeneratorProgress() {
-  return <section className="content-section generator-section" id="generator">
-    <SectionHead number="07" title="Generator progress" note="Work in progress · current reconstruction evidence and proposed end-to-end methodology" />
+  return <>
+    <section className="content-section generator-section" id="generator">
+      <SectionHead number="07" title="Generator goal" note="Work in progress · from calibrated multiview observations to production-valid explicit hair cards" />
+      <div className="generator-goal-card">
+        <span>Research goal</span>
+        <h3>Generate a compact, editable card set—not only a matching silhouette</h3>
+        <p>The generator should infer card count, scalp-root placement, ordered K12 centerlines, width, and orientation from multiview images and cameras. Its output must preserve the observed hairstyle while remaining structurally valid and directly editable in a production workflow.</p>
+        <div><strong>Observe</strong><span>Multiview appearance and calibrated cameras</span><strong>Generate</strong><span>Root-anchored explicit K12 cards</span><strong>Guarantee</strong><span>Compact topology and production validity</span></div>
+      </div>
+    </section>
+    <section className="content-section generator-method-section" id="generator-methodology">
+    <SectionHead number="08" title="Proposed generator methodology" note="Coarse structural inference followed by progressive card birth and update" />
     <figure className="generator-flowchart">
       <figcaption><span>Proposed methodology</span><strong>Coarse blueprint + progressive card generation</strong></figcaption>
       <svg viewBox="0 0 920 720" role="img" aria-labelledby="generator-flow-title generator-flow-desc">
@@ -166,23 +176,23 @@ function GeneratorProgress() {
         </g>
       </svg>
     </figure>
-    <p className="pipeline-boundary"><strong>Proposed methodology.</strong> The complete learned generator is the research target. The cards below report the components currently supported by direct reconstruction experiments.</p>
+    <p className="pipeline-boundary"><strong>Method boundary.</strong> The complete learned generator is the research target; the modules below are currently validated through representation and reconstruction experiments.</p>
+    </section>
+    <section className="content-section generator-progress-section" id="generator-progress">
+    <SectionHead number="09" title="Generator progress" note="Current representation, reconstruction, and geometry-prior evidence" />
     <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}>
-      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Production GT uses 16,835 triangles, CHARM Native uses 16,434, and compact K12 ribbons use 4,109. CHARM reaches 95.35 percent held-out silhouette IoU and K12 reaches 90.5 percent.">
-        <div className="triangle-comparison">
-          <header><span>Geometry budget</span><small>Triangles ↓</small></header>
-          <div className="production"><span>Production GT</span><strong>{study.sourceTriangles.toLocaleString()}</strong><i style={{ '--bar-size': '100%' }} /></div>
-          <div className="charm"><span>CHARM Native</span><strong>{study.charmTriangles.toLocaleString()}</strong><i style={{ '--bar-size': `${(study.charmTriangles / study.sourceTriangles) * 100}%` }} /></div>
-          <div className="ours"><span>Flat K12 <b>Ours</b></span><strong>{study.compactTriangles.toLocaleString()}</strong><i style={{ '--bar-size': `${(study.compactTriangles / study.sourceTriangles) * 100}%` }} /></div>
-        </div>
-        <div className="representation-retention"><header><span>Held-out silhouette</span><small>IoU ↑</small></header>
-          <div><span>CHARM Native</span><strong>{study.charmIou}%</strong><i><b style={{ '--retention': `${study.charmIou}%` }} /></i></div>
-          <div className="ours"><span>Flat K12 <b>Ours</b></span><strong>{study.heldoutIou}%</strong><i><b style={{ '--retention': `${study.heldoutIou}%` }} /></i></div>
+      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Vertical triangle-count comparison: Production GT 16,835, CHARM Native 16,434, and our Flat K12 representation 4,109.">
+        <figcaption><strong>Representation geometry budget</strong><span>Triangle count ↓ · silhouette IoU is noted below each bar</span></figcaption>
+        <div className="representation-bars">
+          <div><strong>{study.sourceTriangles.toLocaleString()}</strong><i style={{ height: '100%' }} /><span>Production GT</span><small>Reference · 100%</small></div>
+          <div><strong>{study.charmTriangles.toLocaleString()}</strong><i style={{ height: `${study.charmTriangles / study.sourceTriangles * 100}%` }} /><span>CHARM</span><small>IoU · {study.charmIou}%</small></div>
+          <div className="ours"><strong>{study.compactTriangles.toLocaleString()}</strong><i style={{ height: `${study.compactTriangles / study.sourceTriangles * 100}%` }} /><span>Ours</span><small>IoU · {study.heldoutIou}%</small></div>
         </div>
       </figure> : <figure><img src={study.image} alt={study.alt} /></figure>}
       <div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div>
     </article>)}</div>
-  </section>
+    </section>
+  </>
 }
 
 export default function ResearchSite() {
