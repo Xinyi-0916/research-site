@@ -127,7 +127,6 @@ function RendererLossChart() {
 }
 
 function ResultsCharts() {
-  const heldoutError = (demo) => 1 - Number.parseFloat(demo.reductions.heldout) / 100
   return (
     <section className="results-charts" aria-labelledby="results-charts-title">
       <header><div><span>Visual summary</span><h3 id="results-charts-title">Population performance at a glance</h3></div><p>Complete 49-case card-bearing Validation population · higher is better</p></header>
@@ -135,10 +134,7 @@ function ResultsCharts() {
         <figure className="heldout-chart">
           <figcaption><strong>Held-out error: initial vs. refined</strong><span>Per-case composite error normalized to initial = 1.00 · lower is better</span></figcaption>
           <div className="chart-legend"><span><i className="initial-swatch" />Initial</span><span><i className="refined-swatch" />Refined</span></div>
-          <div className="heldout-bars">{evaluation.demonstrations.map((demo, index) => {
-            const refined = heldoutError(demo)
-            return <div className="heldout-row" key={demo.caseId}><div className="case-label"><strong>Rank {index + 1}</strong><span>{demo.cards}</span></div><div className="horizontal-bars"><div><i className="initial-bar" style={{ width: '100%' }} /><b>1.00</b></div><div><i className="refined-bar" style={{ width: `${refined * 100}%` }} /><b>{refined.toFixed(2)}</b></div></div></div>
-          })}</div>
+          <div className="heldout-bars">{evaluation.heldoutComparison.map((row) => <div className="heldout-row" key={row.label}><div className="case-label"><strong>{row.label}</strong><span>{row.detail}</span></div><div className="horizontal-bars"><div><i className="initial-bar" style={{ width: `${row.initial * 100}%` }} /><b>{row.initial.toFixed(2)}</b></div><div><i className="refined-bar" style={{ width: `${row.refined * 100}%` }} /><b>{row.refined.toFixed(2)}</b></div></div></div>)}</div>
           <div className="heldout-axis"><span>0</span><span>.25</span><span>.50</span><span>.75</span><span>1.00</span></div>
         </figure>
 
@@ -146,7 +142,7 @@ function ResultsCharts() {
           <figcaption><strong>Population coverage</strong><span>Valid and improved outputs across all card-bearing cases</span></figcaption>
           <div className="coverage-stat"><div><strong>98.0%</strong><span>Improved on both splits</span></div><div className="coverage-track"><i style={{ width: `${48 / 49 * 100}%` }} /></div><small>48 of 49 cases</small></div>
           <div className="coverage-stat"><div><strong>100%</strong><span>H1-valid selected outputs</span></div><div className="coverage-track validity"><i /></div><small>49 of 49 cases</small></div>
-          <p>One case does not improve on both splits; every selected card-bearing output remains inside the frozen H1 validity contract.</p>
+          <p>The worst case is the frozen no-op selection: refinement preserves its initial error rather than accepting a worse feasible state.</p>
         </figure>
       </div>
     </section>

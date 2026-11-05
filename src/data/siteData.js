@@ -263,6 +263,11 @@ export const evaluation = {
     heldout: { mean: '41.40%', p10: '18.52%', median: '43.76%', p90: '61.10%' },
   },
   distributionGuide: 'Each value summarizes the case-level composite error reduction across 49 card-bearing Validation cases. Mean is the arithmetic average; P10 is the 10th percentile (90% of cases are at least this high); Median is the 50th percentile; P90 is the 90th percentile (only 10% of cases are higher). Input aggregates the six optimization views, while Held-out uses three unseen Blender cameras. Higher is better.',
+  heldoutComparison: [
+    { label: 'Overall mean', detail: '49 card-bearing cases', initial: 1, refined: 0.5859648403688951 },
+    { label: 'Top case', detail: '8174510361203308830 · 64 cards', initial: 1, refined: 0.2539034957297223 },
+    { label: 'Worst case', detail: '1074173863623961375 · 45 cards', initial: 1, refined: 1 },
+  ],
   production: {
     decision: 'PASS — Branch A',
     summary: 'The refined Validation outputs remain inside the absolute Train-GT production distribution; no additional set prior is justified by the current evidence.',

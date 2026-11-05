@@ -464,8 +464,9 @@ th:first-child { text-align: left; }
 .refined-swatch, .refined-bar { background: var(--green); }
 .heldout-chart { min-height: 330px; }
 .heldout-bars { display: grid; margin-top: 24px; gap: 22px; }
-.heldout-row { display: grid; grid-template-columns: 65px 1fr; align-items: center; gap: 12px; }
-.heldout-axis { display: flex; margin: 10px 0 0 77px; justify-content: space-between; color: var(--muted); font-size: .5rem; }
+.heldout-row { display: grid; grid-template-columns: 145px 1fr; align-items: center; gap: 12px; }
+.heldout-row .case-label span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.heldout-axis { display: flex; margin: 10px 0 0 157px; justify-content: space-between; color: var(--muted); font-size: .5rem; }
 .distribution-chart { position: relative; min-height: 370px; grid-row: span 2; }
 .grouped-bars { position: relative; display: grid; height: 245px; margin: 22px 12px 0 38px; grid-template-columns: repeat(4, 1fr); align-items: end; border-bottom: 1px solid var(--line-dark); background: repeating-linear-gradient(to top, transparent 0, transparent calc(25% - 1px), var(--line) 25%); }
 .bar-group { display: grid; height: 100%; align-items: end; justify-items: center; }
@@ -517,6 +518,9 @@ th:first-child { text-align: left; }
   .vertical-bar { width: 18px; }
   .grouped-bars { margin-left: 30px; }
   .axis-labels { left: 13px; }
+  .heldout-row { grid-template-columns: 92px 1fr; gap: 8px; }
+  .heldout-row .case-label span { display: none; }
+  .heldout-axis { margin-left: 100px; }
 }
 
 /* CHARM-inspired academic project-page layout */
