@@ -1,25 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { evaluation, findings, limitations, overviewDemonstration, person, project, rendererDemonstration, sections } from './data/siteData'
 
 const Arrow = () => <span aria-hidden="true">↗</span>
 
 function MathFormula({ tex, block = false }) {
-  const formulaRef = useRef(null)
-  useEffect(() => {
-    let attempts = 0
-    const typeset = () => {
-      if (window.MathJax?.typesetPromise && formulaRef.current) {
-        const node = formulaRef.current
-        window.MathJax.typesetClear?.([node])
-        node.textContent = block ? `\\[${tex}\\]` : `\\(${tex}\\)`
-        window.MathJax.typesetPromise([node])
-        return
-      }
-      if (attempts++ < 30) window.setTimeout(typeset, 100)
-    }
-    typeset()
-  }, [tex])
-  return <span ref={formulaRef} className={block ? 'math-display' : 'math-inline'}>{block ? `\\[${tex}\\]` : `\\(${tex}\\)`}</span>
+  return <span data-math-tex={tex} data-math-block={block ? 'true' : 'false'} className={block ? 'math-display' : 'math-inline'}>{block ? `\\[${tex}\\]` : `\\(${tex}\\)`}</span>
 }
 
 function SectionHead({ number, title, note }) {
@@ -134,15 +119,15 @@ function ResultsCharts() {
         <figure className="heldout-chart">
           <figcaption><strong>Held-out error: initial vs. refined</strong><span>Per-case composite error normalized to initial = 1.00 · lower is better</span></figcaption>
           <div className="chart-legend"><span><i className="initial-swatch" />Initial</span><span><i className="refined-swatch" />Refined</span></div>
-          <div className="heldout-bars">{evaluation.heldoutComparison.map((row) => <div className="heldout-row" key={row.label}><div className="case-label"><strong>{row.label}</strong><span>{row.detail}</span></div><div className="horizontal-bars"><div><i className="initial-bar" style={{ width: `${row.initial * 100}%` }} /><b>{row.initial.toFixed(2)}</b></div><div><i className="refined-bar" style={{ width: `${row.refined * 100}%` }} /><b>{row.refined.toFixed(2)}</b></div></div></div>)}</div>
-          <div className="heldout-axis"><span>0</span><span>.25</span><span>.50</span><span>.75</span><span>1.00</span></div>
+          <div className="vertical-comparison">{evaluation.heldoutComparison.map((row) => <div className="comparison-group" key={row.label}><div className="comparison-columns"><div className="comparison-column initial-bar" style={{ height: `${row.initial * 100}%` }}><b>{row.initial.toFixed(2)}</b></div><div className="comparison-column refined-bar" style={{ height: `${row.refined * 100}%` }}><b>{row.refined.toFixed(2)}</b></div></div><strong>{row.label}</strong><span>{row.detail}</span></div>)}</div>
+          <div className="vertical-axis"><span>1.00</span><span>.75</span><span>.50</span><span>.25</span><span>0</span></div>
         </figure>
 
         <figure className="coverage-chart">
           <figcaption><strong>Population coverage</strong><span>Valid and improved outputs across all card-bearing cases</span></figcaption>
           <div className="coverage-stat"><div><strong>98.0%</strong><span>Improved on both splits</span></div><div className="coverage-track"><i style={{ width: `${48 / 49 * 100}%` }} /></div><small>48 of 49 cases</small></div>
           <div className="coverage-stat"><div><strong>100%</strong><span>H1-valid selected outputs</span></div><div className="coverage-track validity"><i /></div><small>49 of 49 cases</small></div>
-          <p>The worst case is the frozen no-op selection: refinement preserves its initial error rather than accepting a worse feasible state.</p>
+          <p>48 of 49 cases improve on both input and held-out views; every selected output remains H1-valid.</p>
         </figure>
       </div>
     </section>
@@ -249,7 +234,7 @@ export default function ResearchSite() {
             <article><span>Code release</span><h3>Known-layout B1/H1 refiner</h3><p>The recovered frozen implementation includes the K12 representation, joint renderer, constrained optimizer, H1 validity checks, contracts, and evaluation protocol.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/refiner" target="_blank" rel="noreferrer">Browse refiner code <Arrow /></a></article>
             <article><span>Data preparation</span><h3>VRoid to research assets</h3><p>Raw VRM files are not redistributed. Follow the PAniC-3D downloader, then use the released Blender/VRM add-on scripts and hair-card extraction utilities.</p><a href="https://github.com/Xinyi-0916/3D_Generation_refinement/tree/main/data_pipeline" target="_blank" rel="noreferrer">View preprocessing code <Arrow /></a></article>
           </div>
-          <p className="dataset-note"><strong>Dataset policy.</strong> Like StdGEN, this project uses VRoid assets but does not redistribute raw VRM files. The repository provides processing code, metadata contracts, and split information; users must obtain source assets under the original platform terms.</p>
+          <p className="dataset-note"><strong>Dataset policy.</strong> This project uses character models from VRoid Hub. Raw VRM files remain subject to their original asset licenses and platform terms, so the repository provides processing code, metadata contracts, and split information rather than redistributing source models.</p>
         </section>
 
         <section className="content-section final-section" id="limitations">

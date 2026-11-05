@@ -266,7 +266,6 @@ export const evaluation = {
   heldoutComparison: [
     { label: 'Overall mean', detail: '49 card-bearing cases', initial: 1, refined: 0.5859648403688951 },
     { label: 'Top case', detail: '8174510361203308830 · 64 cards', initial: 1, refined: 0.2539034957297223 },
-    { label: 'Worst case', detail: '1074173863623961375 · 45 cards', initial: 1, refined: 1 },
   ],
   production: {
     decision: 'PASS — Branch A',

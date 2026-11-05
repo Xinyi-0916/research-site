@@ -462,7 +462,15 @@ th:first-child { text-align: left; }
 .heldout-swatch, .heldout-bar { background: #b99ac4; }
 .initial-swatch, .initial-bar { background: #cfc6d2; }
 .refined-swatch, .refined-bar { background: var(--green); }
-.heldout-chart { min-height: 330px; }
+.heldout-chart { position: relative; min-height: 380px; }
+.vertical-comparison { display: grid; height: 245px; margin: 24px 12px 0 42px; grid-template-columns: repeat(2, 1fr); align-items: end; border-bottom: 1px solid var(--line-dark); background: repeating-linear-gradient(to bottom, var(--line) 0, var(--line) 1px, transparent 1px, transparent 25%); }
+.comparison-group { display: grid; height: 100%; grid-template-rows: 190px auto auto; align-items: end; justify-items: center; }
+.comparison-columns { display: flex; width: 100%; height: 190px; align-items: end; justify-content: center; gap: 9px; }
+.comparison-column { position: relative; width: 44px; min-height: 2px; border-radius: 5px 5px 0 0; }
+.comparison-column b { position: absolute; top: -20px; left: 50%; color: var(--ink); font-size: .58rem; transform: translateX(-50%); }
+.comparison-group > strong { margin-top: 10px; font-size: .66rem; }
+.comparison-group > span { max-width: 170px; margin-top: 3px; overflow: hidden; color: var(--muted); font-size: .5rem; text-overflow: ellipsis; white-space: nowrap; }
+.vertical-axis { position: absolute; top: 100px; bottom: 59px; left: 20px; display: flex; flex-direction: column; justify-content: space-between; color: var(--muted); font-size: .5rem; }
 .heldout-bars { display: grid; margin-top: 24px; gap: 22px; }
 .heldout-row { display: grid; grid-template-columns: 145px 1fr; align-items: center; gap: 12px; }
 .heldout-row .case-label span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -521,6 +529,9 @@ th:first-child { text-align: left; }
   .heldout-row { grid-template-columns: 92px 1fr; gap: 8px; }
   .heldout-row .case-label span { display: none; }
   .heldout-axis { margin-left: 100px; }
+  .vertical-comparison { margin-left: 34px; }
+  .comparison-column { width: 30px; }
+  .vertical-axis { left: 12px; }
 }
 
 /* CHARM-inspired academic project-page layout */
