@@ -168,12 +168,17 @@ function GeneratorProgress() {
     </figure>
     <p className="pipeline-boundary"><strong>Proposed methodology.</strong> The complete learned generator is the research target. The cards below report the components currently supported by direct reconstruction experiments.</p>
     <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}>
-      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Production GT uses 16,835 triangles; compact K12 ribbons use 4,109 triangles and retain 90.5 percent held-out silhouette IoU">
+      {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Production GT uses 16,835 triangles, CHARM Native uses 16,434, and compact K12 ribbons use 4,109. CHARM reaches 95.35 percent held-out silhouette IoU and K12 reaches 90.5 percent.">
         <div className="triangle-comparison">
-          <div><span>Production GT</span><strong>{study.sourceTriangles.toLocaleString()}</strong><i style={{ '--bar-size': '100%' }} /></div>
-          <div><span>Flat K12</span><strong>{study.compactTriangles.toLocaleString()}</strong><i style={{ '--bar-size': `${(study.compactTriangles / study.sourceTriangles) * 100}%` }} /></div>
+          <header><span>Geometry budget</span><small>Triangles ↓</small></header>
+          <div className="production"><span>Production GT</span><strong>{study.sourceTriangles.toLocaleString()}</strong><i style={{ '--bar-size': '100%' }} /></div>
+          <div className="charm"><span>CHARM Native</span><strong>{study.charmTriangles.toLocaleString()}</strong><i style={{ '--bar-size': `${(study.charmTriangles / study.sourceTriangles) * 100}%` }} /></div>
+          <div className="ours"><span>Flat K12 <b>Ours</b></span><strong>{study.compactTriangles.toLocaleString()}</strong><i style={{ '--bar-size': `${(study.compactTriangles / study.sourceTriangles) * 100}%` }} /></div>
         </div>
-        <div className="representation-retention"><span>Held-out silhouette IoU</span><strong>{study.heldoutIou}%</strong><div><i style={{ '--retention': `${study.heldoutIou}%` }} /></div></div>
+        <div className="representation-retention"><header><span>Held-out silhouette</span><small>IoU ↑</small></header>
+          <div><span>CHARM Native</span><strong>{study.charmIou}%</strong><i><b style={{ '--retention': `${study.charmIou}%` }} /></i></div>
+          <div className="ours"><span>Flat K12 <b>Ours</b></span><strong>{study.heldoutIou}%</strong><i><b style={{ '--retention': `${study.heldoutIou}%` }} /></i></div>
+        </div>
       </figure> : <figure><img src={study.image} alt={study.alt} /></figure>}
       <div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div>
     </article>)}</div>
