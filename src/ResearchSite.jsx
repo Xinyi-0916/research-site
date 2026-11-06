@@ -134,6 +134,16 @@ function ResultsCharts() {
   )
 }
 
+function BaselineComparison() {
+  const comparison = generatorProgress.baselineComparison
+  return <section className="baseline-comparison" aria-labelledby="baseline-comparison-title">
+    <header><div><span>Single-case baseline diagnostic</span><h3 id="baseline-comparison-title">Unified direct-mesh comparison</h3></div><p>Case {comparison.caseId}</p></header>
+    <div className="baseline-table-wrap"><table><thead><tr><th>Metric</th><th>{comparison.baseline}<small>3-seed mean · range</small></th><th>Ours<small>v120 · single reconstruction</small></th></tr></thead><tbody>{comparison.rows.map((row) => <tr key={row.metric}><th>{row.metric}<small>{row.direction}</small></th><td><strong>{row.baseline}</strong><span>{row.range}</span></td><td className="ours"><strong>{row.ours}</strong></td></tr>)}</tbody></table></div>
+    <div className="fairness-protocol"><span>Comparison conditions</span><ol>{comparison.conditions.map((condition) => <li key={condition}>{condition}</li>)}</ol></div>
+    <p className="comparison-caveat"><strong>Scope and fairness note.</strong> {comparison.caveat}</p>
+  </section>
+}
+
 function GeneratorProgress() {
   return <>
     <section className="content-section generator-section" id="generator">
@@ -191,13 +201,8 @@ function GeneratorProgress() {
         </div>
       </figure> : <figure><img src={study.image} alt={study.alt} /></figure>}
       <div><span>{study.label}</span><strong className="generator-value">{study.value}</strong><h3>{study.title}</h3><p>{study.body}</p></div>
+      {study.label === 'Direct multiview reconstruction' && <BaselineComparison />}
     </article>)}</div>
-    <section className="baseline-comparison" aria-labelledby="baseline-comparison-title">
-      <header><div><span>Single-case baseline diagnostic</span><h3 id="baseline-comparison-title">Unified direct-mesh comparison</h3></div><p>Case {generatorProgress.baselineComparison.caseId}</p></header>
-      <div className="baseline-table-wrap"><table><thead><tr><th>Metric</th><th>{generatorProgress.baselineComparison.baseline}<small>3-seed mean · range</small></th><th>Ours<small>v120 · single reconstruction</small></th></tr></thead><tbody>{generatorProgress.baselineComparison.rows.map((row) => <tr key={row.metric}><th>{row.metric}<small>{row.direction}</small></th><td><strong>{row.baseline}</strong><span>{row.range}</span></td><td className="ours"><strong>{row.ours}</strong></td></tr>)}</tbody></table></div>
-      <div className="fairness-protocol"><span>Comparison conditions</span><ol>{generatorProgress.baselineComparison.conditions.map((condition) => <li key={condition}>{condition}</li>)}</ol></div>
-      <p className="comparison-caveat"><strong>Scope and fairness note.</strong> {generatorProgress.baselineComparison.caveat}</p>
-    </section>
     </section>
   </>
 }

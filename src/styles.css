@@ -494,7 +494,7 @@ th:first-child { text-align: left; }
 .generator-value { display: block; margin: 14px 0 22px; color: var(--ink); font-family: var(--serif); font-size: 2rem; }
 .generator-studies h3 { margin: 0; font-size: 1rem; line-height: 1.35; }
 .generator-studies p { margin: 12px 0 0; color: var(--muted); font-size: .73rem; line-height: 1.65; }
-.baseline-comparison { margin-top: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.baseline-comparison { grid-column: 1 / -1; margin: 0; overflow: hidden; border-top: 1px solid var(--line); background: white; }
 .baseline-comparison > header { display: flex; padding: 26px 30px 20px; align-items: end; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
 .baseline-comparison > header span, .fairness-protocol > span { color: var(--green); font-size: .59rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
 .baseline-comparison > header h3 { margin: 6px 0 0; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
