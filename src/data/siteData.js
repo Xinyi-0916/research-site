@@ -23,6 +23,25 @@ export const sections = [
 ]
 
 export const generatorProgress = {
+  baselineComparison: {
+    caseId: '1269522819588644851',
+    baseline: 'HairDeck',
+    rows: [
+      { metric: 'Nine-view silhouette IoU', direction: 'Higher is better', baseline: '42.6%', range: '40.8–45.2%', ours: '94.0%' },
+      { metric: 'Surface F-score @ 10 mm', direction: 'Higher is better', baseline: '23.8%', range: '22.4–26.0%', ours: '84.0%' },
+      { metric: 'Symmetric Chamfer-L1', direction: 'Lower is better', baseline: '109.4 mm', range: '95.3–118.3 mm', ours: '12.0 mm' },
+      { metric: 'Boundary Chamfer', direction: 'Lower is better', baseline: '27.0 px', range: '23.3–29.3 px', ours: '0.77 px' },
+      { metric: 'Depth MAE', direction: 'Lower is better', baseline: '0.205 m', range: '0.201–0.210 m', ours: '0.128 m' },
+      { metric: 'Generated cards', direction: 'Reported, not ranked', baseline: '121', range: '115–130', ours: '97' },
+    ],
+    conditions: [
+      'Same VRoid case, fixed canonical head frame, nine evaluation cameras, 512² renderer, and identical GT render targets.',
+      'Direct final triangle meshes are evaluated with no representation conversion; geometry metrics use 200k surface samples per mesh.',
+      'HairDeck receives the rendered input with provided person/hair masks, bypassing SAM3. Only a fixed coordinate-convention transform is applied—no ICP or GT-hair fitting.',
+      'HairDeck reports the mean and full range over three seeds; Ours is one v120 reconstruction.',
+    ],
+    caveat: 'The output-space evaluator is shared, but the input budget is not identical: HairDeck is a single-image baseline with provided masks, while Ours uses calibrated multiview observations. The reported v120 result follows case-specific method development and is not held out. This is a one-case diagnostic, not a population-level or strictly input-equivalent benchmark.',
+  },
   pipeline: [
     ['Multiview observations', 'RGB, masks, predicted normals, and calibrated cameras'],
     ['Camera-aware fusion', 'Frozen dense image features fused into shared structure'],

@@ -494,6 +494,26 @@ th:first-child { text-align: left; }
 .generator-value { display: block; margin: 14px 0 22px; color: var(--ink); font-family: var(--serif); font-size: 2rem; }
 .generator-studies h3 { margin: 0; font-size: 1rem; line-height: 1.35; }
 .generator-studies p { margin: 12px 0 0; color: var(--muted); font-size: .73rem; line-height: 1.65; }
+.baseline-comparison { margin-top: 28px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
+.baseline-comparison > header { display: flex; padding: 26px 30px 20px; align-items: end; justify-content: space-between; gap: 24px; border-bottom: 1px solid var(--line); }
+.baseline-comparison > header span, .fairness-protocol > span { color: var(--green); font-size: .59rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.baseline-comparison > header h3 { margin: 6px 0 0; font-family: var(--serif); font-size: 1.35rem; font-weight: 600; }
+.baseline-comparison > header p { margin: 0; color: var(--muted); font-size: .6rem; }
+.baseline-table-wrap { overflow-x: auto; }
+.baseline-comparison table { width: 100%; margin: 0; border-collapse: collapse; }
+.baseline-comparison th, .baseline-comparison td { padding: 14px 30px; border-bottom: 1px solid var(--line); text-align: left; }
+.baseline-comparison thead th { color: var(--ink); font-size: .66rem; }
+.baseline-comparison thead th small, .baseline-comparison tbody th small { display: block; margin-top: 3px; color: var(--muted); font-size: .5rem; font-weight: 500; }
+.baseline-comparison tbody th { width: 42%; font-size: .64rem; }
+.baseline-comparison tbody td { font-family: var(--serif); font-size: .86rem; }
+.baseline-comparison tbody td strong { display: inline-block; min-width: 74px; }
+.baseline-comparison tbody td span { color: var(--muted); font-family: var(--sans); font-size: .53rem; }
+.baseline-comparison tbody td.ours strong { color: #2f8168; }
+.fairness-protocol { padding: 24px 30px 18px; }
+.fairness-protocol ol { display: grid; margin: 14px 0 0; padding-left: 18px; grid-template-columns: repeat(2, 1fr); gap: 10px 36px; }
+.fairness-protocol li { padding-left: 4px; color: var(--muted); font-size: .63rem; line-height: 1.55; }
+.comparison-caveat { margin: 0; padding: 17px 30px; border-top: 1px solid var(--line); background: var(--green-pale); color: var(--muted); font-size: .64rem; line-height: 1.55; }
+.comparison-caveat strong { color: var(--ink); }
 
 @media (max-width: 700px) {
   .generator-flowchart { padding: 18px 8px 8px; }
@@ -504,6 +524,9 @@ th:first-child { text-align: left; }
   .generator-studies figure { min-height: 220px; }
   .representation-figure { padding: 26px 20px 30px; }
   .representation-bars { gap: 12px; }
+  .baseline-comparison > header { align-items: flex-start; flex-direction: column; }
+  .baseline-comparison th, .baseline-comparison td { padding: 12px 16px; }
+  .fairness-protocol ol { grid-template-columns: 1fr; }
 }
 
 .results-charts { margin-top: 34px; }
