@@ -468,6 +468,33 @@ th:first-child { text-align: left; }
 .flow-labels text:last-child { font-size: 14px; font-weight: 500; }
 .pipeline-boundary { margin: 14px 0 28px; color: var(--muted); font-size: .72rem; }
 .generator-studies { display: grid; gap: 18px; }
+.phase1-update { margin-bottom: 22px; overflow: hidden; border: 1px solid var(--line); border-radius: 16px; background: white; }
+.phase1-update > header { display: flex; padding: 32px 34px 26px; align-items: flex-start; justify-content: space-between; gap: 30px; border-bottom: 1px solid var(--line); }
+.phase1-update > header > div { max-width: 760px; }
+.phase1-update > header span, .phase1-dataset > span, .phase1-visual figcaption > span { color: var(--green); font-size: .59rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+.phase1-update > header h3 { margin: 10px 0 9px; font-family: var(--serif); font-size: 1.5rem; font-weight: 600; line-height: 1.3; }
+.phase1-update > header p { margin: 0; color: var(--muted); font-size: .7rem; line-height: 1.65; }
+.phase1-update > header > strong { flex: 0 0 auto; padding: 8px 11px; border-radius: 999px; background: #fff4dd; color: #8a5b06; font-size: .56rem; font-weight: 750; }
+.phase1-metrics { display: grid; grid-template-columns: repeat(4, 1fr); border-bottom: 1px solid var(--line); }
+.phase1-metrics > div { display: grid; padding: 20px 24px; gap: 5px; border-right: 1px solid var(--line); }
+.phase1-metrics > div:last-child { border-right: 0; }
+.phase1-metrics strong { font-family: var(--serif); font-size: 1.32rem; font-weight: 600; }
+.phase1-metrics span { color: var(--muted); font-size: .55rem; }
+.phase1-visual { display: grid; grid-template-columns: minmax(0, 1fr) 210px; }
+.phase1-visual figure { display: grid; margin: 0; grid-template-rows: minmax(360px, 560px) auto; background: white; }
+.phase1-visual figure img { width: 100%; height: 100%; object-fit: contain; background: white; }
+.phase1-visual figcaption { padding: 21px 28px 24px; border-top: 1px solid var(--line); }
+.phase1-visual figcaption strong { display: block; margin-top: 7px; font-size: .85rem; }
+.phase1-visual figcaption p { margin: 7px 0 0; color: var(--muted); font-size: .63rem; line-height: 1.55; }
+.phase1-visual nav { display: grid; align-content: start; border-left: 1px solid var(--line); background: #fbfafb; }
+.phase1-visual button { display: grid; padding: 21px 18px; grid-template-columns: 28px 1fr; align-items: center; gap: 8px; border: 0; border-bottom: 1px solid var(--line); background: transparent; color: var(--muted); font: inherit; font-size: .6rem; text-align: left; cursor: pointer; }
+.phase1-visual button span { color: #aaa1ab; font-size: .51rem; }
+.phase1-visual button.active { background: white; color: var(--ink); font-weight: 750; box-shadow: inset 3px 0 0 var(--green); }
+.phase1-dataset { display: grid; padding: 25px 30px; grid-template-columns: 1.1fr repeat(4, 1fr); align-items: start; gap: 20px; border-top: 1px solid var(--line); }
+.phase1-dataset > div strong { font-family: var(--serif); font-size: 1rem; font-weight: 600; }
+.phase1-dataset > div p { margin: 5px 0 0; color: var(--muted); font-size: .55rem; line-height: 1.45; }
+.phase1-boundary { margin: 0; padding: 17px 30px; border-top: 1px solid var(--line); background: #fffaf0; color: var(--muted); font-size: .64rem; line-height: 1.55; }
+.phase1-boundary strong { color: var(--ink); }
 .generator-studies > article { display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(270px, .75fr); min-height: 320px; overflow: hidden; border: 1px solid var(--line); border-radius: 14px; background: white; }
 .generator-studies figure { margin: 0; min-height: 320px; background: #fff; }
 .generator-studies img { width: 100%; height: 100%; max-height: 470px; object-fit: contain; display: block; }
@@ -520,6 +547,16 @@ th:first-child { text-align: left; }
   .generator-flowchart figcaption strong { font-size: 1rem; }
   .generator-goal-card { padding: 30px 24px; }
   .generator-goal-card > div { grid-template-columns: auto 1fr; }
+  .phase1-update > header { flex-direction: column; }
+  .phase1-metrics { grid-template-columns: repeat(2, 1fr); }
+  .phase1-metrics > div:nth-child(2) { border-right: 0; }
+  .phase1-metrics > div:nth-child(-n + 2) { border-bottom: 1px solid var(--line); }
+  .phase1-visual { grid-template-columns: 1fr; }
+  .phase1-visual figure { grid-template-rows: minmax(240px, 420px) auto; }
+  .phase1-visual nav { grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); border-left: 0; }
+  .phase1-visual button { padding: 14px 10px; grid-template-columns: 1fr; }
+  .phase1-dataset { grid-template-columns: repeat(2, 1fr); }
+  .phase1-dataset > span { grid-column: 1 / -1; }
   .generator-studies > article { grid-template-columns: 1fr; }
   .generator-studies figure { min-height: 220px; }
   .representation-figure { padding: 26px 20px 30px; }

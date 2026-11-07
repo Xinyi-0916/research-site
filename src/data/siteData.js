@@ -23,6 +23,47 @@ export const sections = [
 ]
 
 export const generatorProgress = {
+  phase1: {
+    status: 'Current · overfit gate not yet passed',
+    title: 'The two-stage generator now completes a full 290-card autoregressive rollout',
+    summary: 'On the Hair001 single-case overfit diagnostic, Stage 1 recovers the coarse envelope and predicts 292.3 cards for a 290-card target. Stage 2 generates all 290 cards, makes the terminal STOP decision, and preserves the intended variable-length generation contract.',
+    metrics: [
+      { value: '290 / 290', label: 'GT / generated cards' },
+      { value: 'STOP ✓', label: 'Terminal decision' },
+      { value: '0.0626', label: 'Normalized free ordered K12 MAE' },
+      { value: '0.1002', label: 'Normalized free matched K12 MAE' },
+    ],
+    dataset: [
+      ['12 cases', 'Passed topology, texture, and scalp requirements'],
+      ['8,968 cards', 'Retained without a fixed card-count truncation'],
+      ['95.42%', 'Original-to-K12 input-view raster IoU'],
+      ['95.27%', 'Original-to-K12 held-out raster IoU'],
+    ],
+    slides: [
+      {
+        label: 'Stage 1 blueprint',
+        title: 'Coarse occupancy and count are learned, with visible overfill',
+        body: 'GT, predicted probability, and absolute difference across XY, XZ, and YZ. The outer envelope is recovered and count is close (292.3 vs. 290), while internal occupancy remains too dense.',
+        image: asset('/media/generator/phase1/blueprint-visualization.png'),
+        alt: 'Stage 1 ground-truth occupancy, predicted probability, and absolute-difference projections for Hair001',
+      },
+      {
+        label: 'Progressive rollout',
+        title: 'The active card set grows from 0 to 290 and then stops',
+        body: 'Free-running snapshots at steps 0, 32, 128, and 290 show the stateful generator progressively expanding the card set instead of regressing a fixed-size output.',
+        image: asset('/media/generator/phase1/progressive-trace.png'),
+        alt: 'Autoregressive progressive trace showing Hair001 card generation at steps 0, 32, 128, and 290',
+      },
+      {
+        label: 'Stage 2 geometry',
+        title: 'Teacher-forced and autoregressive outputs agree at the global-shape level',
+        body: 'Full-ribbon XY, XZ, and YZ projections compare GT, teacher-forced, and free autoregressive generation. Count and global envelope are recovered, but fine geometry and width still miss the overfit gate.',
+        image: asset('/media/generator/phase1/stage2-gt-teacher-autoregressive.png'),
+        alt: 'Ground-truth, teacher-forced, and autoregressive Hair001 ribbon projections across XY, XZ, and YZ',
+      },
+    ],
+    boundary: 'This is a single-case training diagnostic, not a held-out generalization result. Geometry and width precision remain below the Phase 1 overfit threshold; no 12-case Pilot was run and no checkpoint was promoted.',
+  },
   baselineComparison: {
     caseId: '1269522819588644851',
     baseline: 'HairDeck',

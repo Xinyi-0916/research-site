@@ -144,6 +144,22 @@ function BaselineComparison() {
   </section>
 }
 
+function Phase1GeneratorUpdate() {
+  const [activeSlide, setActiveSlide] = useState(0)
+  const phase = generatorProgress.phase1
+  const slide = phase.slides[activeSlide]
+  return <article className="phase1-update">
+    <header><div><span>Phase 1 · real-data overfit</span><h3>{phase.title}</h3><p>{phase.summary}</p></div><strong>{phase.status}</strong></header>
+    <div className="phase1-metrics">{phase.metrics.map((metric) => <div key={metric.label}><strong>{metric.value}</strong><span>{metric.label}</span></div>)}</div>
+    <div className="phase1-visual">
+      <figure><img src={slide.image} alt={slide.alt} /><figcaption><span>{slide.label}</span><strong>{slide.title}</strong><p>{slide.body}</p></figcaption></figure>
+      <nav aria-label="Phase 1 visual checks">{phase.slides.map((item, index) => <button className={index === activeSlide ? 'active' : ''} type="button" onClick={() => setActiveSlide(index)} aria-pressed={index === activeSlide} key={item.label}><span>0{index + 1}</span>{item.label}</button>)}</nav>
+    </div>
+    <div className="phase1-dataset"><span>Representation and data gate</span>{phase.dataset.map(([value, label]) => <div key={label}><strong>{value}</strong><p>{label}</p></div>)}</div>
+    <p className="phase1-boundary"><strong>Evidence boundary.</strong> {phase.boundary}</p>
+  </article>
+}
+
 function GeneratorProgress() {
   return <>
     <section className="content-section generator-section" id="generator">
@@ -190,6 +206,7 @@ function GeneratorProgress() {
     </section>
     <section className="content-section generator-progress-section" id="generator-progress">
     <SectionHead number="09" title="Generator progress" note="Current representation, reconstruction, and geometry-prior evidence" />
+    <Phase1GeneratorUpdate />
     <div className="generator-studies">{generatorProgress.studies.map((study) => <article key={study.label}>
       {study.kind === 'representation' ? <figure className="representation-figure" aria-label="Grouped vertical comparison of normalized triangle count and held-out silhouette IoU for Production GT, CHARM Native, and our Flat K12 representation.">
         <figcaption><strong>Representation efficiency</strong><span>Geometry budget and held-out silhouette fidelity</span></figcaption>
